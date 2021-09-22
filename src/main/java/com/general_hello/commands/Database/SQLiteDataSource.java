@@ -9,10 +9,13 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
 
 public class SQLiteDataSource implements DatabaseManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(SQLiteDataSource.class);
     public static HikariDataSource ds;
+    public static HashMap<Long, Long> userToXpQueue = new HashMap<>();
+    public static HashMap<Long, Integer> userToXpQueueSize = new HashMap<>();
 
     public SQLiteDataSource() {
         try {
@@ -181,13 +184,28 @@ public class SQLiteDataSource implements DatabaseManager {
 
     @Override
     public void setXpPoints(long userId, long xpPoints) {
+        if (!userToXpQueueSize.containsKey(userId)) {
+            userToXpQueue.put(userId, xpPoints);
+            userToXpQueueSize.put(userId, 2);
+            return;
+        }
+
+        Integer queue = userToXpQueueSize.get(userId);
+        Long xpQueued = userToXpQueue.get(userId);
+
+        if (queue != 10) {
+            userToXpQueueSize.put(userId, queue + 1);
+            userToXpQueue.put(userId, xpQueued + xpPoints);
+            return;
+        }
+
         try {
             Thread.sleep(1000);
         } catch (Exception ignored) {}
 
         try {
             Statement statement = getConnection().createStatement();
-            String sql = "UPDATE XPSystemUser SET xpPoints=" + xpPoints + " WHERE UserId=" + userId;
+            String sql = "UPDATE XPSystemUser SET xpPoints=" + (xpQueued + xpPoints) + " WHERE UserId=" + userId;
 
             statement.executeUpdate(sql);
             statement.close();

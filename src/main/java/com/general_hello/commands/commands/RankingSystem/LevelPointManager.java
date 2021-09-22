@@ -64,7 +64,6 @@ public class LevelPointManager{
 
             accessMap.put(member, OffsetDateTime.now());
 
-            Thread.sleep(500);
             GetData.setLevelPoints(member, GetData.getLevelPoints(member) + POINTS_PER_MESSAGE);
             System.out.println("Added xp to " + member.getName() + "!");
         }
@@ -79,7 +78,6 @@ public class LevelPointManager{
                 trackMember(member);
             }
 
-            Thread.sleep(10);
             GetData.setLevelPoints(member, GetData.getLevelPoints(member) + xpToAdd);
             System.out.println("Added xp to " + member.getName() + "!");
         }

@@ -51,10 +51,6 @@ public class GetData {
     }
 
     public static void setLevelPoints(User user, long points) {
-        try {
-            Thread.sleep(1000);
-        } catch (Exception ignored) {}
-
         DatabaseManager.INSTANCE.setXpPoints(user.getIdLong(), points);
         xpMember.put(user, points);
     }
