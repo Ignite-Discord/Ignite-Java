@@ -49,7 +49,7 @@ public class RegisterCommand implements ICommand {
 
     @Override
     public String getHelp(String prefix) {
-        return "Registers the user to Plenary Phone!!!\n" +
+        return "Registers the user to the Ignite bot!!!\n" +
                 "Usage: `" + prefix + getName() + "`";
     }
 }

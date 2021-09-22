@@ -2,6 +2,7 @@ package com.general_hello.commands.commands.DefaultCommands;
 
 import com.general_hello.commands.SlashCommands.SlashCommand;
 import com.general_hello.commands.SlashCommands.SlashCommandContext;
+import com.general_hello.commands.commands.Emoji.Emoji;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -24,7 +25,8 @@ public class PingSlashCommand extends SlashCommand {
 
         jda.getRestPing().queue(
                 (ping) -> event.getChannel()
-                        .sendMessageFormat("Reset ping: %sms \nWS ping: %sms", ping, jda.getGatewayPing()).queue()
+                        .sendMessageFormat("Server Night:\n" +
+                                "Ping: %sms" + Emoji.LOADING, ping).queue()
         );
     }
 }

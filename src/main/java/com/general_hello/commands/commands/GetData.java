@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class GetData {
     public static ArrayList<Guild> blackListedGuild = new ArrayList<>();
+    public static ArrayList<User> blackListedUser = new ArrayList<>();
     public static HashMap<User, Long> xpMember = new HashMap<>();
     //get data from the db
 
@@ -43,7 +44,7 @@ public class GetData {
         }
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (Exception ignored) {}
 
         return DatabaseManager.INSTANCE.getXpPoints(member.getIdLong());
@@ -51,7 +52,7 @@ public class GetData {
 
     public static void setLevelPoints(User user, long points) {
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (Exception ignored) {}
 
         DatabaseManager.INSTANCE.setXpPoints(user.getIdLong(), points);
@@ -60,6 +61,8 @@ public class GetData {
 
 
     private int retrieveData(Long userId, GuildMessageReceivedEvent ctx) {
+        if (blackListedUser.contains(ctx.getAuthor())) return -1;
+
         String name = DatabaseManager.INSTANCE.getName(userId);
         try {
             Thread.sleep(500);
@@ -67,11 +70,32 @@ public class GetData {
             Thread.currentThread().interrupt();
         }
 
-        String profilePicture = DatabaseManager.INSTANCE.getProfilePictureLink(userId);
+        if (name != null) {
+            User userById = ctx.getJDA().getUserById(userId);
+            UserPhoneUser user = new UserPhoneUser(name, userById);
+            Data.userUserPhoneUserHashMap.put(userById, user);
+            Data.userPhoneUsers.add(user);
+            blackListedUser.add(ctx.getAuthor());
+            return 0;
+        }
+        blackListedUser.add(ctx.getAuthor());
+
+        return -1;
+    }
+
+    private int retrieveData(Long userId, CommandContext ctx) {
+        if (blackListedUser.contains(ctx.getAuthor())) return -1;
+
+        String name = DatabaseManager.INSTANCE.getName(userId);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         if (name != null) {
             User userById = ctx.getJDA().getUserById(userId);
-            UserPhoneUser user = new UserPhoneUser(name, userById, profilePicture);
+            UserPhoneUser user = new UserPhoneUser(name, userById);
             Data.userUserPhoneUserHashMap.put(userById, user);
             Data.userPhoneUsers.add(user);
             return 0;
@@ -80,37 +104,24 @@ public class GetData {
         return -1;
     }
 
-    private void retrieveData(Long userId, CommandContext ctx) {
+    private int retrieveData(Long userId, SlashCommandEvent ctx) {
+        if (blackListedUser.contains(ctx.getUser())) return -1;
+
         String name = DatabaseManager.INSTANCE.getName(userId);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        String profilePicture = DatabaseManager.INSTANCE.getProfilePictureLink(userId);
         if (name != null) {
             User userById = ctx.getJDA().getUserById(userId);
-            UserPhoneUser user = new UserPhoneUser(name, userById, profilePicture);
+            UserPhoneUser user = new UserPhoneUser(name, userById);
             Data.userUserPhoneUserHashMap.put(userById, user);
             Data.userPhoneUsers.add(user);
-        }
-    }
-
-    private void retrieveData(Long userId, SlashCommandEvent ctx) {
-        String name = DatabaseManager.INSTANCE.getName(userId);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+            return 0;
         }
 
-        String profilePicture = DatabaseManager.INSTANCE.getProfilePictureLink(userId);
-        if (name != null) {
-            User userById = ctx.getJDA().getUserById(userId);
-            UserPhoneUser user = new UserPhoneUser(name, userById, profilePicture);
-            Data.userUserPhoneUserHashMap.put(userById, user);
-            Data.userPhoneUsers.add(user);
-        }
+        return -1;
     }
 }

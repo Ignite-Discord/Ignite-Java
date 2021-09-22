@@ -11,35 +11,23 @@ public class EntertainmentListener extends ListenerAdapter{
 		String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, DatabaseManager.INSTANCE::getPrefix);
 		String[] args = event.getMessage().getContentRaw().split("\\s+");
 
-		if(args[0].equalsIgnoreCase(prefix + "clap")) {
+		if(args[0].equalsIgnoreCase(prefix + " clap")) {
 			Clap.clap(event, args);
 			return;
 		}
-		if(args[0].equalsIgnoreCase(prefix + "colour") || args[0].equalsIgnoreCase(prefix + "color")) {
+		if(args[0].equalsIgnoreCase(prefix + " colour") || args[0].equalsIgnoreCase(prefix + "color")) {
 			Colour.colour(event, args);
 			return;
 		}
-		if(args[0].equalsIgnoreCase(prefix + "echo")) {
-			Echo.echo(event, args);
-			return;
-		}
-		if(args[0].equalsIgnoreCase(prefix + "eightball")) {
+		if(args[0].equalsIgnoreCase(prefix + " eightball")) {
 			EightBall.eightball(event, args);
 			return;
 		}
-		if(args[0].equalsIgnoreCase(prefix + "poll")) {
-			Poll.poll(event);
-			return;
-		}
-		if(args[0].equalsIgnoreCase(prefix + "newpoll")) {
-			Poll.newpoll(event, args);
-			return;
-		}
-		if(args[0].equalsIgnoreCase(prefix + "read")) {
+		if(args[0].equalsIgnoreCase(prefix + " read")) {
 			Read.read(event, args);
 			return;
 		}
-		if(args[0].equalsIgnoreCase(prefix + "rps")) {
+		if(args[0].equalsIgnoreCase(prefix + " rps")) {
 			RPS.rps(event, args);
 			return;
 		}

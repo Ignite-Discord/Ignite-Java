@@ -3,7 +3,9 @@ package com.general_hello.commands.commands.Info;
 
 import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.Emoji.Emoji;
+import com.general_hello.commands.commands.GetData;
 import com.general_hello.commands.commands.ICommand;
+import com.general_hello.commands.commands.Register.Data;
 import com.general_hello.commands.commands.Utils.UtilString;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -99,7 +101,18 @@ public class InfoUserCommand implements ICommand {
         join = member == null ? "N?A" : UtilString.formatOffsetDateTime(member.getTimeJoined());
         register = UtilString.formatOffsetDateTime(user.getTimeCreated());
 
+        GetData getData = new GetData();
+        try {
+            Thread.sleep(500);
+        } catch (Exception ignored) {}
+        getData.checkIfContainsData(user, e);
+        String userPhoneUserName;
 
+        try {
+            userPhoneUserName = Data.userUserPhoneUserHashMap.get(user).getUserPhoneUserName() == null ? "`Unregistered`" : "`" + Data.userUserPhoneUserHashMap.get(user).getUserPhoneUserName() + "`";
+        } catch (Exception ei) {
+            userPhoneUserName = "`Unregistered`";
+        }
         String isPro = "";
 
         EmbedBuilder embed = new EmbedBuilder()
@@ -108,7 +121,8 @@ public class InfoUserCommand implements ICommand {
                 .setFooter("User Info", null);
 
         embed.addField("Identity", "ID `"+id+"`\n"+
-                "Nickname `"+nickname+"` | Discriminator `"+dis+"`", true);
+                "Nickname `"+nickname+"` | Discriminator `"+dis+"`\n" +
+                "Name: " + userPhoneUserName, true);
 
         embed.addField("Status", "🎮 "+" `"+game+"`\n"
                 +statusEmoji+" `"+status+"`\n", true);
@@ -116,6 +130,6 @@ public class InfoUserCommand implements ICommand {
         embed.addField("⌚ "+"Time", "Join - \n`"+join+"`\n"+
                 "Register `"+register+"`\n", true);
 
-        e.getChannel().sendMessage(embed.build()).queue();
+        e.getChannel().sendMessageEmbeds(embed.build()).queue();
     }
 }

@@ -25,7 +25,7 @@ public class UptimeCOmmand implements ICommand {
         final long milliseconds = duration % 1000;
 
         String uptime = (years == 0 ? "" : "**" + years + "** Years, ") + (months == 0 ? "" : "**" + months + "** Months, ") + (days == 0 ? "" : "**" + days + "** Days, ") + (hours == 0 ? "" : "**" + hours + "** Hours, ")
-                + (minutes == 0 ? "" : "**" + minutes + "** Minutes, ") + (seconds == 0 ? "" : "**" + seconds + "** Seconds, ") + (milliseconds == 0 ? "****" : milliseconds + "** Milliseconds, ");
+                + (minutes == 0 ? "" : "**" + minutes + "** Minutes, ") + (seconds == 0 ? "" : "**" + seconds + "** Seconds, **") + (milliseconds == 0 ? "" : milliseconds + "** Milliseconds, ");
 
         uptime = replaceLast(uptime, ", ", "");
         uptime = replaceLast(uptime, ",", " and");
@@ -33,7 +33,7 @@ public class UptimeCOmmand implements ICommand {
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("Uptime").setTimestamp(OffsetDateTime.now()).setColor(InfoUserCommand.randomColor());
 
         embedBuilder.setDescription("My uptime is " + uptime + "");
-        ctx.getChannel().sendMessage(embedBuilder.build()).queue();
+        ctx.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
     private String replaceLast(final String text, final String regex, final String replacement) {

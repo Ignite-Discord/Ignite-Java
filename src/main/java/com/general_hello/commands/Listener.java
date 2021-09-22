@@ -1,13 +1,11 @@
 package com.general_hello.commands;
 
 import com.general_hello.commands.Database.DatabaseManager;
-import com.general_hello.commands.Database.SQLiteDataSource;
 import com.general_hello.commands.OtherEvents.OtherEvents;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
-import com.general_hello.commands.commands.Settings.SettingsData;
 import com.general_hello.commands.commands.Utils.MoneyData;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import me.duncte123.botcommons.BotCommons;
@@ -60,10 +58,6 @@ public class Listener extends ListenerAdapter {
             // Run automod on the message
             OtherEvents.autoMod.performAutomod(m);
         }
-
-        OtherEvents.messageCache.putMessage(event.getMessage());
-        OtherEvents.autoMod.performAutomod(event.getMessage());
-
         //add xp :D
         LevelPointManager.feed(event.getAuthor());
 
@@ -73,7 +67,7 @@ public class Listener extends ListenerAdapter {
 
         trivia(event);
 
-        if (event.getMessage().getContentRaw().equals(prefix + "commands")) {
+        if (event.getMessage().getContentRaw().equals(prefix + " commands")) {
             if (event.getAuthor().getId().equals(Config.get("owner_id"))) {
                 em = new EmbedBuilder().setTitle("Command Count details!!!!").setColor(Color.red).setFooter("Commands used until now ").setTimestamp(LocalDateTime.now());
                 em.addField("Command made by ", event.getAuthor().getName(), false);
@@ -84,29 +78,24 @@ public class Listener extends ListenerAdapter {
             }
         }
 
-        try {
-            if (SettingsData.pingForPrefix.get(event.getAuthor())) {
-                if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) {
-                    event.getChannel().sendMessage("Psst. Check your **DMS** for the prefix of this bot").queue();
-                    event.getMessage().getAuthor().openPrivateChannel().complete().sendMessage("The prefix for this bot is `" + prefix + "`").queue();
-                }
+            if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) {
+                event.getChannel().sendMessage("Psst. Check your **DMS** for the prefix of this bot").queue();
+                event.getMessage().getAuthor().openPrivateChannel().complete().sendMessage("The prefix for this bot is `" + prefix + "`").queue();
             }
-        } catch (Exception e) {
-            SettingsData.pingForPrefix.put(event.getAuthor(), true);
-        }
+
 
         jda = event.getJDA();
 
         System.out.println(prefix);
-        if (raw.equalsIgnoreCase(prefix + "shutdown") && event.getAuthor().getId().equals(Config.get("owner_id"))) {
+        if (raw.equalsIgnoreCase(prefix + " shutdown") && event.getAuthor().getId().equals(Config.get("owner_id"))) {
             shutdown(event, true);
             return;
-        } else if (raw.equalsIgnoreCase(prefix + "shutdown") && event.getAuthor().getId().equals(Config.get("owner_id_partner"))) {
+        } else if (raw.equalsIgnoreCase(prefix + " shutdown") && event.getAuthor().getId().equals(Config.get("owner_id_partner"))) {
             shutdown(event, false);
             return;
         }
 
-        if (raw.startsWith(prefix)) {
+        if (raw.toLowerCase().startsWith(prefix)) {
             try {
                 manager.handle(event, prefix);
             } catch (InterruptedException | IOException | SQLException e) {
@@ -149,7 +138,6 @@ public class Listener extends ListenerAdapter {
 
 
         event.getJDA().shutdown();
-        SQLiteDataSource.ds.close();
         BotCommons.shutdown(event.getJDA());
     }
 

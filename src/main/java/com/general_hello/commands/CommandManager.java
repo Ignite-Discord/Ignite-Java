@@ -1,8 +1,6 @@
 package com.general_hello.commands;
 
 
-import com.general_hello.commands.commands.Call.HangupCommand;
-import com.general_hello.commands.commands.Call.JoinCallQueueCommand;
 import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.DefaultCommands.*;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.*;
@@ -16,14 +14,15 @@ import com.general_hello.commands.commands.Info.InfoServerCommand;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
 import com.general_hello.commands.commands.Math.MathCommand;
 import com.general_hello.commands.commands.MusicPlainCommand.*;
+import com.general_hello.commands.commands.Others.JokeCommand;
+import com.general_hello.commands.commands.Others.PasteCommand;
+import com.general_hello.commands.commands.Others.SayCommand;
 import com.general_hello.commands.commands.RankingSystem.ViewRank;
 import com.general_hello.commands.commands.Register.RegisterCommand;
-import com.general_hello.commands.commands.Settings.SettingsCommand;
 import com.general_hello.commands.commands.Uno.ChallengeCommand;
 import com.general_hello.commands.commands.Uno.DrawCommand;
 import com.general_hello.commands.commands.Uno.PlayCardCommand;
-import com.general_hello.commands.commands.VoiceCall.onCallCommand;
-import com.general_hello.commands.commands.VoiceCall.onLeaveCommand;
+import com.general_hello.commands.commands.Uno.UnoCommand;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -44,11 +43,10 @@ public class CommandManager {
     public CommandManager(EventWaiter waiter) {
 
         //Default Commands
-        addCommand(new ServerCountCommand());
         addCommand(new BugCommand());
         addCommand(new HelpCommand(this));
         addCommand(new PingCommand());
-        addCommand(new AboutCommand(Color.cyan, "A discord bot that can call other discord servers!"));
+        addCommand(new AboutCommand(Color.cyan, "a multipurpose bot created by Igniters for Igniters!"));
         addCommand(new UptimeCOmmand());
         addCommand(new InfoUserCommand());
         addCommand(new InfoServerCommand());
@@ -56,19 +54,10 @@ public class CommandManager {
         addCommand(new SetPrefixCommand());
         addCommand(new MathCommand());
 
-        //settings
-        addCommand(new SettingsCommand());
-
-        //call commands
-        addCommand(new HangupCommand());
-        addCommand(new JoinCallQueueCommand());
-
         //mini Games
         addCommand(new ChessRequest());
 
         //voice call commands
-        addCommand(new onCallCommand());
-        addCommand(new onLeaveCommand());
 
         //update slash command
         addCommand(new UpdateSlashCommand());
@@ -79,6 +68,7 @@ public class CommandManager {
         //uno
         addCommand(new DrawCommand(gameHandler));
         addCommand(new ChallengeCommand());
+        addCommand(new UnoCommand(gameHandler));
         addCommand(new PlayCardCommand(gameHandler));
 
         //minigames
@@ -105,6 +95,11 @@ public class CommandManager {
         addCommand(new ResumeCommand());
         addCommand(new SkipCommand());
         addCommand(new VolumeCommand());
+
+        //others
+        addCommand(new JokeCommand());
+        addCommand(new PasteCommand());
+        addCommand(new SayCommand());
     }
 
     private void addCommand(ICommand cmd) {
@@ -140,6 +135,7 @@ public class CommandManager {
     void handle(GuildMessageReceivedEvent event, String prefix) throws InterruptedException, IOException, SQLException {
         String[] split = event.getMessage().getContentRaw()
                 .replaceFirst("(?i)" + Pattern.quote(prefix), "")
+                .replaceFirst("\\s+", "")
                 .split("\\s+");
 
         String invoke = split[0].toLowerCase();

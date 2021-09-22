@@ -11,7 +11,7 @@ public class RPS {
 		final long guildID = event.getGuild().getIdLong();
 		String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, DatabaseManager.INSTANCE::getPrefix);
 
-		if (args[0].toLowerCase().contains((prefix + "rps")) && !event.getAuthor().isBot()) {
+		if (args[0].toLowerCase().contains((prefix + " rps")) && !event.getAuthor().isBot()) {
 			Random rand = new Random();
 			int c = rand.nextInt(3);
 			if(args.length == 1) {

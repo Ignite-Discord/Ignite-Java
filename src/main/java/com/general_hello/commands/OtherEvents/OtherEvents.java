@@ -7,7 +7,6 @@ import com.general_hello.commands.commands.Logs.AutoMod;
 import com.general_hello.commands.commands.Logs.BasicLogger;
 import com.general_hello.commands.commands.Logs.MessageCache;
 import com.general_hello.commands.commands.Logs.TextUploader;
-import com.general_hello.commands.commands.Settings.SettingsData;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -92,22 +91,21 @@ public class OtherEvents extends ListenerAdapter {
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
         final String useGuildSpecificSettingsInstead = String.format("Thank you for adding %s to %s!!!\n" +
-                        "\nTo learn more about this bot feel free to type **u?about**\n" +
-                        "You can change the prefix by typing **u?setprefix [prefix]**\n" +
-                        "To learn more about a command **u?help [command name]**",
+                        "\nTo learn more about this bot feel free to type **ign about**\n" +
+                        "You can change the prefix by typing **ign setprefix [prefix]**\n" +
+                        "To learn more about a command **ign help [command name]**",
                 event.getJDA().getSelfUser().getAsMention(), event.getGuild().getName());
 
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("Hello!").setDescription(useGuildSpecificSettingsInstead);
         event.getJDA().getUserById(Config.get("owner_id")).openPrivateChannel().complete().sendMessage("Someone added me to " + event.getGuild().getName()).queue();
         event.getJDA().getUserById(Config.get("owner_id")).openPrivateChannel().complete().sendMessage("Invite link is " + event.getGuild().retrieveInvites().complete().get(0).getUrl()).queue();
-        SettingsData.antiRobServer.put(event.getGuild(), false);
         embedBuilder.setColor(InfoUserCommand.randomColor());
-        event.getGuild().getOwner().getUser().openPrivateChannel().complete().sendMessage(embedBuilder.build()).queue();
+        event.getGuild().getOwner().getUser().openPrivateChannel().complete().sendMessageEmbeds(embedBuilder.build()).queue();
         try {
-            event.getGuild().getTextChannels().get(0).sendMessage(embedBuilder.build()).queue();
+            event.getGuild().getTextChannels().get(0).sendMessageEmbeds(embedBuilder.build()).queue();
         } catch (Exception e) {
             try {
-                event.getGuild().getTextChannels().get(1).sendMessage(embedBuilder.build()).queue();
+                event.getGuild().getTextChannels().get(1).sendMessageEmbeds(embedBuilder.build()).queue();
             } catch (Exception ignored) {}
         }
     }

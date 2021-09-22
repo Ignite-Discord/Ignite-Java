@@ -16,7 +16,7 @@ public class Read {
 		final long guildID = event.getGuild().getIdLong();
 		String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, DatabaseManager.INSTANCE::getPrefix);
 
-		if (args[0].equalsIgnoreCase(prefix + "read")) {
+		if (args[0].equalsIgnoreCase(prefix + " read")) {
 			Message message = event.getMessage();
 			if(message.getAttachments().size() == 0){
 				event.getChannel().sendMessage("Attach a file that you want to read!").queue();

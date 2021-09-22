@@ -18,15 +18,10 @@ public class AboutCommand implements ICommand {
     public Color color;
     public String description;
     public String oauthLink;
-    public final String[] features;
 
     public AboutCommand(Color color, String description) {
         this.color = color;
         this.description = description;
-        featureses[0] = "Text to another server text channel call";
-        featureses[1] = "Voice to another server voice channel call";
-
-        this.features = featureses;
     }
 
     @Override
@@ -53,16 +48,25 @@ public class AboutCommand implements ICommand {
                 .append(author).append("** using " + JDAUtilitiesInfo.AUTHOR + "'s [Commands Extension](" + JDAUtilitiesInfo.GITHUB + ") (")
                 .append(JDAUtilitiesInfo.VERSION).append(") and the [JDA library](https://github.com/DV8FromTheWorld/JDA) (")
                 .append(JDAInfo.VERSION).append(")\nType `").append(prefix).append("help")
-                .append("` to see my commands!").append(join || inv ? invline : "").append("\n\nSome of my features include: ```css");
-        for (String feature : features)
-            descr.append("\n").append(REPLACEMENT_ICON).append(" ").append(feature);
+                .append("` to see my commands!").append(join || inv ? invline : "").append("\n\nSome of my features include: ```css\n");
+       descr.append("IGNITE COINS WALLET: Wondering how much Ignite Coins you have? Wonder no more cause IgntBot will now serve as your digital wallet! Simply register your account to know your balance!\n" +
+               "\n" +
+               "IGNITE FAQs: New to the Ignite Community? Worry not, cause IgntBot got you covered! Ask anything Ignite related and our bot will answer your questions for you! In case the bot doesn't know what to say... just ask us!\n" +
+               "\n" +
+               "MUSIC: Never miss a beat with IgntBot! Simply hop in to a voice channel and enjoy music on demand!\n" +
+               "\n" +
+               "GAMES: IgntBot also contains games that Igniters can play such as UNO, Hangman, Guess the Number and so much more!\n" +
+               "\n" +
+               "MEME GENERATOR: Are you bored and would like to have a good laugh? IgntBot got you covered! Ask for a meme and it'll give you a good one!\n" +
+               "\n" +
+               "BAD WORD BLOCKER: To make COIL a safe space for everybody, IgntBot also blocks inappropriate words in the text channels!");
         descr.append(" ```");
 
         descr.append("\n");
-        descr.append("Total memory: ").append(Runtime.getRuntime().totalMemory()).append("\n");
-        descr.append("Free memory: ").append(Runtime.getRuntime().freeMemory()).append("\n");
-        descr.append("Max memory: ").append(Runtime.getRuntime().maxMemory()).append("\n");
-        descr.append("Memory Usage: ").append(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+        descr.append("Total memory: ").append(Runtime.getRuntime().totalMemory() * 0.00000001).append(" mb\n");
+        descr.append("Free memory: ").append(Runtime.getRuntime().freeMemory() * 0.00000001).append(" mb\n");
+        descr.append("Max memory: ").append(Runtime.getRuntime().maxMemory() * 0.00000001).append(" mb\n");
+        descr.append("Memory Usage: ").append((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 0.00000001).append(" mb");
 
         builder.setDescription(descr);
         event.getJDA().getShardInfo();
@@ -70,7 +74,7 @@ public class AboutCommand implements ICommand {
                 + "/" + event.getJDA().getShardInfo().getShardTotal()), true);
         builder.addField("This shard", event.getJDA().getUsers().size() + " Users\n" + event.getJDA().getGuilds().size() + " Servers", true);
         builder.addField("", event.getJDA().getTextChannels().size() + " Text Channels\n" + event.getJDA().getVoiceChannels().size() + " Voice Channels", true);
-        builder.setFooter("Support me on patreon with https://www.patreon.com/nada", null);
+        builder.setFooter("Among sus", null);
         event.getMessage().replyEmbeds(builder.build()).queue();
     }
 

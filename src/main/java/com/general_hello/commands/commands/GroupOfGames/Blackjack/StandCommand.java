@@ -3,12 +3,13 @@ package com.general_hello.commands.commands.GroupOfGames.Blackjack;
 
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.GetData;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
-import com.general_hello.commands.commands.Utils.MoneyData;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
@@ -24,19 +25,20 @@ public class StandCommand implements ICommand {
                 try {
                     e.getMessage().delete().queueAfter(4, TimeUnit.SECONDS);
                 } catch (Exception ea) {
-                    e.getChannel().sendMessage("Error 210!!! Correcting error now.....").queue(
-                            (message) -> message.editMessage("Error fixed!!!!").queueAfter(6, TimeUnit.SECONDS)
-                    );
                 }
                 bjg.stand();
                 e.getChannel().retrieveMessageById(bjg.getMessageId()).queue(m -> {
                     EmbedBuilder eb = bjg.buildEmbed(e.getAuthor().getName(), e.getGuild());
                     if (bjg.hasEnded()) {
                         int won_lose = bjg.getWonCreds();
-                        final Double money = MoneyData.money.get(e.getAuthor());
+                        int money = 0;
+                        try {
+                            money = (int) GetData.getLevelPoints(e.getAuthor());
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                         LevelPointManager.feed(e.getAuthor(), (long) (money + won_lose));
                         DecimalFormat formatter = new DecimalFormat("#,###.00");
-                        eb.addField("Credits", String.format("You now have %s credits", formatter.format(((int) Math.round(MoneyData.money.get(e.getAuthor()))))), false);
                         GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
                     }
                     m.editMessageEmbeds(eb.build()).queue();

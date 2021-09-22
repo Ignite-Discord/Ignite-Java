@@ -81,7 +81,7 @@ public class InfoServerCommand implements ICommand {
         embed.addField("😎" + " Member", "User `"+member+"` |  `"+online+"`\nHuman `"+human+"` |  Bot `"+bot+"`", true);
         embed.addField("Other", "Region `" + region + "` | Verification `" + verify + "`", true);
 
-        ctx.getChannel().sendMessage(embed.build()).queue();
+        ctx.getChannel().sendMessageEmbeds(embed.build()).queue();
     }
 
     @Override

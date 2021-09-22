@@ -21,6 +21,6 @@ public class OnReadyEvent extends ListenerAdapter {
         new SlashCommandHandler();
         SlashCommandHandler.initialize();
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("Status").setColor(Color.GREEN).setTimestamp(OffsetDateTime.now()).setDescription(event.getJDA().getSelfUser().getAsMention() + " is now online! The problem has been resolved and the maintenance is complete!");
-        event.getJDA().getTextChannelById(852342009288851516L).sendMessageEmbeds(embedBuilder.build()).queue();
+        event.getJDA().getTextChannelById(876363940144242699L).sendMessageEmbeds(embedBuilder.build()).queue();
     }
 }
