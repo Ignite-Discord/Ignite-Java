@@ -1,14 +1,14 @@
-The shortest player in basketball history?-muggsy bogues
-Which player has the most career points?-kareem abdul-jabar
-The famous basketball player Dr. J original name is what?-julius erving
-In 2000’s who was the first player to record back to back 50 points games?-antawn jamison
-Who is the basketball player that score 100 points in a game?-wilt chamberlain
-What is the rarest M&M color?-brown
+Trivia Question: The shortest player in basketball history?-muggsy bogues
+Trivia Question: Which player has the most career points?-kareem abdul-jabar
+Trivia Question: The famous basketball player Dr. J original name is what?-julius erving
+Trivia Question: In 2000’s who was the first player to record back to back 50 points games?-antawn jamison
+Trivia Question: Who is the basketball player that score 100 points in a game?-wilt chamberlain
+Trivia Question: What is the rarest M&M color?-brown
 Trivia Question: In a website browser address bar, what does “www” stand for?-world wide web
 Trivia Question: In what year were the first Air Jordan sneakers released?-1984
 Trivia Question: In a bingo game, which number is represented by the phrase “two little ducks”?-22
 Trivia Question: According to Greek mythology, who was the first woman on earth?-pandora
-Trivia Question: Which African country was formerly known as Abyssinia?-ethiopia 
+Trivia Question: Which African country was formerly known as Abyssinia?-ethiopia
 Trivia Question: Tennis star Serena Williams won which major tournament while pregnant with her first child?-australian open
 Trivia Question: In which European city would you find Orly airport?-paris
 Trivia Question: Fissures, vents, and plugs are all associated with which geological feature?-volcanos
@@ -27,7 +27,6 @@ Trivia Question: What was the predecessor to the United Nations?-league of natio
 Trivia Question: A flamboyance is a group of what animals?-flamingos
 Trivia Question: What color is a polar bear’s skin?-black
 Trivia Question: What is the largest lizard?-komodo dragon
-Trivia Question: The male of what species testicles explode on mating and then dies?-honeybee
 Trivia Question: Europe is separated from Africa by which sea?-mediterranean sea
 Trivia Question: Canberra is the capital city of which country?-australia
 Trivia Question: New York City comprises how many boroughs?-5
@@ -45,8 +44,7 @@ Trivia Question: What is the largest planet in our solar system?-jupiter
 Trivia Question: What has a gravitational pull so strong that even light cannot escape it?-black hole
 Trivia Question: Which 1998 Disney film was Lindsay Lohan’s film debut?-parent trap
 Trivia Question: What type of business did Annie have that failed in “Bridesmaids”?-bakery
-Trivia Question: What were the two sides in World War II known as?
-Answer: Allies and Axis
+Trivia Question: What were the two sides in World War II known as?-Allies and Axis
 Trivia Question: What number did Derek Jeter wear on his New York Yankees jersey?-2
 Trivia Question: What vitamin does the sun’s ultraviolet rays help the skin produce?-vitamin d
 Trivia Question: What is “jaggery” used in Indian cooking?-sugar
