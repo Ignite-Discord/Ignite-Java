@@ -142,42 +142,36 @@ public class Bot {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    System.out.println("Yeet 1");
                     jda.getPresence().setActivity(Activity.watching("Happy Moon festival!"));
 
                     try {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    System.out.println("Yeet 2");
                     jda.getPresence().setActivity(Activity.watching("ign help"));
 
                     try {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    System.out.println("Yeet 3");
                     jda.getPresence().setActivity(Activity.watching("Made by HELLO66#0066"));
 
                     try {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    System.out.println("Yeet 4");
                     jda.getPresence().setActivity(Activity.watching("Made by unjown#4644"));
 
                     try {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    System.out.println("Yeet 5");
                     jda.getPresence().setActivity(Activity.watching("Design made by SkyacinthClues#0822"));
 
                     try {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    System.out.println("Yeet 6");
                     jda.getPresence().setActivity(Activity.watching("Deuteronomy 23 1. No one who has been emasculated by crushing or cutting may enter the assembly of the LORD."));
 
                     try {

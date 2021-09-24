@@ -63,9 +63,9 @@ public class AboutCommand implements ICommand {
         descr.append(" ```");
 
         descr.append("\n");
-        descr.append("Total memory: ").append(Runtime.getRuntime().totalMemory() * 0.00000001).append(" mb\n");
-        descr.append("Free memory: ").append(Runtime.getRuntime().freeMemory() * 0.00000001).append(" mb\n");
-        descr.append("Max memory: ").append(Runtime.getRuntime().maxMemory() * 0.00000001).append(" mb\n");
+        descr.append("Total memory: ").append(Runtime.getRuntime().totalMemory() * 	0.000001).append(" mb\n");
+        descr.append("Free memory: ").append(Runtime.getRuntime().freeMemory() * 0.000001).append(" mb\n");
+        descr.append("Max memory: ").append(Runtime.getRuntime().maxMemory() * 0.000001).append(" mb\n");
         descr.append("Memory Usage: ").append((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 0.00000001).append(" mb");
 
         builder.setDescription(descr);

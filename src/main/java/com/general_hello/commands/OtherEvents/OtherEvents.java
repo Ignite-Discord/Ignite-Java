@@ -2,15 +2,18 @@ package com.general_hello.commands.OtherEvents;
 
 import com.general_hello.commands.Config;
 import com.general_hello.commands.Listener;
+import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
 import com.general_hello.commands.commands.Logs.AutoMod;
 import com.general_hello.commands.commands.Logs.BasicLogger;
 import com.general_hello.commands.commands.Logs.MessageCache;
 import com.general_hello.commands.commands.Logs.TextUploader;
+import com.general_hello.commands.commands.Uno.ImageHandler;
+import com.general_hello.commands.commands.Uno.UnoGame;
+import com.general_hello.commands.commands.Uno.UnoHand;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -22,6 +25,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateDiscriminatorEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateNameEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -32,7 +36,10 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class OtherEvents extends ListenerAdapter {
@@ -55,6 +62,79 @@ public class OtherEvents extends ListenerAdapter {
                 event.getTimeShutdown().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)+ " due to maintenance.\n" +
                 "With response number of " + event.getResponseNumber() + "\n" +
                 "With the code of " + event.getCloseCode().getCode() + "\n");
+    }
+
+    @Override
+    public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
+        if (!event.getUser().isBot()) handleUnoReaction(event.getMember(), event.retrieveMessage().complete(), event.getReactionEmote());
+    }
+
+    public void handleUnoReaction(Member member, Message message, MessageReaction.ReactionEmote emoji) {
+        Guild guild = message.getGuild();
+        UnoGame unoGame = GameHandler.getUnoGame(guild.getIdLong());
+        if (emoji.isEmoji() && unoGame != null && message.getIdLong() == unoGame.getMessageID()) {
+            ArrayList<UnoHand> hands = unoGame.getHands();
+            switch (emoji.getEmoji()) {
+                case "▶️":
+                    if (unoGame.getStarter() == member.getIdLong() && unoGame.getTurn() == -1) {
+                        int turn = unoGame.start();
+                        if (turn != -1) {
+                            guild.createCategory("Uno")
+                                    .addMemberPermissionOverride(guild.getSelfMember().getIdLong(), Collections.singletonList(Permission.VIEW_CHANNEL), Collections.emptyList())
+                                    .addRolePermissionOverride(guild.getIdLong(), Collections.emptyList(), Collections.singletonList(Permission.VIEW_CHANNEL)).queue(category -> {
+                                        unoGame.setCategory(category.getIdLong());
+                                        guild.modifyCategoryPositions().selectPosition(category.getPosition()).moveTo(Math.min(guild.getCategories().size() - 1, 2)).queue();
+                                        for (UnoHand hand : hands) {
+                                            category.createTextChannel(String.format("%s-uno", hand.getPlayerName()))
+                                                    .addMemberPermissionOverride(hand.getPlayerId(), Collections.singletonList(Permission.VIEW_CHANNEL), Collections.emptyList())
+                                                    .addMemberPermissionOverride(guild.getSelfMember().getIdLong(), Collections.singletonList(Permission.VIEW_CHANNEL), Collections.emptyList())
+                                                    .addRolePermissionOverride(guild.getIdLong(), Collections.emptyList(), Collections.singletonList(Permission.VIEW_CHANNEL)).setTopic("Run !help to show which commands you can use").queue(channel -> {
+                                                        channel.sendFile(ImageHandler.getCardsImage(hand.getCards()), "hand.png").embed(unoGame.createEmbed(hand.getPlayerId()).setColor(guild.getSelfMember().getColor()).build()).queue(mes -> {
+                                                            hand.setChannelId(channel.getIdLong());
+                                                            hand.setMessageId(mes.getIdLong());
+                                                        });
+                                                    });
+                                        }
+                                    });
+                        } else {
+                            message.removeReaction(emoji.getEmote(), member.getUser()).queue();
+                        }
+                    }
+                    break;
+                case "❌":
+                    if (unoGame.getStarter() == member.getIdLong()) {
+                        for (long channelId : unoGame.getHands().stream().map(UnoHand::getChannelId).collect(Collectors.toList())) {
+                            if (channelId != -1) guild.getTextChannelById(channelId).delete().queue();
+                        }
+                        if (unoGame.getTurn() != -1) {
+                            guild.getCategoryById(unoGame.getCategory()).delete().queue();
+                        }
+                        MessageEmbed me = message.getEmbeds().get(0);
+                        EmbedBuilder eb = new EmbedBuilder(me);
+                        eb.setTitle("The game of uno has been canceled");
+                        message.editMessageEmbeds(eb.build()).queue();
+                        GameHandler.removeUnoGame(guild.getIdLong());
+                        message.delete().queueAfter(20, TimeUnit.SECONDS);
+                    }
+                    break;
+                case "\uD83D\uDD90️":
+                    if (unoGame.getTurn() == -1 && !hands.stream().map(UnoHand::getPlayerId).collect(Collectors.toList()).contains(member.getIdLong())) {
+                        unoGame.addPlayer(member.getIdLong(), member.getEffectiveName());
+                        MessageEmbed me = message.getEmbeds().get(0);
+                        EmbedBuilder eb = new EmbedBuilder(me);
+                        eb.clearFields();
+                        MessageEmbed.Field f = me.getFields().get(0);
+                        StringBuilder sb = new StringBuilder();
+                        for (String name : hands.stream().map(UnoHand::getPlayerName).collect(Collectors.toList())) {
+                            sb.append(name);
+                            sb.append("\n");
+                        }
+                        eb.addField(f.getName(), sb.toString().trim(), false);
+                        message.editMessageEmbeds(eb.build()).queue();
+                    }
+                    break;
+            }
+        }
     }
 
     @Override

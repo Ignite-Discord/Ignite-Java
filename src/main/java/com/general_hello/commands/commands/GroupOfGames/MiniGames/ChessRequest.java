@@ -65,7 +65,7 @@ public class ChessRequest implements ICommand {
         //DM the requested user for the channel link
         mentionedUser.openPrivateChannel().queue((privateChannel -> {
             embedBuilder.clear();
-            embedBuilder.setTitle("Request to Play Connect4");
+            embedBuilder.setTitle("Request to Play Chess");
             embedBuilder.setColor(Color.YELLOW);
             embedBuilder.setDescription(ctx.getAuthor().getName() + " is challenging you a game of Chess in " + ctx.getGuild().getName() + " at " + ctx.getChannel().getAsMention() + " in this [message](" + messageLink + ")!");
             privateChannel.sendMessageEmbeds(embedBuilder.build()).queue();
