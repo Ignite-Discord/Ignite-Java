@@ -31,7 +31,7 @@ public class OnButtonClick extends ListenerAdapter {
         } catch (Exception ignored) {}
 
         if (!authorId.equals("0000") && !authorId.equals(event.getUser().getId())) {
-            event.reply(com.general_hello.commands.commands.Emoji.Emoji.ERROR + "You cannot press this button").setTTS(true).setEphemeral(true).queue();
+            event.getMember().getUser().openPrivateChannel().complete().sendMessage(com.general_hello.commands.commands.Emoji.Emoji.ERROR + "You cannot press this button").queue();
             System.out.println("oof");
             return;
         }
@@ -152,7 +152,7 @@ public class OnButtonClick extends ListenerAdapter {
                 break;
 
             default:
-                event.reply(com.general_hello.commands.commands.Emoji.Emoji.ERROR + "You cannot press this button").setTTS(true).setEphemeral(true).queue();
+                event.getMember().getUser().openPrivateChannel().complete().sendMessage(com.general_hello.commands.commands.Emoji.Emoji.ERROR + "You cannot press this button").queue();
         }
     }
 

@@ -23,7 +23,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +32,6 @@ public class Listener extends ListenerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
     public static HashMap<String, Integer> count = new HashMap<>();
     public static JDA jda;
-    public static ArrayList<Long> blackListDbCheck = new ArrayList<>();
-    private static boolean oof = true;
 
     public Listener(EventWaiter waiter) {
         manager = new CommandManager(waiter);
@@ -42,6 +39,7 @@ public class Listener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
+        System.out.println(event.getAuthor().getName() + " sent " + event.getMessage().getContentRaw() + " in " + event.getChannel().getName());
         EmbedBuilder em;
 
         if (event.getAuthor().isBot() || event.isWebhookMessage()) {

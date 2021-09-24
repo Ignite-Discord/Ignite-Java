@@ -63,10 +63,15 @@ public class AboutCommand implements ICommand {
         descr.append(" ```");
 
         descr.append("\n");
-        descr.append("Total memory: ").append(Runtime.getRuntime().totalMemory() * 	0.000001).append(" mb\n");
-        descr.append("Free memory: ").append(Runtime.getRuntime().freeMemory() * 0.000001).append(" mb\n");
-        descr.append("Max memory: ").append(Runtime.getRuntime().maxMemory() * 0.000001).append(" mb\n");
-        descr.append("Memory Usage: ").append((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 0.00000001).append(" mb");
+        descr.append("Total memory: ").append((int) (Runtime.getRuntime().totalMemory() * 0.000001)).append(" mb\n");
+        descr.append("Free memory: ").append((int) (Runtime.getRuntime().freeMemory() * 0.000001)).append(" mb\n");
+        descr.append("Max memory: ").append((int) (Runtime.getRuntime().maxMemory() * 0.000001)).append(" mb\n");
+        descr.append("Memory Usage: ").append((int) ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) * 0.00000001)).append(" mb");
+
+        //Here
+        System.out.println("Total Memory: " + Runtime.getRuntime().totalMemory());
+        System.out.println("Free Memory: " + Runtime.getRuntime().freeMemory());
+        System.out.println("Max Memory: " + Runtime.getRuntime().maxMemory());
 
         builder.setDescription(descr);
         event.getJDA().getShardInfo();

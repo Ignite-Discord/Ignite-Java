@@ -7,8 +7,8 @@ com/general_hello/commands/commands/GroupOfGames/Entertainments/Colour.java
  com.general_hello.commands.commands.GroupOfGames.Entertainments.Colour
 com/general_hello/commands/commands/Music/FormatUtil.java
  com.general_hello.commands.commands.Music.FormatUtil
-com/general_hello/commands/OtherEvents/OnButtonClick.java
- com.general_hello.commands.OtherEvents.OnButtonClick
+com/general_hello/commands/OtherEvents/OtherEvents.java
+ com.general_hello.commands.OtherEvents.OtherEvents
 com/general_hello/commands/commands/GroupOfGames/Blackjack/BlackjackGame.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackGame
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackGame$EndState
@@ -33,8 +33,8 @@ com/general_hello/commands/commands/Utils/Util.java
 com/general_hello/commands/commands/Utils/LogUtil.java
  com.general_hello.commands.commands.Utils.LogUtil
  com.general_hello.commands.commands.Utils.LogUtil$ParsedAuditReason
-com/general_hello/commands/commands/DefaultCommands/HelpSlashCommand.java
- com.general_hello.commands.commands.DefaultCommands.HelpSlashCommand
+com/general_hello/commands/commands/Utils/MCColor.java
+ com.general_hello.commands.commands.Utils.MCColor
 com/general_hello/commands/commands/Uno/UnoCard.java
  com.general_hello.commands.commands.Uno.UnoCard
  com.general_hello.commands.commands.Uno.UnoCard$Color
@@ -56,8 +56,10 @@ com/general_hello/commands/commands/GroupOfGames/Blackjack/BlackjackCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackCommand
 com/general_hello/commands/Database/FilePath.java
  com.general_hello.commands.Database.FilePath
-com/general_hello/commands/commands/GroupOfGames/Games/HangManCommand.java
- com.general_hello.commands.commands.GroupOfGames.Games.HangManCommand
+com/general_hello/commands/commands/Music/ButtonPaginator.java
+ com.general_hello.commands.commands.Music.ButtonPaginator
+ com.general_hello.commands.commands.Music.ButtonPaginator$1
+ com.general_hello.commands.commands.Music.ButtonPaginator$Builder
 com/general_hello/commands/commands/GroupOfGames/MiniGames/ChessStoring.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessStoring
 com/general_hello/commands/commands/Music/CachedMessage.java
@@ -90,8 +92,8 @@ com/general_hello/commands/commands/Others/BadDesign.java
  com.general_hello.commands.commands.Others.BadDesign
 com/general_hello/commands/OtherEvents/OnReadyEvent.java
  com.general_hello.commands.OtherEvents.OnReadyEvent
-com/general_hello/commands/commands/DefaultCommands/HelpCommand.java
- com.general_hello.commands.commands.DefaultCommands.HelpCommand
+com/general_hello/commands/commands/DefaultCommands/HelpSlashCommand.java
+ com.general_hello.commands.commands.DefaultCommands.HelpSlashCommand
 com/general_hello/commands/commands/Utils/OtherUtil.java
  com.general_hello.commands.commands.Utils.OtherUtil
 com/general_hello/commands/commands/Others/PasteCommand.java
@@ -121,8 +123,8 @@ com/general_hello/commands/commands/Uno/UnoCommand.java
  com.general_hello.commands.commands.Uno.UnoCommand
 com/general_hello/commands/commands/User/UserPhoneUser.java
  com.general_hello.commands.commands.User.UserPhoneUser
-com/general_hello/commands/commands/GroupOfGames/Games/GuessNumberCommand.java
- com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand
+com/general_hello/commands/commands/Utils/ErrorUtils.java
+ com.general_hello.commands.commands.Utils.ErrorUtils
 com/general_hello/commands/commands/Register/RegisterCommand.java
  com.general_hello.commands.commands.Register.RegisterCommand
 com/general_hello/commands/Database/DatabaseManager.java
@@ -137,8 +139,8 @@ com/general_hello/commands/commands/Utils/Action.java
  com.general_hello.commands.commands.Utils.Action
 com/general_hello/commands/OtherEvents/OnPrivateMessage.java
  com.general_hello.commands.OtherEvents.OnPrivateMessage
-com/general_hello/commands/CommandManager.java
- com.general_hello.commands.CommandManager
+com/general_hello/commands/commands/Logs/AutoMod.java
+ com.general_hello.commands.commands.Logs.AutoMod
 com/general_hello/commands/commands/GroupOfGames/Blackjack/HitCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.HitCommand
 com/general_hello/commands/commands/Music/GuildAudioPlayer.java
@@ -179,10 +181,11 @@ com/general_hello/commands/commands/GroupOfGames/Entertainments/RPS.java
  com.general_hello.commands.commands.GroupOfGames.Entertainments.RPS
 com/general_hello/commands/commands/Utils/UtilString.java
  com.general_hello.commands.commands.Utils.UtilString
-com/general_hello/commands/commands/Info/AboutCommand.java
- com.general_hello.commands.commands.Info.AboutCommand
-com/general_hello/commands/commands/GroupOfGames/Games/TriviaCommand.java
- com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand
+com/general_hello/commands/commands/Logs/TextUploader.java
+ com.general_hello.commands.commands.Logs.TextUploader
+ com.general_hello.commands.commands.Logs.TextUploader$Result
+com/general_hello/commands/commands/Emoji/EmojiObject.java
+ com.general_hello.commands.commands.Emoji.EmojiObject
 com/general_hello/commands/commands/RankingSystem/LevelPointCard.java
  com.general_hello.commands.commands.RankingSystem.LevelPointCard
  com.general_hello.commands.commands.RankingSystem.LevelPointCard$ColorSet
@@ -199,8 +202,8 @@ com/general_hello/commands/commands/MusicPlainCommand/QueueCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.QueueCommand
 com/general_hello/commands/commands/Music/AudioManager.java
  com.general_hello.commands.commands.Music.AudioManager
-com/general_hello/commands/commands/Math/MathCommand.java
- com.general_hello.commands.commands.Math.MathCommand
+com/general_hello/commands/commands/MusicPlainCommand/VolumeCommand.java
+ com.general_hello.commands.commands.MusicPlainCommand.VolumeCommand
 com/general_hello/commands/commands/Utils/FormatUtil.java
  com.general_hello.commands.commands.Utils.FormatUtil
 com/general_hello/commands/commands/CommandContext.java
@@ -217,16 +220,16 @@ com/general_hello/commands/commands/PrefixStoring.java
  com.general_hello.commands.commands.PrefixStoring
 com/general_hello/commands/commands/DefaultCommands/BalanceCommand.java
  com.general_hello.commands.commands.DefaultCommands.BalanceCommand
-com/general_hello/commands/commands/GroupOfGames/Games/HangMan.java
- com.general_hello.commands.commands.GroupOfGames.Games.HangMan
+com/general_hello/commands/commands/Logs/BasicLogger.java
+ com.general_hello.commands.commands.Logs.BasicLogger
 com/general_hello/commands/commands/Register/RegisterSlashCommand.java
  com.general_hello.commands.commands.Register.RegisterSlashCommand
 com/general_hello/commands/Config.java
  com.general_hello.commands.Config
 com/general_hello/commands/commands/GroupOfGames/Blackjack/DoubleDownCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.DoubleDownCommand
-com/general_hello/commands/SlashCommands/OnSlashCommand.java
- com.general_hello.commands.SlashCommands.OnSlashCommand
+com/general_hello/commands/commands/DefaultCommands/BugCommand.java
+ com.general_hello.commands.commands.DefaultCommands.BugCommand
 com/general_hello/commands/commands/Uno/UnoHand.java
  com.general_hello.commands.commands.Uno.UnoHand
 com/general_hello/commands/commands/MusicPlainCommand/PlayCommand.java
@@ -246,30 +249,27 @@ com/general_hello/commands/commands/MusicPlainCommand/RepeatCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.RepeatCommand
 com/general_hello/commands/commands/GroupOfGames/Entertainments/EntertainmentListener.java
  com.general_hello.commands.commands.GroupOfGames.Entertainments.EntertainmentListener
-com/general_hello/commands/commands/Emoji/EmojiObject.java
- com.general_hello.commands.commands.Emoji.EmojiObject
-com/general_hello/commands/commands/Logs/TextUploader.java
- com.general_hello.commands.commands.Logs.TextUploader
- com.general_hello.commands.commands.Logs.TextUploader$Result
-com/general_hello/commands/commands/Utils/ErrorUtils.java
- com.general_hello.commands.commands.Utils.ErrorUtils
-com/general_hello/commands/commands/Utils/MCColor.java
- com.general_hello.commands.commands.Utils.MCColor
-com/general_hello/commands/commands/MusicPlainCommand/VolumeCommand.java
- com.general_hello.commands.commands.MusicPlainCommand.VolumeCommand
-com/general_hello/commands/commands/Music/ButtonPaginator.java
- com.general_hello.commands.commands.Music.ButtonPaginator
- com.general_hello.commands.commands.Music.ButtonPaginator$1
- com.general_hello.commands.commands.Music.ButtonPaginator$Builder
-com/general_hello/commands/commands/DefaultCommands/BugCommand.java
- com.general_hello.commands.commands.DefaultCommands.BugCommand
-com/general_hello/commands/commands/Logs/BasicLogger.java
- com.general_hello.commands.commands.Logs.BasicLogger
+com/general_hello/commands/commands/Info/AboutCommand.java
+ com.general_hello.commands.commands.Info.AboutCommand
+com/general_hello/commands/commands/GroupOfGames/Games/GuessNumberCommand.java
+ com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand
+com/general_hello/commands/commands/GroupOfGames/Games/TriviaCommand.java
+ com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand
+com/general_hello/commands/commands/GroupOfGames/Games/HangMan.java
+ com.general_hello.commands.commands.GroupOfGames.Games.HangMan
 com/general_hello/commands/Listener.java
  com.general_hello.commands.Listener
-com/general_hello/commands/commands/Logs/AutoMod.java
- com.general_hello.commands.commands.Logs.AutoMod
+com/general_hello/commands/SlashCommands/OnSlashCommand.java
+ com.general_hello.commands.SlashCommands.OnSlashCommand
+com/general_hello/commands/commands/GroupOfGames/Games/HangManCommand.java
+ com.general_hello.commands.commands.GroupOfGames.Games.HangManCommand
+com/general_hello/commands/commands/Math/MathCommand.java
+ com.general_hello.commands.commands.Math.MathCommand
+com/general_hello/commands/CommandManager.java
+ com.general_hello.commands.CommandManager
+com/general_hello/commands/OtherEvents/OnButtonClick.java
+ com.general_hello.commands.OtherEvents.OnButtonClick
+com/general_hello/commands/commands/DefaultCommands/HelpCommand.java
+ com.general_hello.commands.commands.DefaultCommands.HelpCommand
 com/general_hello/commands/Bot.java
  com.general_hello.commands.Bot
-com/general_hello/commands/OtherEvents/OtherEvents.java
- com.general_hello.commands.OtherEvents.OtherEvents

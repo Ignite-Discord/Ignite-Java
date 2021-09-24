@@ -62,7 +62,6 @@ public class HelpCommand implements ICommand {
                         Button.danger(ctx.getMember().getUser().getId() + ":end", "Cancel").withDisabled(disableOrEnable).withEmoji(Emoji.fromEmote("cancel", Long.parseLong("863204248657461298"), true)))
             ).queue();
 
-            ctx.getMessage().delete().queue();
             return;
         }
 
