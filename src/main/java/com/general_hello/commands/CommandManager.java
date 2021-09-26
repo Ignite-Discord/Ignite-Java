@@ -2,6 +2,7 @@ package com.general_hello.commands;
 
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.DefaultCommands.*;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.*;
 import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand;
@@ -39,11 +40,15 @@ public class CommandManager {
     private final List<ICommand> commands = new ArrayList<>();
     public static ArrayList<String> commandNames = new ArrayList<>();
     public static ArrayList<String> cmdNames = new ArrayList<>();
+    private final long GAMES = 0L;
+    private final long MUSIC = 0L;
+    private final long WALLET = 0L;
+    private final boolean testing = true;
+    private final long OTHERS = 0L;
 
     public CommandManager(EventWaiter waiter) {
 
         //Default Commands
-        addCommand(new BugCommand());
         addCommand(new HelpCommand(this));
         addCommand(new PingCommand());
         addCommand(new AboutCommand(Color.cyan, "a multipurpose bot created by Igniters for Igniters!"));
@@ -56,11 +61,6 @@ public class CommandManager {
 
         //mini Games
         addCommand(new ChessRequest());
-
-        //voice call commands
-
-        //update slash command
-        addCommand(new UpdateSlashCommand());
 
         //games
         GameHandler gameHandler = new GameHandler();
@@ -110,7 +110,7 @@ public class CommandManager {
         }
 
         cmdNames.add(cmd.getName());
-        System.out.println(Bot.ANSI_BLUE + "Loaded the u?" + cmd.getName() + " -> " + cmd.getClass() + Bot.ANSI_RESET);
+        System.out.println(Bot.ANSI_BLUE + "Loaded the ign " + cmd.getName() + " -> " + cmd.getClass() + Bot.ANSI_RESET);
         commands.add(cmd);
     }
 
@@ -150,6 +150,21 @@ public class CommandManager {
                 Listener.count.put(invoke, lastCount + 1);
 
                 if (!commandNames.contains(invoke)) commandNames.add(invoke);
+            }
+
+            if (!testing) {
+                if (!cmd.getCategory().equals(CommandType.SPECIAL)) {
+                    switch (cmd.getCategory()) {
+                        case GAMES:
+                            if (event.getChannel().getIdLong() != (GAMES)) return;
+                        case MUSIC:
+                            if (event.getChannel().getIdLong() != (MUSIC)) return;
+                        case OTHERS:
+                            if (event.getChannel().getIdLong() != (OTHERS)) return;
+                        case WALLET:
+                            if (event.getChannel().getIdLong() != (WALLET)) return;
+                    }
+                }
             }
 
             event.getChannel().sendTyping().queue();

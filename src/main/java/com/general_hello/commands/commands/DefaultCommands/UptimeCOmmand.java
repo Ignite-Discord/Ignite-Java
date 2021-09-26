@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.DefaultCommands;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -49,5 +50,11 @@ public class UptimeCOmmand implements ICommand {
     public String getHelp(String prefix) {
         return "Shows the current uptime of the bot\n" +
                 "Usage: `" + prefix + getName() + "`";
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

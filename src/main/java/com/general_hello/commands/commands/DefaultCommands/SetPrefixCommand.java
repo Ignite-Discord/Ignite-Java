@@ -3,6 +3,7 @@ package com.general_hello.commands.commands.DefaultCommands;
 import com.general_hello.commands.Config;
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import net.dv8tion.jda.api.Permission;
@@ -50,5 +51,11 @@ public class SetPrefixCommand implements ICommand {
     private void updatePrefix(long guildId, String newPrefix) {
         PrefixStoring.PREFIXES.put(guildId, newPrefix);
         DatabaseManager.INSTANCE.setPrefix(guildId, newPrefix);
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

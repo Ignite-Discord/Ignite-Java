@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.MusicPlainCommand;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Music.AudioManager;
@@ -43,5 +44,10 @@ public class SkipCommand implements ICommand
     @Override
     public String getHelp(String prefix) {
         return "Skips the currently playing track";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.MUSIC;
     }
 }

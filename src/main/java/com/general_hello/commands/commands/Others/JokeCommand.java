@@ -2,6 +2,7 @@ package com.general_hello.commands.commands.Others;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import me.duncte123.botcommons.messaging.EmbedUtils;
 import me.duncte123.botcommons.web.WebUtils;
@@ -40,5 +41,11 @@ public class JokeCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Usage: `" + prefix + "joke`\n" +
                 "Shows a random joke";
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.OTHERS;
     }
 }

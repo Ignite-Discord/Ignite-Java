@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.GroupOfGames.Blackjack;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Utils.MoneyData;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -50,5 +51,9 @@ public class DoubleDownCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Double the bet and take last card\n" +
                 "Usage: `" + prefix + getName() + "`";
+    }
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

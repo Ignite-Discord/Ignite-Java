@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.GroupOfGames.Blackjack;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -63,5 +64,11 @@ public class BlackjackCommand implements ICommand {
             i = -1;
         }
         return i;
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.DefaultCommands;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.ICommand;
 import net.dv8tion.jda.api.JDA;
@@ -26,5 +27,11 @@ public class PingCommand implements ICommand {
     @Override
     public String getName() {
         return "ping";
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

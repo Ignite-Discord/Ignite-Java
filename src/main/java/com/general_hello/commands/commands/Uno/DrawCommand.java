@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.Uno;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -116,5 +117,9 @@ public class DrawCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Draws a card\n" +
                 "Usage: `" + prefix + getName() + " [card name]`";
+    }
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

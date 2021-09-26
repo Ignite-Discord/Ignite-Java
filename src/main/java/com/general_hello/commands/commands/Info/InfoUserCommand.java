@@ -2,6 +2,7 @@ package com.general_hello.commands.commands.Info;
 
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.GetData;
 import com.general_hello.commands.commands.ICommand;
@@ -131,5 +132,11 @@ public class InfoUserCommand implements ICommand {
                 "Register `"+register+"`\n", true);
 
         e.getChannel().sendMessageEmbeds(embed.build()).queue();
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

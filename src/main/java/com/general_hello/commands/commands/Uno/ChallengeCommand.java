@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.Uno;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -111,5 +112,10 @@ public class ChallengeCommand implements ICommand {
     @Override
     public String getHelp(String prefix) {
         return "Challenges the user who gave you a `+4 card`";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

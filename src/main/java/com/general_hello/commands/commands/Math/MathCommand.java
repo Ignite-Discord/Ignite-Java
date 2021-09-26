@@ -4,6 +4,7 @@ package com.general_hello.commands.commands.Math;
 import com.general_hello.commands.Config;
 import com.general_hello.commands.Listener;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.PrefixStoring;
@@ -76,5 +77,11 @@ public class MathCommand implements ICommand {
                 + "Command Usage: `" + prefix + "calculator`\n"
                 + "Parameter: `[Math Operation]`\n"
                 + "Supported values: `pi, π, e, φ`\n";
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.OTHERS;
     }
 }

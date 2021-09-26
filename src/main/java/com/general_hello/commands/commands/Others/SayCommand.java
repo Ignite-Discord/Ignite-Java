@@ -3,6 +3,7 @@ package com.general_hello.commands.commands.Others;
 
 import com.general_hello.commands.Config;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -78,5 +79,10 @@ public class SayCommand implements ICommand {
                 + "[Content]: The sentence you want the bot to say in normal message form.\n"
                 + "embed [Content]: The sentence you want the bot to say in embed message form.\n"
                 + "Support @mention(s): @everyone, @here, and @user.";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.OTHERS;
     }
 }

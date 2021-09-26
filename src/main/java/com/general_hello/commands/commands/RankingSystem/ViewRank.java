@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.RankingSystem;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Utils.ErrorUtils;
 import net.dv8tion.jda.api.entities.User;
@@ -36,5 +37,10 @@ public class ViewRank implements ICommand
     @Override
     public String getHelp(String prefix) {
         return "Shows your rank!";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

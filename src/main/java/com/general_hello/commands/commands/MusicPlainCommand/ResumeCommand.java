@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.MusicPlainCommand;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Music.AudioManager;
@@ -50,5 +51,10 @@ public class ResumeCommand implements ICommand
         arrayList.add("continue");
         arrayList.add("resume");
         return arrayList;
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.MUSIC;
     }
 }

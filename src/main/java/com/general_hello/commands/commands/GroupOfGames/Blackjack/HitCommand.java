@@ -1,10 +1,7 @@
 package com.general_hello.commands.commands.GroupOfGames.Blackjack;
 
 import com.general_hello.commands.Database.DatabaseManager;
-import com.general_hello.commands.commands.CommandContext;
-import com.general_hello.commands.commands.GetData;
-import com.general_hello.commands.commands.ICommand;
-import com.general_hello.commands.commands.PrefixStoring;
+import com.general_hello.commands.commands.*;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
@@ -57,5 +54,10 @@ public class HitCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Receives an additional card!\n" +
                 "Usage: `" + prefix + getName() + "`";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

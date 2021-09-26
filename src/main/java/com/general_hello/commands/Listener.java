@@ -1,7 +1,6 @@
 package com.general_hello.commands;
 
 import com.general_hello.commands.Database.DatabaseManager;
-import com.general_hello.commands.OtherEvents.OtherEvents;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand;
 import com.general_hello.commands.commands.PrefixStoring;
@@ -48,14 +47,6 @@ public class Listener extends ListenerAdapter {
 
         Message m = (event).getMessage();
 
-        if(!m.getAuthor().isBot()) // ignore bot messages
-        {
-            // Store the message
-            OtherEvents.messageCache.putMessage(m);
-
-            // Run automod on the message
-            OtherEvents.autoMod.performAutomod(m);
-        }
         //add xp :D
         LevelPointManager.feed(event.getAuthor());
 

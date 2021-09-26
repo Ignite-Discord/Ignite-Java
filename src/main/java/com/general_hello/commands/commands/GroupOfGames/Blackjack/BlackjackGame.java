@@ -218,7 +218,7 @@ public class BlackjackGame {
             final long guildID = guild.getIdLong();
             String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, DatabaseManager.INSTANCE::getPrefix);
 
-            eb.addField("Commands", String.format(prefix + "stand : see dealer cards\n" + prefix + "hit : take another card%s%s", canDouble() ? "\n" + prefix + "double : double bet and take last card" : "", canSplit() && !hasSplit ? "\n" + prefix + "split : split your cards" : ""), false);
+            eb.addField("Commands", String.format(prefix + " stand : see dealer cards\n" + prefix + " hit : take another card%s%s", canDouble() ? "\n" + prefix + " double : double bet and take last card" : "", canSplit() && !hasSplit ? "\n" + prefix + " split : split your cards" : ""), false);
         }
         return eb;
     }

@@ -2,6 +2,7 @@ package com.general_hello.commands.commands.GroupOfGames.Games;
 
 import com.general_hello.commands.Listener;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import net.dv8tion.jda.api.entities.User;
 import org.slf4j.Logger;
@@ -61,5 +62,10 @@ public class GuessNumberCommand implements ICommand {
                 "Usage: `" + prefix + "gn`" +
                 "\n" +
                 "Parameter: `start | number`";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

@@ -4,10 +4,6 @@ import com.general_hello.commands.Config;
 import com.general_hello.commands.Listener;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
-import com.general_hello.commands.commands.Logs.AutoMod;
-import com.general_hello.commands.commands.Logs.BasicLogger;
-import com.general_hello.commands.commands.Logs.MessageCache;
-import com.general_hello.commands.commands.Logs.TextUploader;
 import com.general_hello.commands.commands.Uno.ImageHandler;
 import com.general_hello.commands.commands.Uno.UnoGame;
 import com.general_hello.commands.commands.Uno.UnoHand;
@@ -16,18 +12,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
-import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdateNicknameEvent;
-import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
-import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
-import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
-import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.api.events.user.update.UserUpdateDiscriminatorEvent;
-import net.dv8tion.jda.api.events.user.update.UserUpdateNameEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -38,7 +23,6 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -46,10 +30,6 @@ public class OtherEvents extends ListenerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
     public static int disconnectCount = 0;
     private static OffsetDateTime timeDisconnected = OffsetDateTime.now();
-    public static BasicLogger logger = new BasicLogger();
-    public static MessageCache messageCache = new MessageCache();
-    public static AutoMod autoMod = new AutoMod();
-    public static TextUploader uploader = new TextUploader("https://discord.com/api/webhooks/877034647400349696/ZG9eOzP6UN1k1_U5i6YkBEpPmcNliFE5gEdAE3aJBsqYSh85Q9OdpaD2HJjuh_h5pOXF");
 
     @Override
     public void onDisconnect(@NotNull DisconnectEvent event) {
@@ -89,7 +69,7 @@ public class OtherEvents extends ListenerAdapter {
                                                     .addMemberPermissionOverride(hand.getPlayerId(), Collections.singletonList(Permission.VIEW_CHANNEL), Collections.emptyList())
                                                     .addMemberPermissionOverride(guild.getSelfMember().getIdLong(), Collections.singletonList(Permission.VIEW_CHANNEL), Collections.emptyList())
                                                     .addRolePermissionOverride(guild.getIdLong(), Collections.emptyList(), Collections.singletonList(Permission.VIEW_CHANNEL)).setTopic("Run !help to show which commands you can use").queue(channel -> {
-                                                        channel.sendFile(ImageHandler.getCardsImage(hand.getCards()), "hand.png").embed(unoGame.createEmbed(hand.getPlayerId()).setColor(guild.getSelfMember().getColor()).build()).queue(mes -> {
+                                                        channel.sendFile(ImageHandler.getCardsImage(hand.getCards()), "hand.png").setEmbeds(unoGame.createEmbed(hand.getPlayerId()).setColor(guild.getSelfMember().getColor()).build()).queue(mes -> {
                                                             hand.setChannelId(channel.getIdLong());
                                                             hand.setMessageId(mes.getIdLong());
                                                         });
@@ -138,27 +118,6 @@ public class OtherEvents extends ListenerAdapter {
     }
 
     @Override
-    public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event) {
-        Message m = (event).getMessage();
-
-        if(!m.getAuthor().isBot()) // ignore bot edits
-        {
-            // Run automod on the message
-            OtherEvents.autoMod.performAutomod(m);
-
-            // Store and log the edit
-            MessageCache.CachedMessage old = messageCache.putMessage(m);
-            logger.logMessageEdit(m, old);
-        }
-    }
-
-    @Override
-    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
-        // Log the join
-        logger.logGuildJoin(event);
-    }
-
-    @Override
     public void onReady(@NotNull ReadyEvent event) {
         LOGGER.info("{} is ready", event.getJDA().getSelfUser().getAsTag());
     }
@@ -204,78 +163,5 @@ public class OtherEvents extends ListenerAdapter {
         guildChannelById.sendMessageEmbeds(em.build()).queue();
         User owner_id = event.getJDA().getUserById(Config.get("owner_id"));
         owner_id.openPrivateChannel().complete().sendMessageEmbeds(em.build()).queue();
-    }
-
-    @Override
-    public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
-
-        // Log the deletion
-        MessageCache.CachedMessage old = messageCache.pullMessage(event.getGuild(), event.getMessageIdLong());
-        logger.logMessageDelete(old);
-    }
-
-    @Override
-    public void onMessageBulkDelete(@NotNull MessageBulkDeleteEvent event) {
-        MessageBulkDeleteEvent gevent = event;
-
-        // Get the messages we had cached
-
-        List<MessageCache.CachedMessage> logged = gevent.getMessageIds().stream()
-                .map(id -> messageCache.pullMessage(gevent.getGuild(), Long.parseLong(id)))
-                .filter(m -> m != null)
-                .collect(Collectors.toList());
-
-        // Log the deletion
-        logger.logMessageBulkDelete(logged, gevent.getMessageIds().size(), gevent.getChannel());
-    }
-
-    @Override
-    public void onUserUpdateName(@NotNull UserUpdateNameEvent event) {
-        // Log the name change
-        logger.logNameChange(event);
-        event.getUser().getMutualGuilds().stream().map(g -> g.getMember(event.getUser())).forEach(m -> OtherEvents.autoMod.dehoist(m));
-    }
-
-    @Override
-    public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
-
-        // Log the member leaving
-        logger.logGuildLeave(event);
-    }
-
-    @Override
-    public void onUserUpdateDiscriminator(@NotNull UserUpdateDiscriminatorEvent event) {
-        logger.logNameChange(event);
-
-    }
-
-    @Override
-    public void onGuildMemberUpdateNickname(@NotNull GuildMemberUpdateNicknameEvent event) {
-        OtherEvents.autoMod.dehoist(event.getMember());
-
-    }
-
-    @Override
-    public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
-
-        // Log the voice join
-        if (!event.getMember().getUser().isBot()) // ignore bots
-            logger.logVoiceJoin(event);
-    }
-
-    @Override
-    public void onGuildVoiceMove(@NotNull GuildVoiceMoveEvent event) {
-
-        // Log the voice move
-        if(!event.getMember().getUser().isBot()) // ignore bots
-            logger.logVoiceMove(event);
-    }
-
-    @Override
-    public void onGuildVoiceLeave(@NotNull GuildVoiceLeaveEvent event) {
-
-        // Log the voice leave
-        if(!event.getMember().getUser().isBot()) // ignore bots
-            logger.logVoiceLeave(event);
     }
 }

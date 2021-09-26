@@ -43,10 +43,6 @@ public class GetData {
             return xpMember.get(member);
         }
 
-        try {
-            Thread.sleep(1000);
-        } catch (Exception ignored) {}
-
         return DatabaseManager.INSTANCE.getXpPoints(member.getIdLong());
     }
 

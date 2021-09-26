@@ -4,6 +4,7 @@ package com.general_hello.commands.commands.GroupOfGames.Games;
 import com.general_hello.commands.Database.FilePath;
 import com.general_hello.commands.Listener;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Utils.UtilNum;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -72,5 +73,10 @@ public class TriviaCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Makes the bot send a trivia message!!!\n" +
                 "Usage: `" + prefix + "trivia`";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

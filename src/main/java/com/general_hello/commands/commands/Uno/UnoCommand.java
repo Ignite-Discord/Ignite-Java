@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.Uno;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackCommand;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.ICommand;
@@ -65,5 +66,10 @@ public class UnoCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Starts an uno game!!!\n" +
                 "Usage: `" + prefix + "startuno [money]`";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

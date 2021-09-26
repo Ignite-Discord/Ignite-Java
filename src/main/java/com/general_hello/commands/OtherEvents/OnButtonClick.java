@@ -7,12 +7,10 @@ import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.Register.Data;
 import com.github.bhlangonijr.chesslib.Board;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
-import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -91,69 +89,7 @@ public class OnButtonClick extends ListenerAdapter {
                 ChessStoring.userToBoard.put(ChessStoring.userToUser.get(event.getUser()), board);
                 event.getInteraction().editButton(event.getButton().asDisabled()).queue();
                 break;
-            case "ownersetting":
-                EmbedBuilder embedBuilder = new EmbedBuilder().setTitle(event.getUser().getName() + "'s settings for " + event.getJDA().getSelfUser().getName()).setFooter("Your settings ↔ Owner Main Page").setColor(Color.ORANGE);
-                embedBuilder.setDescription("Kindly select the setting you want to change. For example, Choosing ***Prefix on DM*** will bring you to a Prefix on DM setting page where you can set your setting for Prefix On DM`");
-
-                SelectionMenu menu = SelectionMenu.create("menu:ownersetting:" + event.getUser().getId())
-                        .setPlaceholder("No setting") // shows the placeholder indicating what this menu is for
-                        .setRequiredRange(1, 1) // only one can be selected
-                        //.addOption("mage-arcane", "Arcane Mage")
-                        .build();
-                event.getMessage().editMessageEmbeds(embedBuilder.build()).setActionRow(menu).queue();
-                break;
-            case "modsetting":
-                embedBuilder = new EmbedBuilder().setTitle(event.getUser().getName() + "'s settings for " + event.getJDA().getSelfUser().getName()).setFooter("Your settings ↔ Moderator Main Page").setColor(Color.ORANGE);
-                embedBuilder.setDescription("Kindly select the setting you want to change. For example, Choosing ***Prefix on DM*** will bring you to a Prefix on DM setting page where you can set your setting for Prefix On DM`");
-
-
-                menu = SelectionMenu.create("menu:modsetting:" + event.getUser().getId())
-                        .setPlaceholder("Choose your setting") // shows the placeholder indicating what this menu is for
-                        .setRequiredRange(1, 1) // only one can be selected
-                        .addOption("XP System", "enableXP")
-                        .build();
-
-                event.getMessage().editMessageEmbeds(embedBuilder.build()).setActionRow(menu).queue();
-                break;
-            case "usersetting":
-                embedBuilder = new EmbedBuilder().setTitle(event.getUser().getName() + "'s settings for " + event.getJDA().getSelfUser().getName()).setFooter("Your settings ↔ User Main Page").setColor(Color.ORANGE);
-                embedBuilder.setDescription("Kindly select the setting you want to change. For example, Choosing ***Prefix on ping*** will bring you to a Prefix on DM setting page where you can set your setting for Prefix On DM`");
-
-                menu = SelectionMenu.create("menu:usersetting:" + event.getUser().getId())
-                        .setPlaceholder("Choose your setting") // shows the placeholder indicating what this menu is for
-                        .setRequiredRange(1, 1) // only one can be selected
-                        .addOption("prefixDM", "Prefix on ping")
-                        .build();
-
-                event.getMessage().editMessageEmbeds(embedBuilder.build())
-                        .setActionRow(menu).queue();
-                break;
-            case "back":
-                embedBuilder = new EmbedBuilder().setTitle(event.getUser().getName() + "'s settings for " + event.getJDA().getSelfUser().getName()).setFooter("Your settings ↔ Home Page").setColor(Color.ORANGE);
-                embedBuilder.setDescription("Kindly select the category you want to change the setting of. For example, Pressing/Clicking on the button ***User*** will bring you to a setting page where you can set your user setting for `Userphone Bot`");
-
-                boolean isMod = true;
-
-                if (event.getMember().hasPermission(Permission.MANAGE_SERVER)) {
-                    isMod = false;
-                }
-
-                boolean isOwner = true;
-
-                if (event.getUser().getId().equals(Config.get("owner_id")) || event.getUser().getId().equals(Config.get("owner_id_partner"))) {
-                    isOwner = false;
-                }
-
-                event.getMessage().editMessageEmbeds(embedBuilder.build()).setActionRow(
-                        Button.primary(event.getUser().getId() + ":usersetting", "User").withEmoji(net.dv8tion.jda.api.entities.Emoji.fromEmote("user", 862895295239028756L, true)),
-                        Button.primary(event.getUser().getId() + ":modsetting", "Moderation").withDisabled(isMod).withEmoji(net.dv8tion.jda.api.entities.Emoji.fromEmote("mod", 862898484041482270L, true)),
-                        Button.primary(event.getUser().getId() + ":ownersetting", "Owner").withDisabled(isOwner).withEmoji(net.dv8tion.jda.api.entities.Emoji.fromEmote("babyyoda", 866105061665669140L, true))
-                ).queue();
-                break;
-
-            default:
-                event.getMember().getUser().openPrivateChannel().complete().sendMessage(com.general_hello.commands.commands.Emoji.Emoji.ERROR + "You cannot press this button").queue();
-        }
+            }
     }
 
     public EmbedBuilder helpCrap (int number, ButtonClickEvent ctx) {
@@ -168,7 +104,7 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField("1.) Profile Command","`" + prefix + " profile`", false);
                 embedBuilder.addField("2.) Server Information Command","`" + prefix + " serverinfo`", false);
 
-                embedBuilder.setFooter("\nType " + prefix + "help [command name] to see what they do");
+                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;
             case 2:
                 embedBuilder.setTitle("About the Bot Commands");
@@ -178,53 +114,54 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField("3.) About Command", "`" + prefix + " about`", false);
 
 
-                embedBuilder.setFooter("\nType " + prefix + "help [command name] to see what they do");
+                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;
             case 3:
                 embedBuilder.setTitle("Moderation Commands");
                 embedBuilder.setColor(Color.red);
                 embedBuilder.addField("1.) Set Prefix Command", "`" + prefix + " setprefix`", false);
                 embedBuilder.addField("2.) Lockdown Command", "`" + prefix + " lockdown`", false);
+                embedBuilder.addField("3.) Un-lockdown Command", "`" + prefix + " unlockdown`", false);
+                embedBuilder.addField("4.) Add Meme Command", "`" + prefix + " addmeme`", false);
 
-                embedBuilder.setFooter("\nType " + prefix + "help [command name] to see what they do");
+                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;
             case 4:
                 embedBuilder.setTitle("User Commands");
                 embedBuilder.setColor(Color.CYAN);
                 embedBuilder.addField("1.) Calculator Command", "`" + prefix + " calculator`", false);
                 embedBuilder.addField("2.) Register Command", "`" + prefix + " register`", false);
-                embedBuilder.addField("3.) View rank Command", "`" + prefix + " rank` or `/rank`", false);
+                embedBuilder.addField("3.) View rank Command", "`" + prefix + " rank`", false);
                 embedBuilder.addField("4.) Show a Joke Command", "`" + prefix + " joke`", false);
                 embedBuilder.addField("5.) Show a Meme Command", "`" + prefix + " meme`", false);
-                embedBuilder.addField("6.) Say Command", "`" + prefix + " say`", false);
-                embedBuilder.addField("7.) Clap Command", "`" + prefix + " clap`", false);
-                embedBuilder.addField("8.) Color Command", "`" + prefix + " color`", false);
-                embedBuilder.addField("9.) Read File Command", "`" + prefix + " read`", false);
-                embedBuilder.addField("10.) Share code Command (Programming)", "`" + prefix + " sharecode`", false);
+                embedBuilder.addField("6.) Share code Command (Programming)", "`" + prefix + " sharecode`", false);
 
-                embedBuilder.setFooter("Type " + prefix + "help [command name] to see what they do");
+                embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
                 break;
             case 5:
                 embedBuilder.setTitle("Games");
                 embedBuilder.setColor(Color.ORANGE);
-                embedBuilder.setDescription("Uno\n" +
-                        "Blackjack\n" +
-                        "Others....");
+                embedBuilder.setDescription(com.general_hello.commands.commands.Emoji.Emoji.UNO + " **Uno** - Players take turns matching a card in their hand with the current card shown on top of the deck either by color or number. Special action cards deliver game-changing moments as they help you defeat your opponents.\n\n" +
+                        com.general_hello.commands.commands.Emoji.Emoji.BLACKJACK + " **Blackjack** - Blackjack is a card game. The object of blackjack is to be dealt cards with a value of up to but not over 21 and to beat the dealer's hand. ... You place bets with the dealer on the likelihood that your hand will come equal or closer to 21 than will the dealer's.\n\n" +
+                        com.general_hello.commands.commands.Emoji.Emoji.NUMBER + " **Guess the Number** - Your goal is to get the same number that the bot selected from 1-100 the bot will inform you if the number is *higher* or *lower*\n\n" +
+                        com.general_hello.commands.commands.Emoji.Emoji.USER + " **Hangman** - Hangman is a popular word guessing game where the player attempts to build a missing word by guessing one letter at a time.\n\n" +
+                        com.general_hello.commands.commands.Emoji.Emoji.MARK_QUESTION + " **Trivia** - Users will be given a random question and they are to answer it.\n\n" +
+                        com.general_hello.commands.commands.Emoji.Emoji.BPAWN + " **Chess** *Soon* - Chess is a game played between two opponents on opposite sides of a board containing 64 squares of alternating colors. Each player has 16 pieces. The goal of the game is to checkmate the other king.");
 
-                embedBuilder.setFooter("Type " + prefix + "help [command name] to see what they do");
+                embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
                 break;
             case 6:
                 embedBuilder.setTitle("Music Commands *Temporary* " + com.general_hello.commands.commands.Emoji.Emoji.ERROR);
                 embedBuilder.setColor(Color.blue);
-                embedBuilder.addField("1.) Play Command", "`/play` or `" + prefix + " play`", false);
-                embedBuilder.addField("2.) Pause Command", "`/pause` or `" + prefix + " pause`", false);
-                embedBuilder.addField("3.) Queue Command", "`/queue` or `" + prefix + " queue`", false);
-                embedBuilder.addField("4.) Repeat Command", "`/repeat` or `" + prefix + " repeat`", false);
-                embedBuilder.addField("5.) Resume Command", "`/resume` or `" + prefix + " resume`", false);
-                embedBuilder.addField("6.) Skip Command", "`/skip` or `" + prefix + " skip`", false);
-                embedBuilder.addField("7.) Volume Command", "`/volume` or `" + prefix + " volume`", false);
+                embedBuilder.addField("1.) Play Command", "`" + prefix + " play`", false);
+                embedBuilder.addField("2.) Pause Command", "`" + prefix + " pause`", false);
+                embedBuilder.addField("3.) Queue Command", "`" + prefix + " queue`", false);
+                embedBuilder.addField("4.) Repeat Command", "`" + prefix + " repeat`", false);
+                embedBuilder.addField("5.) Resume Command", "`" + prefix + " resume`", false);
+                embedBuilder.addField("6.) Skip Command", "`" + prefix + " skip`", false);
+                embedBuilder.addField("7.) Volume Command", "`" + prefix + " volume`", false);
 
-                embedBuilder.setFooter("Type " + prefix + "help [command name] to see what they do");
+                embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
         }
         return embedBuilder;
     }

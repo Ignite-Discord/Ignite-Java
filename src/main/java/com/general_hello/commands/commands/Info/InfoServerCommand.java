@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.Info;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Utils.UtilString;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -94,5 +95,11 @@ public class InfoServerCommand implements ICommand {
         return "Shows info about that server\n" +
                 "Usage: `" + prefix + "serverinfo`\n" +
                 "Parameter: `-h | [ID] | null`";
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

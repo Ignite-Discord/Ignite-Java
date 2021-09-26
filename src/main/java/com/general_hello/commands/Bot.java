@@ -2,10 +2,6 @@ package com.general_hello.commands;
 
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.OtherEvents.*;
-import com.general_hello.commands.SlashCommands.OnSlashCommand;
-import com.general_hello.commands.SlashCommands.SlashCommandHandler;
-import com.general_hello.commands.commands.GroupOfGames.Entertainments.EntertainmentListener;
-import com.general_hello.commands.commands.Utils.MCColor;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import me.duncte123.botcommons.messaging.EmbedUtils;
 import me.duncte123.botcommons.web.WebUtils;
@@ -55,8 +51,6 @@ public class Bot {
         )
                 .enableCache(CacheFlag.VOICE_STATE)
                 .addEventListeners(new Listener(waiter), waiter)
-                .addEventListeners(new EntertainmentListener())
-                .addEventListeners(new OnSlashCommand())
                 .addEventListeners(new OnButtonClick())
                 .addEventListeners(new OnPrivateMessage())
                 .addEventListeners(new OtherEvents())
@@ -218,10 +212,6 @@ public class Bot {
                 System.out.println("Thank you for using UBCL have a great day!");
                 jda.shutdown();
                 break;
-            }
-
-            if (s.equalsIgnoreCase("updateslashcommand")) {
-                SlashCommandHandler.updateCommands((x) -> System.out.println(MCColor.translate("&aQueued "+x.size()+" commands!")), Throwable::printStackTrace);
             }
         }
     }

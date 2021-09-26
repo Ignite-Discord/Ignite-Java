@@ -1,21 +1,16 @@
 package com.general_hello.commands.Database;
 
 import com.general_hello.commands.Config;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
 
 public class SQLiteDataSource implements DatabaseManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(SQLiteDataSource.class);
-    public static HikariDataSource ds;
-    public static HashMap<Long, Long> userToXpQueue = new HashMap<>();
-    public static HashMap<Long, Integer> userToXpQueueSize = new HashMap<>();
+    public static Connection connection = null;
 
     public SQLiteDataSource() {
         try {
@@ -34,14 +29,11 @@ public class SQLiteDataSource implements DatabaseManager {
         }
 
 
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:sqlite:database.db");
-        config.setConnectionTestQuery("SELECT 1");
-        config.addDataSourceProperty("cachePrepStmts", "true");
-        config.addDataSourceProperty("prepStmtCacheSize", "250");
-        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
-        ds = new HikariDataSource(config);
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Opened database successfully");
 
@@ -138,6 +130,7 @@ public class SQLiteDataSource implements DatabaseManager {
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    getConnection().close();
                     return resultSet.getString("UserName");
                 }
             }
@@ -145,115 +138,57 @@ public class SQLiteDataSource implements DatabaseManager {
             e.printStackTrace();
         }
 
+        try {
+            getConnection().close();
+        } catch (Exception ignored) {}
+
         return null;
     }
 
     @Override
     public Integer getXpPoints(long userId) throws SQLException {
         try {
-            Thread.sleep(1000);
-        } catch (Exception ignored) {}
-
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection
-                     .prepareStatement("SELECT xpPoints FROM XPSystemUser WHERE userId = ?")) {
-
-            preparedStatement.setString(1, String.valueOf(userId));
-
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getInt("xpPoints");
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try (Connection connection = getConnection();
-             PreparedStatement insertStatement = connection
-                .prepareStatement("INSERT INTO XPSystemUser(userId) VALUES(?)")) {
-
-            insertStatement.setString(1, String.valueOf(userId));
-
-            insertStatement.execute();
-        }
-
-        return 0;
-    }
-
-    @Override
-    public void setXpPoints(long userId, long xpPoints) {
-        if (!userToXpQueueSize.containsKey(userId)) {
-            userToXpQueue.put(userId, xpPoints);
-            userToXpQueueSize.put(userId, 2);
-            return;
-        }
-
-        Integer queue = userToXpQueueSize.get(userId);
-        Long xpQueued = userToXpQueue.get(userId);
-
-        if (queue != 10) {
-            userToXpQueueSize.put(userId, queue + 1);
-            userToXpQueue.put(userId, xpQueued + xpPoints);
-            return;
-        }
-
-        try {
-            Thread.sleep(1000);
-        } catch (Exception ignored) {}
-
-        try {
             Statement statement = getConnection().createStatement();
-            String sql = "UPDATE XPSystemUser SET xpPoints=" + (xpQueued + xpPoints) + " WHERE UserId=" + userId;
+            String sql = "SELECT xpPoints FROM XPSystemUser WHERE userId=" + userId;
 
-            statement.executeUpdate(sql);
+            ResultSet result = statement.executeQuery(sql);
+
+            if (result.next()) {
+                return result.getInt("xpPoints");
+            }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public Integer getGuildSettings(long guildId) throws SQLException {
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection
-                     .prepareStatement("SELECT XPSystem FROM GuildSettings WHERE GuildId = ?")) {
+        try {
+            Statement statement = getConnection().createStatement();
+            String sql = "INSERT INTO XPSystemUser(userId) VALUES(" + userId + ")";
 
-            preparedStatement.setString(1, String.valueOf(guildId));
-
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getInt("XPSystem");
-                }
-            }
-
+            statement.executeUpdate(sql);
+            statement.close();
+            getConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        try (Connection connection = getConnection();
-             PreparedStatement insertStatement = connection
-                     .prepareStatement("INSERT INTO GuildSettings(GuildId) VALUES(?)")) {
-
-            insertStatement.setString(1, String.valueOf(guildId));
-
-            insertStatement.execute();
-        }
-
-        return 0;
+        return -1;
     }
 
     @Override
-    public void setGuildSettings(long guildId, long enabledOrDisabled) {
-        try (final PreparedStatement preparedStatement = getConnection()
-                .prepareStatement("UPDATE GuildSettings SET XPSystem=? WHERE GuildId=?"
-                )) {
+    public void setXpPoints(long userId, long xpPoints) {
+        try {
+            if (getConnection() == null) return;
 
-            preparedStatement.setString(2, String.valueOf(guildId));
-            preparedStatement.setString(1, String.valueOf(enabledOrDisabled));
+            Statement statement = getConnection().createStatement();
+            statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
-            preparedStatement.executeUpdate();
+            String sql = "UPDATE XPSystemUser SET xpPoints=" + (xpPoints) + " WHERE UserId=" + userId;
+
+            statement.executeUpdate(sql);
+            statement.close();
+            getConnection().close();
+            System.out.println(getConnection());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -271,6 +206,7 @@ public class SQLiteDataSource implements DatabaseManager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+            getConnection().close();
 
             System.out.println("Added the user to the database successfully!");
         } catch (SQLException e) {
@@ -289,11 +225,22 @@ public class SQLiteDataSource implements DatabaseManager {
             preparedStatement.setString(1, name);
 
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            getConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     public static Connection getConnection() throws SQLException {
-        return ds.getConnection();
+        try {
+            System.out.println(connection);
+            if (connection == null) {
+                connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return connection;
     }
 }

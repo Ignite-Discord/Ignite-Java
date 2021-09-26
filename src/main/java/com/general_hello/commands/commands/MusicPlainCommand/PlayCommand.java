@@ -2,6 +2,7 @@ package com.general_hello.commands.commands.MusicPlainCommand;
 
 import com.general_hello.commands.Config;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Music.FormatUtil;
 import com.general_hello.commands.commands.Music.GuildAudioPlayer;
@@ -119,5 +120,9 @@ public class PlayCommand implements ICommand
         arrayList.add("playsong");
         arrayList.add("listensong");
         return arrayList;
+    }
+    @Override
+    public CommandType getCategory() {
+        return CommandType.MUSIC;
     }
 }

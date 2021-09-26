@@ -13,7 +13,4 @@ public interface DatabaseManager {
     void setPrefix(long guildId, String newPrefix);
     void newInfo(long userId, String userName);
     void setName(long userId, String name);
-
-    Integer getGuildSettings(long guildId) throws SQLException;
-    void setGuildSettings(long guildId, long enabledOrDisabled);
 }

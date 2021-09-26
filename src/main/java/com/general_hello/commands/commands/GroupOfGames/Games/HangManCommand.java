@@ -3,6 +3,7 @@ package com.general_hello.commands.commands.GroupOfGames.Games;
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.Listener;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import net.dv8tion.jda.api.entities.User;
@@ -25,7 +26,7 @@ public class HangManCommand implements ICommand {
 
         if(ctx.getArgs().size() == 0)
         {
-            ctx.getChannel().sendMessage(getHelp(prefix)).queue();
+            ctx.getChannel().sendMessage(getHelp(prefix + " ")).queue();
             return;
         }
 
@@ -74,5 +75,11 @@ public class HangManCommand implements ICommand {
         ArrayList<String> aliases = new ArrayList<>();
         aliases.add("hangman");
         return aliases;
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

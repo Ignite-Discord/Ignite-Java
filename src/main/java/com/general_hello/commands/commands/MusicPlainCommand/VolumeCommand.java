@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.MusicPlainCommand;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Music.AudioManager;
 import com.general_hello.commands.commands.Music.GuildAudioPlayer;
@@ -33,4 +34,9 @@ public class VolumeCommand implements ICommand
                 "Usage: `" + prefix + getName() + " [volume 1-100]`";
     }
 
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.MUSIC;
+    }
 }

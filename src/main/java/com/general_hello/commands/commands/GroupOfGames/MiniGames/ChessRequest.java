@@ -1,6 +1,7 @@
 package com.general_hello.commands.commands.GroupOfGames.MiniGames;
 
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.Emoji.EmojiObject;
 import com.general_hello.commands.commands.GetData;
@@ -81,5 +82,10 @@ public class ChessRequest implements ICommand {
     public String getHelp(String prefix) {
         return "Plays chess with another user!\n" +
                 "Usage: `" + prefix + getName() + "[mentioned user]";
+    }
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.GAMES;
     }
 }

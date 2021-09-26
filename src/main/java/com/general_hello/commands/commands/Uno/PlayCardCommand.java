@@ -3,6 +3,7 @@ package com.general_hello.commands.commands.Uno;
 
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.PrefixStoring;
@@ -146,5 +147,11 @@ public class PlayCardCommand implements ICommand {
     public String getHelp(String prefix) {
         return "Play a card from your hand, pick the color for a wildcard immediately\n" +
                 "Usage: `" + prefix + "playcard [color] [value]`";
+    }
+
+
+    @Override
+    public CommandType getCategory() {
+        return CommandType.SPECIAL;
     }
 }

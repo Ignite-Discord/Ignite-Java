@@ -124,6 +124,13 @@ public class Emoji {
     public final static String ARROW_POINTING_RIGHT = EmojiParser.parseToUnicode("<a:arrow_1:862525611465113640>");
     public final static String ARROW_POINTING_LEFT = EmojiParser.parseToUnicode("<a:arrow_2:862525611443879966>");
     public final static String USER_COIN = EmojiParser.parseToUnicode("<:userphonecoin:872996023570661397>");
+    public final static String BLACKJACK = EmojiParser.parseToUnicode("<a:bjk:891148784967491604>");
+    public final static String FAQ = EmojiParser.parseToUnicode("<a:faq:891179078911143976>");
+    public final static String GAME = EmojiParser.parseToUnicode("<a:games:891146612016025630>");
+    public final static String MEME = EmojiParser.parseToUnicode("<a:meme:891179097546453024>");
+    public final static String UNO = EmojiParser.parseToUnicode("<a:uno:891148764537049088>");
+    public final static String MUSIC = EmojiParser.parseToUnicode("<a:music:891148744408584192>");
+    public final static String WALLET = EmojiParser.parseToUnicode("<a:wallet:891179114470465566>");
 
     /* Server Emotes */
     public final static String GUILD_ONLINE = "🟢";

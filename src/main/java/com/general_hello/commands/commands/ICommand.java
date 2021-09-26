@@ -12,6 +12,8 @@ public interface ICommand {
 
     String getHelp(String prefix);
 
+    CommandType getCategory();
+
     default List<String> getAliases() {
         return new ArrayList<>();
     }
