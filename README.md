@@ -3,20 +3,20 @@ Ignite bot is a fully multipurpose bot made in `3` languages (**java**, **python
 
 Ignite bot has: (non-exhaustive list):
 
-✉️ Support for commands in direct messages *soon*
-⚙️ Guild configuration (prefix, ignored channels, etc...)
-😀 Commands made pleasant thanks to the many emojis
-
+✉️ Support for commands in direct messages *soon* <br />
+⚙️ Guild configuration (prefix, ignored channels, etc...) <br />
+😀 Commands made pleasant thanks to the many emojis <br />
+<br />
 The commands **includes** and is **not limited** to:
-
-👩‍💼 Administration: `lockdown`, `automod`, `setprefix` and `3 more`!
-🎵 Music: `play`, `skip`, `queue`, `np`, `setvolume` and `2 more`!
-👻 Fun: `eightball`, `joke`, `calculator`, and `6 more`!
-🖨️ General: `10 more`!
-👑 Owner: `eval`, `shutdown`, and `2 more`!
-❓ Trivia (lists are included and can be easily added)
-😶 Info commands (`profile`, `serverinfo`)
-🕹 Games (`Uno`, `Blackjack`, `Hangman`, `Rock paper scissors`)
-
+<br />
+👩‍💼 Administration: `lockdown`, `automod`, `setprefix` and `3 more`! <br />
+🎵 Music: `play`, `skip`, `queue`, `np`, `setvolume` and `2 more`! <br />
+👻 Fun: `eightball`, `joke`, `calculator`, and `6 more`! <br />
+🖨️ General: `10 more`! <br />
+👑 Owner: `eval`, `shutdown`, and `2 more`! <br />
+❓ Trivia (lists are included and can be easily added) <br />
+😶 Info commands (`profile`, `serverinfo`) <br />
+🕹 Games (`Uno`, `Blackjack`, `Hangman`, `Rock paper scissors`) <br />
+ <br />
 # License
 Ignite bot is licensed under the `Apache License 2.0`. See the file `LICENSE` for more information. If you plan to use any part of this source code in your own bot, I would be grateful if you would include some form of credit somewhere.
