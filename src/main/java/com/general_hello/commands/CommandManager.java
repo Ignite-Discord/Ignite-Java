@@ -4,6 +4,7 @@ package com.general_hello.commands;
 import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.DefaultCommands.*;
+import com.general_hello.commands.commands.DefaultCommands.PingCommand;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.*;
 import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand;
 import com.general_hello.commands.commands.GroupOfGames.Games.HangManCommand;
@@ -15,9 +16,7 @@ import com.general_hello.commands.commands.Info.InfoServerCommand;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
 import com.general_hello.commands.commands.Math.MathCommand;
 import com.general_hello.commands.commands.MusicPlainCommand.*;
-import com.general_hello.commands.commands.Others.JokeCommand;
-import com.general_hello.commands.commands.Others.PasteCommand;
-import com.general_hello.commands.commands.Others.SayCommand;
+import com.general_hello.commands.commands.Others.*;
 import com.general_hello.commands.commands.RankingSystem.ViewRank;
 import com.general_hello.commands.commands.Register.RegisterCommand;
 import com.general_hello.commands.commands.Uno.ChallengeCommand;
@@ -98,6 +97,9 @@ public class CommandManager {
 
         //others
         addCommand(new JokeCommand());
+        addCommand(new LockDownCommand());
+        addCommand(new UnLockDownCommand());
+        addCommand(new BalanceCommand());
         addCommand(new PasteCommand());
         addCommand(new SayCommand());
     }

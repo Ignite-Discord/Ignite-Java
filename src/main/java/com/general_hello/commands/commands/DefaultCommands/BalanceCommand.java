@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class BalanceCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
-
+        ctx.getChannel().sendMessage("This command is still being coded.").queue();
     }
 
     @Override
