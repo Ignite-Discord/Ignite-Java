@@ -37,7 +37,7 @@ public class Bot {
         EmbedUtils.setEmbedBuilder(
                 () -> new EmbedBuilder()
                         .setColor(Color.cyan)
-                        .setFooter("ign help")
+                        .setFooter("ignt help")
         );
 
         EventWaiter waiter = new EventWaiter();
@@ -63,7 +63,7 @@ public class Bot {
                 .addEventListeners(new OnSelectionMenu())
                 .addEventListeners(new OnButtonChessClick())
                 .addEventListeners(new OnReadyEvent())
-                .setActivity(Activity.watching("ign help"))
+                .setActivity(Activity.watching("ignt help"))
                 .setStatus(OnlineStatus.ONLINE)
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
@@ -148,7 +148,7 @@ public class Bot {
                         Thread.sleep(10000);
                     } catch (Exception ignored) {}
 
-                    jda.getPresence().setActivity(Activity.watching("ign help"));
+                    jda.getPresence().setActivity(Activity.watching("ignt help"));
 
                     try {
                         Thread.sleep(10000);
