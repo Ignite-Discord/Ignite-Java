@@ -20,8 +20,8 @@ com/general_hello/commands/commands/GroupOfGames/Blackjack/GameHandler.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler
 com/general_hello/commands/commands/Info/AboutCommand.java
  com.general_hello.commands.commands.Info.AboutCommand
-com/general_hello/commands/commands/GroupOfGames/MiniGames/ChessRequest.java
- com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessRequest
+com/general_hello/commands/OtherEvents/OnButtonClick.java
+ com.general_hello.commands.OtherEvents.OnButtonClick
 com/general_hello/commands/commands/Others/PingCommand.java
  com.general_hello.commands.commands.Others.PingCommand
 com/general_hello/commands/commands/Emoji/Emoji.java
@@ -68,9 +68,8 @@ com/general_hello/commands/commands/MusicPlainCommand/ResumeCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.ResumeCommand
 com/general_hello/commands/commands/ICommand.java
  com.general_hello.commands.commands.ICommand
-com/general_hello/commands/commands/Info/InfoUserCommand.java
- com.general_hello.commands.commands.Info.InfoUserCommand
- com.general_hello.commands.commands.Info.InfoUserCommand$1
+com/general_hello/commands/Bot.java
+ com.general_hello.commands.Bot
 com/general_hello/commands/commands/Utils/TextUploader.java
  com.general_hello.commands.commands.Utils.TextUploader
  com.general_hello.commands.commands.Utils.TextUploader$Result
@@ -98,8 +97,9 @@ com/general_hello/commands/commands/Music/AudioPlayerSendHandler.java
  com.general_hello.commands.commands.Music.AudioPlayerSendHandler
 com/general_hello/commands/commands/Uno/UnoCommand.java
  com.general_hello.commands.commands.Uno.UnoCommand
-com/general_hello/commands/commands/User/UserPhoneUser.java
- com.general_hello.commands.commands.User.UserPhoneUser
+com/general_hello/commands/commands/Info/InfoUserCommand.java
+ com.general_hello.commands.commands.Info.InfoUserCommand
+ com.general_hello.commands.commands.Info.InfoUserCommand$1
 com/general_hello/commands/commands/GroupOfGames/Games/GuessNumberCommand.java
  com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand
 com/general_hello/commands/commands/Register/RegisterCommand.java
@@ -196,20 +196,20 @@ com/general_hello/commands/commands/MusicPlainCommand/RepeatCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.RepeatCommand
 com/general_hello/commands/commands/Emoji/EmojiObject.java
  com.general_hello.commands.commands.Emoji.EmojiObject
-com/general_hello/commands/Bot.java
- com.general_hello.commands.Bot
-com/general_hello/commands/OtherEvents/OnButtonClick.java
- com.general_hello.commands.OtherEvents.OnButtonClick
+com/general_hello/commands/commands/GroupOfGames/MiniGames/ChessRequest.java
+ com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessRequest
+com/general_hello/commands/commands/User/UserPhoneUser.java
+ com.general_hello.commands.commands.User.UserPhoneUser
 com/general_hello/commands/commands/GetData.java
  com.general_hello.commands.commands.GetData
+com/general_hello/commands/OtherEvents/OnPrivateMessage.java
+ com.general_hello.commands.OtherEvents.OnPrivateMessage
+com/general_hello/commands/OtherEvents/OnReadyEvent.java
+ com.general_hello.commands.OtherEvents.OnReadyEvent
+com/general_hello/commands/commands/Others/UpdateIgniteCoinsCommand.java
+ com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand
 com/general_hello/commands/CommandManager.java
  com.general_hello.commands.CommandManager
  com.general_hello.commands.CommandManager$1
 com/general_hello/commands/commands/DefaultCommands/BalanceCommand.java
  com.general_hello.commands.commands.DefaultCommands.BalanceCommand
-com/general_hello/commands/commands/Others/UpdateIgniteCoinsCommand.java
- com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand
-com/general_hello/commands/OtherEvents/OnReadyEvent.java
- com.general_hello.commands.OtherEvents.OnReadyEvent
-com/general_hello/commands/OtherEvents/OnPrivateMessage.java
- com.general_hello.commands.OtherEvents.OnPrivateMessage

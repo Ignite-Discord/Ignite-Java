@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.entities.User;
 
 public class UserPhoneUser {
     private String userPhoneUserName;
-    private Integer balance = -1;
+    private Integer balance;
     private User discordUser;
     private String webhookUrl = null;
 

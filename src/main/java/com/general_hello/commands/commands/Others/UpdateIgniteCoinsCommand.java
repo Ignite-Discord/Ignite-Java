@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.Permission;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class UpdateIgniteCoinsCommand implements ICommand {
@@ -81,11 +82,15 @@ public class UpdateIgniteCoinsCommand implements ICommand {
             // Print columns A and E, which correspond to indices 1 and 7.
             System.out.printf("%s, %s\n", row.get(0), row.get(7));
 
-            String name = splitter(row);
+            if (!row.get(0).toString().equals("Maxine")) {
 
-            if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
-                UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
-                userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
+                String name = splitter(row);
+
+                if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
+                    System.out.println(name);
+                    UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
+                    userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
+                }
             }
         }
     }
@@ -93,16 +98,18 @@ public class UpdateIgniteCoinsCommand implements ICommand {
     public static void getSpecificData(List<List<Object>> values, String target) {
         for (List row : values) {
             // Print columns A and E, which correspond to indices 1 and 7.
-            String name = splitter(row);
 
+            if (!row.get(0).toString().equals("Maxine")) {
+                String name = splitter(row);
 
-            if (target.equals(name)) {
-                if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
-                    UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
-                    userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
-                    System.out.printf("%s, %s\n", row.get(0), row.get(7));
+                if (target.equals(name)) {
+                    if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
+                        UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
+                        userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
+                        System.out.printf("%s, %s\n", row.get(0), row.get(7));
+                    }
+                    return;
                 }
-                return;
             }
         }
     }
@@ -111,6 +118,8 @@ public class UpdateIgniteCoinsCommand implements ICommand {
         String name = row.get(0).toString();
         String[] split = name.split("\\s+");
         int length = split.length;
+
+        System.out.println(Arrays.toString(split));
 
         if (length == 3) {
             name = split[0] + " " + split[2];

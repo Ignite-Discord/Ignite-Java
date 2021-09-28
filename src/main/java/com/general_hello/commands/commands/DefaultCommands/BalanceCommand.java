@@ -9,6 +9,7 @@ import com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand;
 import com.general_hello.commands.commands.Register.Data;
 import com.general_hello.commands.commands.User.UserPhoneUser;
 import com.general_hello.commands.commands.Utils.EmbedUtil;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
@@ -27,24 +28,28 @@ public class BalanceCommand implements ICommand {
         GetData getData = new GetData();
         getData.checkIfContainsData(user, ctx);
 
-        if (!Data.userUserPhoneUserHashMap.containsKey(ctx.getAuthor())) {
-            ctx.getChannel().sendMessage(Emoji.ERROR + "Kindly register `ignt register` first before using this command!").queue();
+        if (!Data.userUserPhoneUserHashMap.containsKey(user)) {
+            ctx.getChannel().sendMessage(Emoji.ERROR + " Kindly register `ignt register` first before using this command!").queue();
             return;
         }
 
-        UpdateIgniteCoinsCommand.loadData(true);
+        List<List<Object>> lists = UpdateIgniteCoinsCommand.loadData(true);
+        UserPhoneUser userPhoneUser = Data.userUserPhoneUserHashMap.get(user);
 
-        UserPhoneUser userPhoneUser = Data.userUserPhoneUserHashMap.get(ctx.getAuthor());
+        UpdateIgniteCoinsCommand.getSpecificData(lists, userPhoneUser.getUserPhoneUserName());
         Integer balance = userPhoneUser.getBalance();
 
-        if (balance == -1) {
+        if (balance == null) {
             MessageEmbed messageEmbed = EmbedUtil.errorEmbed("The balance hasn't been updated. Kindly ping one of the developers about this issue.");
             ctx.getChannel().sendMessageEmbeds(messageEmbed).queue();
             return;
         }
 
-        MessageEmbed messageEmbed = EmbedUtil.successEmbed("Balance: **" + balance + "** ignite coins");
-        ctx.getChannel().sendMessageEmbeds(messageEmbed).queue();
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setTitle(user.getName() + "'s Balance").setFooter("Nice balance you have 😀");
+        embedBuilder.setDescription("Balance: **" + balance + "** ignite coins\n" +
+                "Credits: **Soon to Come**");
+        ctx.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
     @Override
