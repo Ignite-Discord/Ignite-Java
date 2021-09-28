@@ -5,12 +5,8 @@ import com.general_hello.commands.OtherEvents.*;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import me.duncte123.botcommons.messaging.EmbedUtils;
 import me.duncte123.botcommons.web.WebUtils;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.*;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -19,6 +15,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bot {
@@ -93,6 +90,21 @@ public class Bot {
                 EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("Status").setColor(Color.GREEN).setFooter("This status is for all Plenary bots").setDescription(jda.getSelfUser().getAsMention() + " is now online! The problem has been resolved and the maintenance is complete!");
                 jda.getTextChannelById(891816519498096650L).sendMessageEmbeds(embedBuilder.build()).queue();
                 System.out.println("Successfully sent the message!");
+            }
+
+            if (s.equalsIgnoreCase("setup")) {
+                List<TextChannel> channels = jda.getGuildById(843769353040298011L).getTextChannels();
+
+                int x = 0;
+                Guild guildById = jda.getGuildById(843769353040298011L);
+
+                while (x < channels.size()) {
+                    Role lockdown = guildById.getRolesByName("lockdown", true).get(0);
+                    channels.get(x).createPermissionOverride(lockdown).setDeny(Permission.MESSAGE_WRITE).queue();
+                    x++;
+                    System.out.println("Lockdown setup in " + channels.get(x));
+                }
+                System.out.println("Mission accomplished!");
             }
 
             if (s.equalsIgnoreCase("help")) {

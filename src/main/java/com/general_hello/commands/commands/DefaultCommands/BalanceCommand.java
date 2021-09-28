@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,13 +24,23 @@ public class BalanceCommand implements ICommand {
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
         User user = ctx.getAuthor();
 
-        if (!ctx.getMessage().getMentionedMembers().isEmpty()) user = ctx.getMessage().getMentionedUsers().get(0);
+        boolean oof = true;
+
+        if (!ctx.getMessage().getMentionedMembers().isEmpty()) {
+            oof = false;
+            user = ctx.getMessage().getMentionedUsers().get(0);
+        }
 
         GetData getData = new GetData();
         getData.checkIfContainsData(user, ctx);
 
         if (!Data.userUserPhoneUserHashMap.containsKey(user)) {
-            ctx.getChannel().sendMessage(Emoji.ERROR + " Kindly register `ignt register` first before using this command!").queue();
+            if (oof) {
+                ctx.getChannel().sendMessage(Emoji.ERROR + " Kindly register `ignt register` first before using this command!").queue();
+                return;
+            }
+
+            ctx.getChannel().sendMessage(Emoji.ERROR + " Kindly ask " + user.getName() + " to register with `ignt register` first before using this command!").queue();
             return;
         }
 
@@ -46,6 +57,7 @@ public class BalanceCommand implements ICommand {
         }
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setColor(Color.CYAN);
         embedBuilder.setTitle(user.getName() + "'s Balance").setFooter("Nice balance you have 😀");
         embedBuilder.setDescription("Balance: **" + balance + "** ignite coins\n" +
                 "Credits: **Soon to Come**");

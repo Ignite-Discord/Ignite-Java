@@ -1,18 +1,35 @@
 package com.general_hello.commands.OtherEvents;
 
+import com.general_hello.commands.Config;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
+import com.general_hello.commands.commands.PrefixStoring;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.ButtonStyle;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
 
 public class OnSelectionMenu extends ListenerAdapter {
     @Override
     public void onSelectionMenu(@NotNull SelectionMenuEvent event) {
         EmbedBuilder embedBuilder;
 
+        SelectionMenu menu = SelectionMenu.create("menu:class")
+                .setPlaceholder("Choose the game you want to find help on") // shows the placeholder indicating what this menu is for
+                .setRequiredRange(1, 1) // only one can be selected
+                .addOption("Uno", "uno")
+                .addOption("Blackjack", "bj")
+                .addOption("Guess the number", "gn")
+                .addOption("Hangman", "hangman")
+                .addOption("Trivia", "trivia")
+                .addOption("Chess", "chess")
+                .build();
         int x = 0;
 
         while (x < event.getSelectedOptions().size()) {
@@ -44,15 +61,96 @@ public class OnSelectionMenu extends ListenerAdapter {
                     ).complete().getPrivateChannel().getId();
                     event.getMessage().delete().queue();
                     return;
-                case "n/a":
-                    return;
-                default:
+                case "bj":
+                    event.getMessage().editMessageEmbeds(helpCrap(1, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
+                    event.deferEdit().queue();
+                    break;
+                case "gn":
+                    event.getMessage().editMessageEmbeds(helpCrap(2, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
                     event.deferReply().queue();
+                default:
+                case "hangman":
+                    event.getMessage().editMessageEmbeds(helpCrap(3, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
+                    event.deferEdit().queue();
+                    break;
+                case "trivia":
+                    event.getMessage().editMessageEmbeds(helpCrap(4, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
+                    event.deferEdit().queue();
+                    break;
+                case "chess":
+                    event.getMessage().editMessageEmbeds(helpCrap(5, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
+                    event.deferEdit().queue();
+                    break;
+                case "uno":
+                    event.getMessage().editMessageEmbeds(helpCrap(6, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
+                    event.deferEdit().queue();
+                    break;
             }
 
             x++;
         }
+    }
 
-        event.deferEdit().queue();
+    public EmbedBuilder helpCrap (int number, SelectionMenuEvent ctx) {
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        final long guildID = ctx.getGuild().getIdLong();
+        String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, (id) -> Config.get("prefix"));
+
+        switch (number) {
+            case 1:
+                embedBuilder.setTitle("Blackjack Commands");
+                embedBuilder.setColor(Color.YELLOW);
+                embedBuilder.addField("1.) Start a blackjack game command","`" + prefix + " blackjack`", false);
+                embedBuilder.addField("2.) Hit card command","`" + prefix + " hit`", false);
+                embedBuilder.addField("3.) Stand command","`" + prefix + " hit`", false);
+                embedBuilder.addField("4.) Double command","`" + prefix + " hit`", false);
+                embedBuilder.addField("5.) Split card command","`" + prefix + " hit`", false);
+
+                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
+                break;
+            case 2:
+                embedBuilder.setTitle("Guess the number Commands");
+                embedBuilder.setColor(Color.blue);
+                embedBuilder.addField("1.) Start the Guess the number game Command", "`" + prefix + " gn start`", false);
+                embedBuilder.addField("2.) Guess a number Command", "`" + prefix + " gn [number]`", false);
+                embedBuilder.addField("3.) End game Command", "`" + prefix + " gn end`", false);
+
+                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
+                break;
+            case 3:
+                embedBuilder.setTitle("Hangman Commands");
+                embedBuilder.setColor(Color.red);
+                embedBuilder.addField("1.) Start hangman game Command", "`" + prefix + " hm start`", false);
+                embedBuilder.addField("2.) Guess a letter Command", "`" + prefix + " hm [letter]`", false);
+                embedBuilder.addField("3.) End game Command", "`" + prefix + " hm end`", false);
+
+                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
+                break;
+            case 4:
+                embedBuilder.setTitle("Trivia Commands");
+                embedBuilder.setColor(Color.CYAN);
+                embedBuilder.addField("1.) Start trivia Command", "`" + prefix + " trivia`", false);
+
+                embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
+                break;
+            case 5:
+                embedBuilder.setTitle("Chess Commands");
+                embedBuilder.setColor(Color.CYAN);
+                embedBuilder.setDescription("Unknown!\n" +
+                        "Chess is still being programmed!");
+                embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
+                break;
+            case 6:
+                embedBuilder.setTitle("Uno Commands");
+                embedBuilder.setColor(Color.blue);
+                embedBuilder.addField("1.) Start the UNO game Command", "`" + prefix + " startuno`", false);
+                embedBuilder.addField("2.) Play card Command", "`" + prefix + " playcard [card name]`\n" +
+                        "Example: `" + prefix + "` playcard red4", false);
+                embedBuilder.addField("3.) Draw Card Command", "`" + prefix + " draw`", false);
+                embedBuilder.addField("4.) Challenge a +4 card Command", "`" + prefix + " challenge`", false);
+
+                embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
+        }
+        return embedBuilder;
     }
 }

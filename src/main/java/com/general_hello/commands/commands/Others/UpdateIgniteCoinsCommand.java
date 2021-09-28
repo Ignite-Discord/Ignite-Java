@@ -21,7 +21,7 @@ import java.util.List;
 public class UpdateIgniteCoinsCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
-        if (!ctx.getMember().hasPermission(Permission.MANAGE_SERVER)) {
+        if (!ctx.getMember().hasPermission(Permission.MANAGE_SERVER) && !ctx.getMember().getRoles().contains(ctx.getGuild().getRoleById(888627140046749697L))) {
             ctx.getChannel().sendMessage("You don't have the `Manage Server permission` with you!").queue();
             return;
         }

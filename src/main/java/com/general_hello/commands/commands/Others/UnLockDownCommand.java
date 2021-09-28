@@ -15,7 +15,7 @@ import java.util.List;
 public class UnLockDownCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
-        if (!ctx.getMember().hasPermission(Permission.MANAGE_SERVER)) {
+        if (!ctx.getMember().hasPermission(Permission.MANAGE_SERVER) && !ctx.getMember().getRoles().contains(ctx.getGuild().getRoleById(888627140046749697L))) {
             ctx.getChannel().sendMessage("You don't have the `Manage Server permission` with you!").queue();
             return;
         }
@@ -27,18 +27,20 @@ public class UnLockDownCommand implements ICommand {
         }
 
         Role role = lockdown.get(0);
-
         List<Member> members = ctx.getGuild().getMembers();
         int x = 0;
+        int y = 0;
 
         while (x < members.size()) {
             if (ctx.getGuild().getSelfMember().canInteract(members.get(x))) {
+                System.out.println(members.get(x).getEffectiveName());
                 ctx.getGuild().removeRoleFromMember(members.get(x), role).queue();
+                y++;
             }
             x++;
         }
 
-        ctx.getChannel().sendMessage("Lockdown is now ceased! " + Emoji.USER).queue();
+        ctx.getChannel().sendMessage("Lockdown is now ceased! For " + y + " users " + Emoji.USER).queue();
     }
 
     @Override
