@@ -2,6 +2,7 @@ package com.general_hello.commands.OtherEvents;
 
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
+import com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand;
 import com.general_hello.commands.commands.Register.Data;
 import com.general_hello.commands.commands.User.UserPhoneUser;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -9,6 +10,7 @@ import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -37,6 +39,11 @@ public class OnPrivateMessage extends ListenerAdapter {
                 UserPhoneUser user = new UserPhoneUser(oldAnswers.get(0), event.getAuthor());
                 Data.userUserPhoneUserHashMap.put(event.getAuthor(), user);
                 Data.userPhoneUsers.add(user);
+                try {
+                    UpdateIgniteCoinsCommand.getSpecificData(UpdateIgniteCoinsCommand.loadData(true), oldAnswers.get(0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 DatabaseManager.INSTANCE.newInfo(event.getAuthor().getIdLong(), oldAnswers.get(0));
             }

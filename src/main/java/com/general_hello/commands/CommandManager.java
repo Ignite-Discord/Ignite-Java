@@ -39,11 +39,11 @@ public class CommandManager {
     private final List<ICommand> commands = new ArrayList<>();
     public static ArrayList<String> commandNames = new ArrayList<>();
     public static ArrayList<String> cmdNames = new ArrayList<>();
-    private final long GAMES = 0L;
-    private final long MUSIC = 0L;
-    private final long WALLET = 0L;
-    private final boolean testing = true;
-    private final long OTHERS = 0L;
+    private final long GAMES = 891569196427804672L;
+    private final long MUSIC = 891568732810408007L;
+    private final long WALLET = 891570475220754462L;
+    private final boolean testing = false;
+    private final long OTHERS = 892205334721101844L;
 
     public CommandManager(EventWaiter waiter) {
 
@@ -102,6 +102,7 @@ public class CommandManager {
         addCommand(new BalanceCommand());
         addCommand(new PasteCommand());
         addCommand(new SayCommand());
+        addCommand(new UpdateIgniteCoinsCommand());
     }
 
     private void addCommand(ICommand cmd) {
@@ -154,17 +155,19 @@ public class CommandManager {
                 if (!commandNames.contains(invoke)) commandNames.add(invoke);
             }
 
-            if (!testing) {
-                if (!cmd.getCategory().equals(CommandType.SPECIAL)) {
-                    switch (cmd.getCategory()) {
-                        case GAMES:
-                            if (event.getChannel().getIdLong() != (GAMES)) return;
-                        case MUSIC:
-                            if (event.getChannel().getIdLong() != (MUSIC)) return;
-                        case OTHERS:
-                            if (event.getChannel().getIdLong() != (OTHERS)) return;
-                        case WALLET:
-                            if (event.getChannel().getIdLong() != (WALLET)) return;
+            if (event.getGuild().getIdLong() != 860295266765635584L) {
+                if (!testing) {
+                    if (!cmd.getCategory().equals(CommandType.SPECIAL)) {
+                        switch (cmd.getCategory()) {
+                            case GAMES:
+                                if (event.getChannel().getIdLong() != (GAMES)) return;
+                            case MUSIC:
+                                if (event.getChannel().getIdLong() != (MUSIC)) return;
+                            case OTHERS:
+                                if (event.getChannel().getIdLong() != (OTHERS)) return;
+                            case WALLET:
+                                if (event.getChannel().getIdLong() != (WALLET)) return;
+                        }
                     }
                 }
             }

@@ -4,6 +4,7 @@ import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.ICommand;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 
@@ -14,13 +15,20 @@ import java.util.List;
 public class LockDownCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
-        List<Role> lockdown = ctx.getGuild().getRolesByName("lockdown", false);
-        Role role = lockdown.get(0);
+        if (!ctx.getMember().hasPermission(Permission.MANAGE_SERVER)) {
+            ctx.getChannel().sendMessage("You don't have the `Manage Server permission` with you!").queue();
+            return;
+        }
 
-        if (role == null) {
+        System.out.println("Lockdown starting ALERT ALERT");
+        List<Role> lockdown = ctx.getGuild().getRolesByName("lockdown", true);
+
+        if (lockdown.isEmpty()) {
             ctx.getChannel().sendMessage("There is no role called **Lockdown**").queue();
             return;
         }
+
+        Role role = lockdown.get(0);
 
         List<Member> members = ctx.getGuild().getMembers();
         int x = 0;

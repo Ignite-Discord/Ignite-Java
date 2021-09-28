@@ -26,6 +26,10 @@ repositories {
     maven {
         url 'https://jitpack.io'
     }
+
+    maven {
+        url "https://m2.chew.pro/releases"
+    }
 }
 
 jar {
@@ -40,6 +44,7 @@ jar {
 
 dependencies {
     implementation group: 'net.dv8tion', name: 'JDA', version: '4.3.0_331'
+    implementation group: 'pw.chew', name: 'jda-chewtils-command', version: '1.22.0'
     implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.5'
     implementation group: 'me.duncte123', name: 'botCommons', version: '2.1.2'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.6'

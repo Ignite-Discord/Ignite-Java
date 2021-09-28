@@ -46,7 +46,7 @@ public class AboutCommand implements ICommand {
                 : event.getJDA().getUserById(Config.get("owner_id")).getName();
         StringBuilder descr = new StringBuilder().append("Hello! I am **").append(event.getSelfUser().getName()).append("**, ")
                 .append(description).append("\nI ").append(IS_AUTHOR ? "was written in Java" : "am owned").append(" by **")
-                .append(author).append("** using " + JDAUtilitiesInfo.AUTHOR + "'s [Commands Extension](" + JDAUtilitiesInfo.GITHUB + ") (")
+                .append(author).append("** using " + "Chewtils's [Commands Extension](2.3.5) (")
                 .append(JDAUtilitiesInfo.VERSION).append(") and the [JDA library](https://github.com/DV8FromTheWorld/JDA) (")
                 .append(JDAInfo.VERSION).append(")\nType `").append(prefix).append("help")
                 .append("` to see my commands!").append(join || inv ? invline : "").append("\n\nSome of my features include: ```html\n");

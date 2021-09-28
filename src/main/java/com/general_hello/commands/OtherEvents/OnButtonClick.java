@@ -10,7 +10,9 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -57,7 +59,18 @@ public class OnButtonClick extends ListenerAdapter {
                 event.getHook().editOriginalEmbeds(helpCrap(6, event).build()).queue();
                 return;
             case "game":
-                event.getHook().editOriginalEmbeds(helpCrap(5, event).build()).queue();
+                SelectionMenu menu = SelectionMenu.create("menu:class")
+                        .setPlaceholder("Choose your age") // shows the placeholder indicating what this menu is for
+                        .setRequiredRange(1, 1) // only one can be selected
+                        .addOption("Uno", "uno")
+                        .addOption("Blackjack", "bj")
+                        .addOption("Guess the number", "gn")
+                        .addOption("Hangman", "hangman")
+                        .addOption("Trivia", "trivia")
+                        .addOption("Chess", "chess")
+                        .build();
+
+                event.getHook().editOriginalEmbeds(helpCrap(5, event).build()).setActionRows(ActionRow.of(), ActionRow.of()).queue();
                 return;
             case "accept":
                 String arrow = "<a:arrow_1:862525611465113640>";
@@ -77,7 +90,7 @@ public class OnButtonClick extends ListenerAdapter {
             case "yes":
                 event.getHook().deleteOriginal().queue();
                 event.getChannel().sendMessage("<a:thanks:863989523461177394> Thank you for accepting the rules and data that will be stored.").queue();
-                event.getChannel().sendMessage("<a:question:863989523368247346> For your Ignite Coins balance, may we ask for your complete, real name?").queue();
+                event.getChannel().sendMessage("<a:question:863989523368247346> For your Ignite Coins balance, may we ask for your first and last, real name? For example, **Nathan Tan** or **John Sy**").queue();
                 Data.progress.put(event.getUser(), 1);
                 break;
             case "acceptChess":
@@ -123,6 +136,7 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField("2.) Lockdown Command", "`" + prefix + " lockdown`", false);
                 embedBuilder.addField("3.) Un-lockdown Command", "`" + prefix + " unlockdown`", false);
                 embedBuilder.addField("4.) Add Meme Command", "`" + prefix + " addmeme`", false);
+                embedBuilder.addField("5.) Update Ignite Coins Balance Command", "`" + prefix + " updatecoins`", false);
 
                 embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;
@@ -134,7 +148,10 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField("3.) View rank Command", "`" + prefix + " rank`", false);
                 embedBuilder.addField("4.) Show a Joke Command", "`" + prefix + " joke`", false);
                 embedBuilder.addField("5.) Show a Meme Command", "`" + prefix + " meme`", false);
-                embedBuilder.addField("6.) Share code Command (Programming)", "`" + prefix + " sharecode`", false);
+                embedBuilder.addField("6.) Animal Fact Command", "`" + prefix + " fact`", false);
+                embedBuilder.addField("7.) Weather Lookup Command", "`" + prefix + " weather`", false);
+                embedBuilder.addField("8.) Lyric Search Command", "`" + prefix + " lyric`", false);
+                embedBuilder.addField("9.) Share code Command (Programming)", "`" + prefix + " sharecode`", false);
 
                 embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
                 break;

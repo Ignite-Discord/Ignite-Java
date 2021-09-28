@@ -28,7 +28,6 @@ public class RegisterCommand implements ICommand {
                 .addOption("13 - 21", "noice")
                 .addOption("22 - 40", "oh")
                 .addOption("41 +", "old")
-                .addOption("Prefer not to say", "n/a")
                 .build();
 
         EmbedBuilder embedBuilder = new EmbedBuilder().setColor(InfoUserCommand.randomColor()).setTitle("Age");

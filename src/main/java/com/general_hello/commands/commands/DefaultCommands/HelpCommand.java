@@ -60,7 +60,7 @@ public class HelpCommand implements ICommand {
                     ActionRow.of(
                         Button.secondary(ctx.getMember().getUser().getId() + ":music", "Music").withEmoji(Emoji.fromEmote("music", Long.parseLong("891148744408584192"), true)),
                         Button.secondary(ctx.getMember().getUser().getId() + ":mod", "Moderation").withDisabled(disableOrEnable).withEmoji(Emoji.fromEmote("mod", Long.parseLong("862898484041482270"), true)),
-                        Button.danger(ctx.getMember().getUser().getId() + ":end", "Cancel").withDisabled(disableOrEnable).withEmoji(Emoji.fromEmote("cancel", Long.parseLong("863204248657461298"), true)))
+                        Button.danger(ctx.getMember().getUser().getId() + ":end", "Cancel").withEmoji(Emoji.fromEmote("cancel", Long.parseLong("863204248657461298"), true)))
             ).queue();
 
             return;

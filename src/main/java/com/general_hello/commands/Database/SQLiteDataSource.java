@@ -81,6 +81,8 @@ public class SQLiteDataSource implements DatabaseManager {
 
     @Override
     public String getPrefix(long guildId) {
+        System.out.println("Get prefix");
+
         try (final PreparedStatement preparedStatement = getConnection()
                 .prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id = ?")) {
 
@@ -108,6 +110,8 @@ public class SQLiteDataSource implements DatabaseManager {
 
     @Override
     public void setPrefix(long guildId, String newPrefix) {
+        System.out.println("Set prefix");
+
         try (final PreparedStatement preparedStatement = getConnection()
                 .prepareStatement("UPDATE guild_settings SET prefix = ? WHERE guild_id = ?")) {
 
@@ -130,23 +134,18 @@ public class SQLiteDataSource implements DatabaseManager {
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    getConnection().close();
                     return resultSet.getString("UserName");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        try {
-            getConnection().close();
-        } catch (Exception ignored) {}
-
         return null;
     }
 
     @Override
     public Integer getXpPoints(long userId) throws SQLException {
+        System.out.println("Get XP points");
         try {
             Statement statement = getConnection().createStatement();
             String sql = "SELECT xpPoints FROM XPSystemUser WHERE userId=" + userId;
@@ -167,7 +166,6 @@ public class SQLiteDataSource implements DatabaseManager {
 
             statement.executeUpdate(sql);
             statement.close();
-            getConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -177,18 +175,19 @@ public class SQLiteDataSource implements DatabaseManager {
 
     @Override
     public void setXpPoints(long userId, long xpPoints) {
+        System.out.println("Set XP points");
+        try {
+            System.out.println("Connection closed? " + getConnection().isClosed());
+        } catch (Exception ignored) {}
+
         try {
             if (getConnection() == null) return;
 
             Statement statement = getConnection().createStatement();
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
             String sql = "UPDATE XPSystemUser SET xpPoints=" + (xpPoints) + " WHERE UserId=" + userId;
 
             statement.executeUpdate(sql);
-            statement.close();
-            getConnection().close();
-            System.out.println(getConnection());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -196,6 +195,8 @@ public class SQLiteDataSource implements DatabaseManager {
 
     @Override
     public void newInfo(long userId, String userName) {
+        System.out.println("New info");
+
         try (final PreparedStatement preparedStatement = getConnection()
              .prepareStatement("INSERT INTO UserData" +
                      "(UserId, UserName)" +
@@ -206,7 +207,6 @@ public class SQLiteDataSource implements DatabaseManager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
-            getConnection().close();
 
             System.out.println("Added the user to the database successfully!");
         } catch (SQLException e) {
@@ -217,6 +217,8 @@ public class SQLiteDataSource implements DatabaseManager {
 
     @Override
     public void setName(long userId, String name) {
+        System.out.println("Set name");
+
         try (final PreparedStatement preparedStatement = getConnection()
                 .prepareStatement("UPDATE UserData SET UserName=? WHERE UserId=?"
                 )) {
@@ -225,22 +227,14 @@ public class SQLiteDataSource implements DatabaseManager {
             preparedStatement.setString(1, name);
 
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            getConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     public static Connection getConnection() throws SQLException {
-        try {
-            System.out.println(connection);
-            if (connection == null) {
-                connection = DriverManager.getConnection("jdbc:sqlite:database.db");
-            }
-        } catch (Exception e) {
-            return null;
+        if (connection.isClosed()) {
+            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
         }
-
         return connection;
     }
 }
