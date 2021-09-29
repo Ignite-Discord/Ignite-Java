@@ -72,7 +72,8 @@ public class OnButtonClick extends ListenerAdapter {
                         .addOption("Chess", "chess")
                         .build();
 
-                event.getHook().editOriginalEmbeds(helpCrap(5, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessageEmbeds(helpCrap(5, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
                 return;
             case "backgames":
                 final long guildID = event.getGuild().getIdLong();
@@ -96,7 +97,9 @@ public class OnButtonClick extends ListenerAdapter {
                 if (!event.getMember().hasPermission(Permission.MANAGE_SERVER) && !event.getMember().getRoles().contains(event.getGuild().getRoleById(888627140046749697L))) {
                     disableOrEnable = false;
                 }
-                event.getHook().editOriginalEmbeds(embedBuilder.build()).setActionRows(
+
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessageEmbeds(embedBuilder.build()).setActionRows(
                         ActionRow.of(
                                 Button.secondary(event.getMember().getUser().getId() + ":user", "User").withEmoji(Emoji.fromEmote("user", Long.parseLong("862895295239028756"), true)),
                                 Button.secondary(event.getMember().getUser().getId() + ":bot", "Bot").withEmoji(Emoji.fromEmote("discord_bot", Long.parseLong("862895574960701440"), false)),

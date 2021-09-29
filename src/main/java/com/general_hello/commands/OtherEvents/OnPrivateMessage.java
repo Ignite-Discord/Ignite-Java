@@ -39,13 +39,14 @@ public class OnPrivateMessage extends ListenerAdapter {
                 UserPhoneUser user = new UserPhoneUser(oldAnswers.get(0), event.getAuthor());
                 Data.userUserPhoneUserHashMap.put(event.getAuthor(), user);
                 Data.userPhoneUsers.add(user);
+
+                DatabaseManager.INSTANCE.newInfo(event.getAuthor().getIdLong(), oldAnswers.get(0));
+
                 try {
-                    UpdateIgniteCoinsCommand.getSpecificData(UpdateIgniteCoinsCommand.loadData(true), oldAnswers.get(0));
+                    UpdateIgniteCoinsCommand.loadData(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                DatabaseManager.INSTANCE.newInfo(event.getAuthor().getIdLong(), oldAnswers.get(0));
             }
         }
     }

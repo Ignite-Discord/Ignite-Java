@@ -41,11 +41,11 @@ public class CommandManager {
     private final List<ICommand> commands = new ArrayList<>();
     public static ArrayList<String> commandNames = new ArrayList<>();
     public static ArrayList<String> cmdNames = new ArrayList<>();
-    private final long GAMES = 891569196427804672L;
-    private final long MUSIC = 891568732810408007L;
-    private final long WALLET = 891570475220754462L;
+    private final long GAMESC = 891569196427804672L;
+    private final long MUSICC = 891568732810408007L;
+    private final long WALLETC = 891570475220754462L;
     private final boolean testing = false;
-    private final long OTHERS = 892205334721101844L;
+    private final long OTHERSC = 892205334721101844L;
 
     public CommandManager(EventWaiter waiter) {
 
@@ -162,47 +162,58 @@ public class CommandManager {
             if (event.getGuild().getIdLong() != 860295266765635584L) {
                 if (!testing) {
                     if (!cmd.getCategory().equals(CommandType.SPECIAL)) {
+                        System.out.println(cmd.getCategory());
                         switch (cmd.getCategory()) {
                             case GAMES:
-                                if (event.getChannel().getIdLong() != (GAMES)) {
+                                if (event.getChannel().getIdLong() != (GAMESC)) {
                                     embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
-                                            "Go to " + event.getGuild().getGuildChannelById(GAMES).getAsMention() + " and send \n" +
+                                            "Go to " + event.getGuild().getGuildChannelById(GAMESC).getAsMention() + " and send \n" +
                                             "```java\n" +
                                             prefix + " " + invoke + "\n" +
                                             "```");
                                     event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
                                     return;
                                 }
+                                break;
                             case MUSIC:
-                                if (event.getChannel().getIdLong() != (MUSIC)) {
+                                if (event.getChannel().getIdLong() != (MUSICC)) {
+                                    System.out.println("2");
+
                                     embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
-                                            "Go to " + event.getGuild().getGuildChannelById(MUSIC).getAsMention() + " and send \n" +
+                                            "Go to " + event.getGuild().getGuildChannelById(MUSICC).getAsMention() + " and send \n" +
                                             "```java\n" +
                                             prefix + " " + invoke + "\n" +
                                             "```");
                                     event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
                                     return;
                                 }
+                                break;
                             case OTHERS:
-                                if (event.getChannel().getIdLong() != (OTHERS)) {
+                                if (event.getChannel().getIdLong() != (OTHERSC)) {
+                                    System.out.println("3");
+
                                     embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
-                                            "Go to " + event.getGuild().getGuildChannelById(OTHERS).getAsMention() + " and send \n" +
+                                            "Go to " + event.getGuild().getGuildChannelById(OTHERSC).getAsMention() + " and send \n" +
                                             "```java\n" +
                                             prefix + " " + invoke + "\n" +
                                             "```");
                                     event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
                                     return;
                                 }
+                                break;
                             case WALLET:
-                                if (event.getChannel().getIdLong() != (WALLET)) {
+                                if (event.getChannel().getIdLong() != (WALLETC)) {
+                                    System.out.println("4");
+
                                     embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
-                                            "Go to " + event.getGuild().getGuildChannelById(WALLET).getAsMention() + " and send \n" +
+                                            "Go to " + event.getGuild().getGuildChannelById(WALLETC).getAsMention() + " and send \n" +
                                             "```java\n" +
                                             prefix + " " + invoke + "\n" +
                                             "```");
                                     event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
                                     return;
                                 }
+                                break;
                         }
                     }
                 }

@@ -107,7 +107,7 @@ public class PlayCardCommand implements ICommand {
                                     EmbedBuilder eb = new EmbedBuilder(m.getEmbeds().get(0));
                                     eb.setTitle("The game of uno has concluded");
                                     eb.setDescription(String.format("%s won the game and won **%d** credits", hand.getPlayerName(), credits));
-                                    m.editMessage(eb.build()).queue();
+                                    m.editMessageEmbeds(eb.build()).queue();
                                 });
                                 channel.delete().queueAfter(1, TimeUnit.MINUTES);
 
