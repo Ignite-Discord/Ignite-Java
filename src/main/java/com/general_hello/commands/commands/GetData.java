@@ -22,12 +22,11 @@ public class GetData {
     public static HashMap<User, Long> xpMember = new HashMap<>();
     //get data from the db
 
-    public int checkIfContainsData(User user, GuildMessageReceivedEvent ctx) {
+    public void checkIfContainsData(User user, GuildMessageReceivedEvent ctx) {
         if (!Data.userUserPhoneUserHashMap.containsKey(user)) {
-            return retrieveData(user.getIdLong(), ctx);
+            retrieveData(user.getIdLong(), ctx);
         }
 
-        return 100;
     }
 
     public void checkIfContainsData(User user, SlashCommandEvent ctx) {
@@ -38,6 +37,7 @@ public class GetData {
 
     public void checkIfContainsData(User user, CommandContext ctx) {
         if (!Data.userUserPhoneUserHashMap.containsKey(user)) {
+            System.out.println("YEET");
             retrieveData(user.getIdLong(), ctx);
         }
     }
@@ -55,7 +55,9 @@ public class GetData {
         xpMember.put(user, points);
     }
 
-
+    public static void setName(User user, String name) {
+        DatabaseManager.INSTANCE.setName(user.getIdLong(), name);
+    }
     private int retrieveData(Long userId, GuildMessageReceivedEvent ctx) {
         if (blackListedUser.contains(ctx.getAuthor())) return -1;
 
@@ -65,8 +67,6 @@ public class GetData {
     }
 
     private int retrieveData(Long userId, CommandContext ctx) {
-        if (blackListedUser.contains(ctx.getAuthor())) return -1;
-
         String name = DatabaseManager.INSTANCE.getName(userId);
 
         return addData(userId, name, ctx.getJDA());
@@ -75,15 +75,17 @@ public class GetData {
     private int addData(Long userId, String name, JDA jda) {
         if (name != null) {
             User userById = jda.getUserById(userId);
-            UserPhoneUser user = new UserPhoneUser(name, userById);
+
+            int credits = DatabaseManager.INSTANCE.getCredits(userId);
+            UserPhoneUser user = new UserPhoneUser(name, userById, credits);
             Data.userUserPhoneUserHashMap.put(userById, user);
             Data.realNameUserPhoneUserHashMap.put(name, user);
             Data.userPhoneUsers.add(user);
             try {
-                List<List<Object>> lists = UpdateIgniteCoinsCommand.loadData(false);
+                List<List<Object>> lists = UpdateIgniteCoinsCommand.loadData();
                 if (lists == null) return -1;
 
-                UpdateIgniteCoinsCommand.getSpecificData(lists, name);
+                UpdateIgniteCoinsCommand.loadData();
             } catch (IOException e) {
                 return -1;
             }

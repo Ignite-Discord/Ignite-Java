@@ -1,11 +1,11 @@
 package com.general_hello.commands.commands.Uno;
 
+import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackCommand;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.ICommand;
-import com.general_hello.commands.commands.Utils.MoneyData;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
@@ -28,8 +28,8 @@ public class UnoCommand implements ICommand {
         if (e.getArgs().size() == 1) {
             bet = BlackjackCommand.getInt(e.getArgs().get(0));
             if (bet >= 100) {
-                if (!(MoneyData.money.get(e.getAuthor()) - bet >= 0)) {
-                    e.getChannel().sendMessage(String.format("You don't have enough credits to make a %d credits bet", bet)).queue();
+                if (Integer.parseInt(e.getArgs().get(0)) > DatabaseManager.INSTANCE.getCredits(e.getAuthor().getIdLong())) {
+                    e.getChannel().sendMessage("You do not have enough to make that bet!").queue();
                     return;
                 }
             } else {

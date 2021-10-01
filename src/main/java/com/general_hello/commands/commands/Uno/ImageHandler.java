@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class ImageHandler {
-    private static final String PATH = "src/main/resources/uno_cards";
+    private static final String PATH = "/home/container/";
     private static final int height = 362;
     private static final int width = 242;
 

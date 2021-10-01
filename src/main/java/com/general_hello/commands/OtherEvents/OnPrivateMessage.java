@@ -32,21 +32,24 @@ public class OnPrivateMessage extends ListenerAdapter {
                 embedBuilder.setDescription("Name: ***" + oldAnswers.get(0) + "***\n" +
                         "Discord name: " + event.getAuthor().getAsMention() + "\n" +
                         "Account creation date: " + DateTimeFormatter.ofPattern("M/d/u h:m:s a").format(event.getAuthor().getTimeCreated()) + "\n" +
-                        "Agreed to all rules: ✅").setFooter("Thank you for registering!");
+                        "Agreed to all rules: ✅").setFooter("Thank you for registering and 1000 credits have been added to your account!!");
                 embedBuilder.setColor(InfoUserCommand.randomColor());
                 event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
 
-                UserPhoneUser user = new UserPhoneUser(oldAnswers.get(0), event.getAuthor());
+                UserPhoneUser user = new UserPhoneUser(oldAnswers.get(0), event.getAuthor(), 1000);
+                DatabaseManager.INSTANCE.setCredits(event.getAuthor().getIdLong(), 1000);
                 Data.userUserPhoneUserHashMap.put(event.getAuthor(), user);
                 Data.userPhoneUsers.add(user);
 
                 DatabaseManager.INSTANCE.newInfo(event.getAuthor().getIdLong(), oldAnswers.get(0));
 
                 try {
-                    UpdateIgniteCoinsCommand.loadData(true);
+                    UpdateIgniteCoinsCommand.loadData();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                Data.realNameUserPhoneUserHashMap.put(oldAnswers.get(0), user);
             }
         }
     }

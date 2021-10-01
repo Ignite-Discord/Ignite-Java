@@ -8,7 +8,6 @@ import com.general_hello.commands.commands.DefaultCommands.*;
 import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.GroupOfGames.Blackjack.*;
 import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand;
-import com.general_hello.commands.commands.GroupOfGames.Games.HangManCommand;
 import com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand;
 import com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessRequest;
 import com.general_hello.commands.commands.ICommand;
@@ -20,6 +19,7 @@ import com.general_hello.commands.commands.MusicPlainCommand.*;
 import com.general_hello.commands.commands.Others.*;
 import com.general_hello.commands.commands.RankingSystem.ViewRank;
 import com.general_hello.commands.commands.Register.RegisterCommand;
+import com.general_hello.commands.commands.Register.SetNameCommand;
 import com.general_hello.commands.commands.Uno.ChallengeCommand;
 import com.general_hello.commands.commands.Uno.DrawCommand;
 import com.general_hello.commands.commands.Uno.PlayCardCommand;
@@ -73,7 +73,6 @@ public class CommandManager {
         addCommand(new PlayCardCommand(gameHandler));
 
         //minigames
-        addCommand(new HangManCommand());
         addCommand(new TriviaCommand());
         addCommand(new GuessNumberCommand());
 
@@ -105,6 +104,8 @@ public class CommandManager {
         addCommand(new PasteCommand());
         addCommand(new SayCommand());
         addCommand(new UpdateIgniteCoinsCommand());
+        addCommand(new SetNameCommand());
+        addCommand(new AddCreditsCommand());
     }
 
     private void addCommand(ICommand cmd) {
@@ -161,7 +162,7 @@ public class CommandManager {
 
             if (event.getGuild().getIdLong() != 860295266765635584L) {
                 if (!testing) {
-                    if (!cmd.getCategory().equals(CommandType.SPECIAL)) {
+                    if (!cmd.getCategory().equals(CommandType.SPECIAL) || !cmd.getCategory().equals(CommandType.OTHERS)) {
                         System.out.println(cmd.getCategory());
                         switch (cmd.getCategory()) {
                             case GAMES:
@@ -181,19 +182,6 @@ public class CommandManager {
 
                                     embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
                                             "Go to " + event.getGuild().getGuildChannelById(MUSICC).getAsMention() + " and send \n" +
-                                            "```java\n" +
-                                            prefix + " " + invoke + "\n" +
-                                            "```");
-                                    event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
-                                    return;
-                                }
-                                break;
-                            case OTHERS:
-                                if (event.getChannel().getIdLong() != (OTHERSC)) {
-                                    System.out.println("3");
-
-                                    embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
-                                            "Go to " + event.getGuild().getGuildChannelById(OTHERSC).getAsMention() + " and send \n" +
                                             "```java\n" +
                                             prefix + " " + invoke + "\n" +
                                             "```");

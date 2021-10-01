@@ -13,4 +13,7 @@ public interface DatabaseManager {
     void setPrefix(long guildId, String newPrefix);
     void newInfo(long userId, String userName);
     void setName(long userId, String name);
+
+    void setCredits(long userId, int credits);
+    int getCredits(long userId);
 }

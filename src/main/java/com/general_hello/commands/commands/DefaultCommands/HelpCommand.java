@@ -42,7 +42,7 @@ public class HelpCommand implements ICommand {
             embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.INFO + " | Info (3)", "Shows basic to complex information about users, servers, or mods", false);
             embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.MOD + " | Moderation (4)","Basic to advanced moderation tools used by staff to control or monitor the server.", false);
             embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.MUSIC + " | Music (7)","Basic to advanced music commands.", false);
-            embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.GAME + " | Games (4)","Fun games.", false);
+            embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.GAME + " | Games (6)","Fun games.", false);
 
             embedBuilder.setFooter("Type " + prefix + " help [group name] to see their commands");
 

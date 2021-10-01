@@ -2,15 +2,12 @@ package com.general_hello.commands.commands.DefaultCommands;
 
 import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.CommandType;
-import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.GetData;
 import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand;
 import com.general_hello.commands.commands.Register.Data;
 import com.general_hello.commands.commands.User.UserPhoneUser;
-import com.general_hello.commands.commands.Utils.EmbedUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
@@ -24,43 +21,29 @@ public class BalanceCommand implements ICommand {
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
         User user = ctx.getAuthor();
 
-        boolean oof = true;
 
         if (!ctx.getMessage().getMentionedMembers().isEmpty()) {
-            oof = false;
             user = ctx.getMessage().getMentionedUsers().get(0);
         }
 
         GetData getData = new GetData();
         getData.checkIfContainsData(user, ctx);
 
-        if (!Data.userUserPhoneUserHashMap.containsKey(user)) {
-            if (oof) {
-                ctx.getChannel().sendMessage(Emoji.ERROR + " Kindly register `ignt register` first before using this command!").queue();
-                return;
-            }
+        UpdateIgniteCoinsCommand.loadData();
 
-            ctx.getChannel().sendMessage(Emoji.ERROR + " Kindly ask " + user.getName() + " to register with `ignt register` first before using this command!").queue();
-            return;
-        }
-
-        List<List<Object>> lists = UpdateIgniteCoinsCommand.loadData(true);
         UserPhoneUser userPhoneUser = Data.userUserPhoneUserHashMap.get(user);
 
-        UpdateIgniteCoinsCommand.getSpecificData(lists, userPhoneUser.getUserPhoneUserName());
-        Integer balance = userPhoneUser.getBalance();
-
-        if (balance == null) {
-            MessageEmbed messageEmbed = EmbedUtil.errorEmbed("The balance hasn't been updated. Kindly ping one of the developers about this issue.");
-            ctx.getChannel().sendMessageEmbeds(messageEmbed).queue();
+        if (userPhoneUser == null) {
+            ctx.getChannel().sendMessage("Kindly register with the bot by using `ignt register`").queue();
             return;
         }
+        Integer balance = userPhoneUser.getBalance();
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setColor(Color.CYAN);
         embedBuilder.setTitle(user.getName() + "'s Balance").setFooter("Nice balance you have 😀");
-        embedBuilder.setDescription("Balance: **" + balance + "** ignite coins\n" +
-                "Credits: **Soon to Come**");
+        embedBuilder.setDescription("Balance: **" + (balance == null ? "You are not in the spreadsheet of ignite coins!**\n" : balance + "** ignite coins\n") +
+                "Credits: ** " + userPhoneUser.getCredits() + " credits**");
         ctx.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
     }
 

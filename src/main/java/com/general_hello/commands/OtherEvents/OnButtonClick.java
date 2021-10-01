@@ -67,7 +67,6 @@ public class OnButtonClick extends ListenerAdapter {
                         .addOption("Uno", "uno")
                         .addOption("Blackjack", "bj")
                         .addOption("Guess the number", "gn")
-                        .addOption("Hangman", "hangman")
                         .addOption("Trivia", "trivia")
                         .addOption("Chess", "chess")
                         .build();
@@ -123,7 +122,7 @@ public class OnButtonClick extends ListenerAdapter {
                         arrow + " Reads your user name, profile picture, nitro status, and user id.\n" +
                         arrow + " Reads all the permissions you have on that server.");
                 event.getChannel().sendMessageEmbeds(em.build()).setActionRow(
-                        Button.primary("0000:yes", "Accept").withEmoji(Emoji.fromEmote("verify", Long.parseLong("803768813110951947"), true))
+                        Button.primary("0000:yes", "Accept").withEmoji(Emoji.fromEmote("verify", Long.parseLong("863204252188672000"), true))
                 ).queue();
                 break;
             case "yes":
@@ -200,7 +199,6 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.setDescription(com.general_hello.commands.commands.Emoji.Emoji.UNO + " **Uno** - Players take turns matching a card in their hand with the current card shown on top of the deck either by color or number. Special action cards deliver game-changing moments as they help you defeat your opponents.\n\n" +
                         com.general_hello.commands.commands.Emoji.Emoji.BLACKJACK + " **Blackjack** - Blackjack is a card game. The object of blackjack is to be dealt cards with a value of up to but not over 21 and to beat the dealer's hand. ... You place bets with the dealer on the likelihood that your hand will come equal or closer to 21 than will the dealer's.\n\n" +
                         com.general_hello.commands.commands.Emoji.Emoji.NUMBER + " **Guess the Number** - Your goal is to get the same number that the bot selected from 1-100 the bot will inform you if the number is *higher* or *lower*\n\n" +
-                        com.general_hello.commands.commands.Emoji.Emoji.USER + " **Hangman** - Hangman is a popular word guessing game where the player attempts to build a missing word by guessing one letter at a time.\n\n" +
                         com.general_hello.commands.commands.Emoji.Emoji.MARK_QUESTION + " **Trivia** - Users will be given a random question and they are to answer it.\n\n" +
                         com.general_hello.commands.commands.Emoji.Emoji.BPAWN + " **Chess** *Soon* - Chess is a game played between two opponents on opposite sides of a board containing 64 squares of alternating colors. Each player has 16 pieces. The goal of the game is to checkmate the other king.");
 

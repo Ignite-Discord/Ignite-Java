@@ -56,9 +56,9 @@ public class OnSelectionMenu extends ListenerAdapter {
                     embedBuilder.setDescription(message);
                     embedBuilder.setFooter("Press the Accept button if you accept the rules stated above!");
 
-                    String id = event.getUser().openPrivateChannel().complete().sendMessageEmbeds(embedBuilder.build()).setActionRow(
-                            Button.primary("0000:accept", "Accept").withEmoji(Emoji.fromEmote("verify", Long.parseLong("803768813110951947"), true))
-                    ).complete().getPrivateChannel().getId();
+                    event.getUser().openPrivateChannel().complete().sendMessageEmbeds(embedBuilder.build()).setActionRow(
+                            Button.primary("0000:accept", "Accept").withEmoji(Emoji.fromEmote("verify", 863204252188672000L, true))
+                    ).queue();
                     event.getMessage().delete().queue();
                     return;
                 case "bj":
@@ -70,12 +70,6 @@ public class OnSelectionMenu extends ListenerAdapter {
                     event.getMessage().delete().queue();
                     event.getChannel().sendMessageEmbeds(helpCrap(2, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
                     event.deferReply().queue();
-                default:
-                case "hangman":
-                    event.getMessage().delete().queue();
-                    event.getChannel().sendMessageEmbeds(helpCrap(3, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
-                    event.deferEdit().queue();
-                    break;
                 case "trivia":
                     event.getMessage().delete().queue();
                     event.getChannel().sendMessageEmbeds(helpCrap(4, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
@@ -108,9 +102,9 @@ public class OnSelectionMenu extends ListenerAdapter {
                 embedBuilder.setColor(Color.YELLOW);
                 embedBuilder.addField("1.) Start a blackjack game command","`" + prefix + " blackjack`", false);
                 embedBuilder.addField("2.) Hit card command","`" + prefix + " hit`", false);
-                embedBuilder.addField("3.) Stand command","`" + prefix + " hit`", false);
-                embedBuilder.addField("4.) Double command","`" + prefix + " hit`", false);
-                embedBuilder.addField("5.) Split card command","`" + prefix + " hit`", false);
+                embedBuilder.addField("3.) Stand command","`" + prefix + " stand`", false);
+                embedBuilder.addField("4.) Double command","`" + prefix + " double`", false);
+                embedBuilder.addField("5.) Split card command","`" + prefix + " split`", false);
 
                 embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;
@@ -120,15 +114,6 @@ public class OnSelectionMenu extends ListenerAdapter {
                 embedBuilder.addField("1.) Start the Guess the number game Command", "`" + prefix + " gn start`", false);
                 embedBuilder.addField("2.) Guess a number Command", "`" + prefix + " gn [number]`", false);
                 embedBuilder.addField("3.) End game Command", "`" + prefix + " gn end`", false);
-
-                embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
-                break;
-            case 3:
-                embedBuilder.setTitle("Hangman Commands");
-                embedBuilder.setColor(Color.red);
-                embedBuilder.addField("1.) Start hangman game Command", "`" + prefix + " hm start`", false);
-                embedBuilder.addField("2.) Guess a letter Command", "`" + prefix + " hm [letter]`", false);
-                embedBuilder.addField("3.) End game Command", "`" + prefix + " hm end`", false);
 
                 embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;

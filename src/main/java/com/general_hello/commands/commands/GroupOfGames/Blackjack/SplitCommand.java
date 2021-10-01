@@ -2,11 +2,13 @@ package com.general_hello.commands.commands.GroupOfGames.Blackjack;
 
 
 import com.general_hello.commands.Database.DatabaseManager;
-import com.general_hello.commands.commands.*;
+import com.general_hello.commands.commands.CommandContext;
+import com.general_hello.commands.commands.CommandType;
+import com.general_hello.commands.commands.ICommand;
+import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 public class SplitCommand implements ICommand {
@@ -23,14 +25,11 @@ public class SplitCommand implements ICommand {
                     e.getChannel().retrieveMessageById(bjg.getMessageId()).queue(m -> {
                         EmbedBuilder eb = bjg.buildEmbed(e.getAuthor().getName(), e.getGuild());
                         if (bjg.hasEnded()) {
-                            int won_lose = bjg.getWonCreds();
-                            int money = 0;
-                            try {
-                                money = (int) GetData.getLevelPoints(e.getAuthor());
-                            } catch (SQLException throwables) {
-                                throwables.printStackTrace();
-                            }
-                            LevelPointManager.feed(e.getAuthor(), (long) (money + won_lose));
+                            int d = bjg.getWonCreds();
+                            GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
+                            LevelPointManager.feed(e.getAuthor(), 20);
+                            DatabaseManager.INSTANCE.setCredits(e.getAuthor().getIdLong(), d);
+                            eb.addField("Credits", "You now have " + d + " more credits", false);
                             GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
                         }
                         m.editMessageEmbeds(eb.build()).queue();

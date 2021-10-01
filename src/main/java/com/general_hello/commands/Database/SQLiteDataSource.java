@@ -49,6 +49,7 @@ public class SQLiteDataSource implements DatabaseManager {
                             ");",
                     "CREATE TABLE IF NOT EXISTS UserData ( UserId INTEGER NOT NULL, " +
                             "UserName TEXT NOT NULL, " +
+                            "Credits INTEGER DEFAULT 1000," +
                             "PRIMARY KEY(UserId) ) WITHOUT ROWID",
                     "CREATE TABLE IF NOT EXISTS XPSystemUser (" +
                             "userId INTEGER UNIQUE," +
@@ -225,6 +226,44 @@ public class SQLiteDataSource implements DatabaseManager {
 
             preparedStatement.setString(2, String.valueOf(userId));
             preparedStatement.setString(1, name);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getCredits(long userId) {
+        System.out.println("Get credits");
+
+        try {
+            Statement statement = getConnection().createStatement();
+            String sql = "SELECT Credits FROM UserData WHERE UserId=" + userId;
+
+            ResultSet result = statement.executeQuery(sql);
+
+            if (result.next()) {
+                return result.getInt("Credits");
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public void setCredits(long userId, int credits) {
+        System.out.println("Set Credits");
+
+        int total = credits + DatabaseManager.INSTANCE.getCredits(userId);
+
+        try (final PreparedStatement preparedStatement = getConnection()
+                .prepareStatement("UPDATE UserData SET Credits=? WHERE UserId=?"
+                )) {
+
+            preparedStatement.setString(2, String.valueOf(userId));
+            preparedStatement.setString(1, String.valueOf(total));
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

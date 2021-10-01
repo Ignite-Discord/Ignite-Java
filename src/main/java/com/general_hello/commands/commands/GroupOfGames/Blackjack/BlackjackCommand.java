@@ -1,5 +1,6 @@
 package com.general_hello.commands.commands.GroupOfGames.Blackjack;
 
+import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.CommandContext;
 import com.general_hello.commands.commands.CommandType;
 import com.general_hello.commands.commands.ICommand;
@@ -22,16 +23,28 @@ public class BlackjackCommand implements ICommand {
         User author = e.getAuthor();
         long playerId = author.getIdLong();
 
+        if (e.getArgs().isEmpty()) {
+            e.getChannel().sendMessage("Kindly place your bet after the command.\n" +
+                    "For example: `ignt bj 1000`").queue();
+            return;
+        }
+
+        if (Integer.parseInt(e.getArgs().get(0)) > DatabaseManager.INSTANCE.getCredits(author.getIdLong())) {
+            e.getChannel().sendMessage("You do not have enough to make that bet!").queue();
+            return;
+        }
+
          BlackjackGame objg = GameHandler.getBlackJackGame(playerId);
                 if (objg == null) {
-                    BlackjackGame bjg = new BlackjackGame(50);
+                    BlackjackGame bjg = new BlackjackGame(Integer.parseInt(e.getArgs().get(0)));
                     EmbedBuilder eb = bjg.buildEmbed(author.getName(), e.getGuild());
                     if (!bjg.hasEnded()) {
                         GameHandler.putBlackJackGame(playerId, bjg);
                     } else {
                         double d = bjg.getWonCreds();
-                        LevelPointManager.feed(author, (long) d);
-                        eb.addField("XP points", "You now have more XP points", false);
+                        LevelPointManager.feed(author, 20);
+                        DatabaseManager.INSTANCE.setCredits(author.getIdLong(), (int) d);
+                        eb.addField("Credits", "You now have " + d + " more credits", false);
                     }
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         if (!bjg.hasEnded()) bjg.setMessageId(m.getIdLong());

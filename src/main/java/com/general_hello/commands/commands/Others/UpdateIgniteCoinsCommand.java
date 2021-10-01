@@ -15,7 +15,6 @@ import net.dv8tion.jda.api.Permission;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 public class UpdateIgniteCoinsCommand implements ICommand {
@@ -26,7 +25,7 @@ public class UpdateIgniteCoinsCommand implements ICommand {
             return;
         }
 
-        loadData(true);
+        loadData();
 
         ctx.getChannel().sendMessageEmbeds(EmbedUtil.successEmbed("Successfully updated all users balance!")).queue();
     }
@@ -46,7 +45,7 @@ public class UpdateIgniteCoinsCommand implements ICommand {
         return CommandType.WALLET;
     }
 
-    public static List<List<Object>> loadData(boolean isSolo) throws IOException {
+    public static List<List<Object>> loadData() throws IOException {
         String APPLICATION_NAME = "Ignite bot";
 
         NetHttpTransport HTTP_TRANSPORT;
@@ -68,65 +67,30 @@ public class UpdateIgniteCoinsCommand implements ICommand {
         if (values == null || values.isEmpty()) {
             System.out.println("No data found.");
         } else {
-            System.out.println("Name, Ignite Coins");
-            if (isSolo) {
-                getData(values);
+            System.out.println("Name, Major");
+            for (List row : values) {
+                // Print columns A and E, which correspond to indices 0 and 4.
+                if (!row.get(0).toString().equals("Maxine")) {
+                    String name = row.get(0).toString();
+                    String[] split = name.split("\\s+");
+                    int length = split.length;
+
+                    if (length == 3) {
+                        name = split[0] + " " + split[2];
+                    } else {
+                        name = split[0] + " " + split[1];
+                    }
+
+                    if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
+                        System.out.println(name);
+                        UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
+                        userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
+                        Data.realNameUserPhoneUserHashMap.put(name, userPhoneUser);
+                    }
+                }
             }
         }
 
         return values;
-    }
-
-    public static void getData(List<List<Object>> values) {
-        for (List row : values) {
-            // Print columns A and E, which correspond to indices 1 and 7.
-            System.out.printf("%s, %s\n", row.get(0), row.get(7));
-
-            if (!row.get(0).toString().equals("Maxine")) {
-
-                String name = splitter(row);
-
-                if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
-                    System.out.println(name);
-                    UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
-                    userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
-                }
-            }
-        }
-    }
-
-    public static void getSpecificData(List<List<Object>> values, String target) {
-        for (List row : values) {
-            // Print columns A and E, which correspond to indices 1 and 7.
-
-            if (!row.get(0).toString().equals("Maxine")) {
-                String name = splitter(row);
-
-                if (target.equals(name)) {
-                    if (Data.realNameUserPhoneUserHashMap.containsKey(name)) {
-                        UserPhoneUser userPhoneUser = Data.realNameUserPhoneUserHashMap.get(name);
-                        userPhoneUser.setBalance(Integer.parseInt(row.get(7).toString()));
-                        System.out.printf("%s, %s\n", row.get(0), row.get(7));
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private static String splitter(List row) {
-        String name = row.get(0).toString();
-        String[] split = name.split("\\s+");
-        int length = split.length;
-
-        System.out.println(Arrays.toString(split));
-
-        if (length == 3) {
-            name = split[0] + " " + split[2];
-        } else {
-            name = split[0] + " " + split[1];
-        }
-
-        return name;
     }
 }

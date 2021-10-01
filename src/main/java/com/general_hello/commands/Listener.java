@@ -5,7 +5,6 @@ import com.general_hello.commands.commands.Emoji.Emoji;
 import com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
-import com.general_hello.commands.commands.Utils.MoneyData;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import me.duncte123.botcommons.BotCommons;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -138,15 +137,22 @@ public class Listener extends ListenerAdapter {
                     .split("\\s+");
             List<String> args = Arrays.asList(split).subList(1, split.length);
 
+            int x = 0;
+            while (x < args.size()) {
+                String s = args.get(x);
+                args.set(x, s.toLowerCase());
+                x++;
+            }
+
             if (args.contains(answer.toLowerCase())) {
                 event.getChannel().sendMessage("Correct answer!!!!\n" +
-                        "You got \uD83E\uDE99 5,000 for getting the correct answer").queue();
-                final Double money = MoneyData.money.get(event.getAuthor());
-                MoneyData.money.put(event.getAuthor(), money + 5000);
+                        "You got \uD83E\uDE99 1,000 for getting the correct answer").queue();
+                LevelPointManager.feed(event.getAuthor(), 40);
+                DatabaseManager.INSTANCE.setCredits(event.getAuthor().getIdLong(), 1000);
             } else {
                 EmbedBuilder e = new EmbedBuilder();
                 e.setTitle("Incorrect answer");
-                e.setFooter("A correct answer gives you \uD83E\uDE99 5,000");
+                e.setFooter("A correct answer gives you \uD83E\uDE99 1,000");
                 e.addField("The correct answer is " + TriviaCommand.storeAnswer.get(event.getAuthor()).toUpperCase(), "Better luck next time", false);
                 event.getChannel().sendMessageEmbeds(e.build()).queue();
             }

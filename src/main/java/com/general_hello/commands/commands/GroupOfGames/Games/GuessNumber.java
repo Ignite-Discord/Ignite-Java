@@ -1,6 +1,8 @@
 package com.general_hello.commands.commands.GroupOfGames.Games;
 
-import com.general_hello.commands.commands.Utils.MoneyData;
+import com.general_hello.commands.Database.DatabaseManager;
+import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
+import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import com.general_hello.commands.commands.Utils.UtilNum;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -24,9 +26,9 @@ public class GuessNumber implements Game {
 
     @Override
     public void startGame(User user) {
-        numberHash.put(user, UtilNum.randomNum(0, 100));
+        numberHash.put(user, UtilNum.randomNum(0, 1000));
 
-        e.getChannel().sendMessage("1️⃣ Guess a number between 0 and 100! You have " + count  + " chances.").queue();
+        e.getChannel().sendMessage("1️⃣ Guess a number between 0 and 1000! You have " + count  + " chances.").queue();
     }
 
     @Override
@@ -52,12 +54,13 @@ public class GuessNumber implements Game {
         if(innum == number)
         {
 
-            int rewardbonus = 0;
 
             e.getChannel().sendMessage(e.getAuthor().getAsMention() + " won! The number was " + number + ".\n" +
-                    "\uD83E\uDE99 " + (200 + rewardbonus) + " was added to your account").queue();
-            final Double aDouble = MoneyData.money.get(e.getAuthor());
-            MoneyData.money.put(e.getAuthor(), aDouble + 200);
+                    "\uD83E\uDE99 " + (2000) + " was added to your account").queue();
+            GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
+            LevelPointManager.feed(e.getAuthor(), 20);
+            DatabaseManager.INSTANCE.setCredits(e.getAuthor().getIdLong(), 2000);
+            GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
             endGame(event.getAuthor());
             return;
         }

@@ -24,7 +24,7 @@ public class OnReadyEvent extends ListenerAdapter {
         event.getJDA().getTextChannelById(891816519498096650L).sendMessageEmbeds(embedBuilder.build()).queue();
 
         try {
-            UpdateIgniteCoinsCommand.loadData(true);
+            UpdateIgniteCoinsCommand.loadData();
         } catch (IOException e) {
             e.printStackTrace();
         }
