@@ -2,7 +2,8 @@ package com.general_hello.commands;
 
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.Emoji.Emoji;
-import com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand;
+import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumber;
+import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
@@ -21,7 +22,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,8 +54,6 @@ public class Listener extends ListenerAdapter {
         String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, DatabaseManager.INSTANCE::getPrefix);
         String raw = event.getMessage().getContentRaw();
 
-        trivia(event);
-
         if (event.getMessage().getContentRaw().equals(prefix + " commands")) {
             if (event.getAuthor().getId().equals(Config.get("owner_id"))) {
                 em = new EmbedBuilder().setTitle("Command Count details!!!!").setColor(Color.red).setFooter("Commands used until now ").setTimestamp(LocalDateTime.now());
@@ -66,7 +65,7 @@ public class Listener extends ListenerAdapter {
             }
         }
 
-            if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) {
+        if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) {
                 event.getChannel().sendMessage("Psst. Check your **DMS** for the prefix of this bot").queue();
                 event.getMessage().getAuthor().openPrivateChannel().complete().sendMessage("The prefix for this bot is `" + prefix + "`").queue();
             }
@@ -88,6 +87,19 @@ public class Listener extends ListenerAdapter {
                 manager.handle(event, prefix);
             } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
+            }
+        } else {
+
+            List<String> lol = new ArrayList<>();
+            lol.add(event.getMessage().getContentRaw());
+
+            GuessNumber gn = GuessNumberCommand.guessNumberHashMap.get(event.getAuthor());
+            try {
+                if (!gn.isEnded)
+                    gn.sendInput(lol, event);
+            } catch (NullPointerException en) {
+                LOGGER.info(en + this.getClass().getName(), "Game haven't started.");
+            } catch (NumberFormatException ignored) {
             }
         }
     }
@@ -127,37 +139,5 @@ public class Listener extends ListenerAdapter {
 
         event.getJDA().shutdown();
         BotCommons.shutdown(event.getJDA());
-    }
-
-    public static void trivia(GuildMessageReceivedEvent event) {
-        if (TriviaCommand.storeUser.contains(event.getAuthor())) {
-            final String answer = event.getMessage().getContentRaw();
-
-            String[] split = TriviaCommand.storeAnswer.get(event.getAuthor()).toLowerCase()
-                    .split("\\s+");
-            List<String> args = Arrays.asList(split).subList(1, split.length);
-
-            int x = 0;
-            while (x < args.size()) {
-                String s = args.get(x);
-                args.set(x, s.toLowerCase());
-                x++;
-            }
-
-            if (args.contains(answer.toLowerCase())) {
-                event.getChannel().sendMessage("Correct answer!!!!\n" +
-                        "You got \uD83E\uDE99 1,000 for getting the correct answer").queue();
-                LevelPointManager.feed(event.getAuthor(), 40);
-                DatabaseManager.INSTANCE.setCredits(event.getAuthor().getIdLong(), 1000);
-            } else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setTitle("Incorrect answer");
-                e.setFooter("A correct answer gives you \uD83E\uDE99 1,000");
-                e.addField("The correct answer is " + TriviaCommand.storeAnswer.get(event.getAuthor()).toUpperCase(), "Better luck next time", false);
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
-            }
-            TriviaCommand.storeUser.remove(event.getAuthor());
-            TriviaCommand.storeAnswer.remove(event.getAuthor());
-        }
     }
 }

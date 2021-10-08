@@ -26,9 +26,10 @@ public class AddCreditsCommand implements ICommand {
             return;
         }
 
-        int moneey = 0;
+        int moneey;
 
-        String money = ctx.getArgs().get(0);
+        String money = ctx.getArgs().get(1);
+        System.out.println(money);
         try {
             moneey = Integer.parseInt(money);
         } catch (NumberFormatException e) {
@@ -37,7 +38,7 @@ public class AddCreditsCommand implements ICommand {
         }
 
         DatabaseManager.INSTANCE.setCredits(ctx.getMessage().getMentionedMembers().get(0).getIdLong(), moneey);
-        ctx.getChannel().sendMessage("Successfully added " + money + " to " + ctx.getMessage().getMentionedMembers().get(0)).queue();
+        ctx.getChannel().sendMessage("Successfully added " + money + " to " + ctx.getMessage().getMentionedMembers().get(0).getAsMention()).queue();
     }
 
     @Override

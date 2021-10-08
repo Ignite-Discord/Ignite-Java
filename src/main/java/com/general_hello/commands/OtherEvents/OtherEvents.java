@@ -12,6 +12,8 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -130,9 +132,9 @@ public class OtherEvents extends ListenerAdapter {
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
         final String useGuildSpecificSettingsInstead = String.format("Thank you for adding %s to %s!!!\n" +
-                        "\nTo learn more about this bot feel free to type **ign about**\n" +
-                        "You can change the prefix by typing **ign setprefix [prefix]**\n" +
-                        "To learn more about a command **ign help [command name]**",
+                        "\nTo learn more about this bot feel free to type **ignt about**\n" +
+                        "You can change the prefix by typing **ignt setprefix [prefix]**\n" +
+                        "To learn more about a command **ignt help [command name]**",
                 event.getJDA().getSelfUser().getAsMention(), event.getGuild().getName());
 
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("Hello!").setDescription(useGuildSpecificSettingsInstead);
@@ -150,8 +152,23 @@ public class OtherEvents extends ListenerAdapter {
     }
 
     @Override
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+        String name = event.getMember().getEffectiveName().replace(" ", "%20");
+        String guildName = event.getGuild().getName().replace(" ", "+");
+        String pngUrl = "https://api.popcat.xyz/welcomecard?background=https://media.discordapp.net/attachments/862860280963137576/894423966968598558/images_78.png&text1=" + name + "&text2=Welcome+To+" + guildName + "&text3=" + event.getGuild().getMembers().size() + "th+Member&avatar=" + event.getUser().getEffectiveAvatarUrl();
+        event.getGuild().getDefaultChannel().sendMessage(pngUrl).queue();
+    }
+
+    @Override
+    public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
+        String name = event.getUser().getName().replace(" ", "%20");
+        String guildName = event.getGuild().getName().replace(" ", "+");
+        String pngUrl = "https://api.popcat.xyz/welcomecard?background=https://media.discordapp.net/attachments/862860280963137576/894423966968598558/images_78.png&text1=" + name + "&text2=Left+" + guildName + "&text3=" + event.getGuild().getMembers().size() + "+Members+Left&avatar=" + event.getUser().getEffectiveAvatarUrl();
+        event.getGuild().getDefaultChannel().sendMessage(pngUrl).queue();
+    }
+
+    @Override
     public void onResumed(@NotNull ResumedEvent event)  {
-        TextChannel guildChannelById = event.getJDA().getTextChannelById(852338750519640116L);
         EmbedBuilder em = new EmbedBuilder().setColor(Color.RED).setTitle("🔴 Disconnected");
         disconnectCount++;
         em.setDescription("The bot disconnected for " +
@@ -160,7 +177,6 @@ public class OtherEvents extends ListenerAdapter {
                 (OffsetDateTime.now().getSecond() - timeDisconnected.getSecond()) + " second(s) and " +
                 (timeDisconnected.getNano() /1000000) + " milliseconds due to connectivity issues!\n" +
                 "Response number: " + event.getResponseNumber()).setTimestamp(OffsetDateTime.now()).setFooter("The bot disconnected " + disconnectCount + " times already since the last restart!");
-        guildChannelById.sendMessageEmbeds(em.build()).queue();
         User owner_id = event.getJDA().getUserById(Config.get("owner_id"));
         owner_id.openPrivateChannel().complete().sendMessageEmbeds(em.build()).queue();
     }

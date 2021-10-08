@@ -9,14 +9,18 @@ import com.general_hello.commands.commands.Register.Data;
 import com.general_hello.commands.commands.User.UserPhoneUser;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BalanceCommand implements ICommand {
+    public static HashMap<Long, Integer> dataInTheSky = new HashMap<>();
     @Override
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
         User user = ctx.getAuthor();
@@ -42,9 +46,12 @@ public class BalanceCommand implements ICommand {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setColor(Color.CYAN);
         embedBuilder.setTitle(user.getName() + "'s Balance").setFooter("Nice balance you have 😀");
-        embedBuilder.setDescription("Balance: **" + (balance == null ? "You are not in the spreadsheet of ignite coins!**\n" : balance + "** ignite coins\n") +
-                "Credits: ** " + userPhoneUser.getCredits() + " credits**");
-        ctx.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
+        embedBuilder.setDescription("Ignite Coins: **" + (balance == null ? "You are not in the spreadsheet of ignite coins!**\n" :"Press the button for your ignite coins**\n") +
+                "Credits: ** " + userPhoneUser.getCredits() + " credits**\n" +
+                "Shekels: **To arrive soon**");
+        ctx.getChannel().sendMessageEmbeds(embedBuilder.build()).setActionRow(Button.of(ButtonStyle.PRIMARY, user.getIdLong() + ":balance", "View Coins")).queue();
+
+        if (balance != null) dataInTheSky.put(user.getIdLong(), balance);
     }
 
     @Override

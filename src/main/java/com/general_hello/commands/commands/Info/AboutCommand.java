@@ -32,7 +32,7 @@ public class AboutCommand implements ICommand {
         String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, (id) -> Config.get("prefix"));
 
         if (oauthLink == null) {
-               oauthLink = "https://discord.com/api/oauth2/authorize?client_id=861133487948300308&permissions=1626729696&scope=bot%20applications.commands";
+               oauthLink = "https://discord.com/api/oauth2/authorize?client_id=888586282098364437&permissions=8&scope=bot%20applications.commands";
         }
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.cyan);
@@ -40,15 +40,15 @@ public class AboutCommand implements ICommand {
         event.getChannel().createInvite().complete().getUrl();
         boolean join = !event.getChannel().retrieveInvites().complete().isEmpty();
         boolean inv = !oauthLink.isEmpty();
-        String invline = "\n" + (join ? "Join my server [here](https://discord.gg/UeQ7NJcpNd)" : (inv ? "Please " : ""))
+        String invline = "\n" + (join ? "Join my server [here](https://discord.gg/tXX654E9rM)" : (inv ? "Please " : ""))
                 + (inv ? (join ? ", or " : "") + "[invite](" + oauthLink + ") me to your server" : "") + "!";
         String author = event.getJDA().getUserById(Config.get("owner_id"))==null ? "<@" + event.getJDA().getUserById(Config.get("owner_id"))+">"
                 : event.getJDA().getUserById(Config.get("owner_id")).getName();
         StringBuilder descr = new StringBuilder().append("Hello! I am **").append(event.getSelfUser().getName()).append("**, ")
                 .append(description).append("\nI ").append(IS_AUTHOR ? "was written in Java" : "am owned").append(" by **")
-                .append(author).append("** using " + "Chewtils's [Commands Extension](2.3.5) (")
-                .append(JDAUtilitiesInfo.VERSION).append(") and the [JDA library](https://github.com/DV8FromTheWorld/JDA) (")
-                .append(JDAInfo.VERSION).append(")\nType `").append(prefix).append("help")
+                .append(author).append("** using " + "JDA Utils [Commands Extension](" + JDAUtilitiesInfo.GITHUB + ") (")
+                .append(JDAUtilitiesInfo.VERSION).append(") and the [JDA library](" + JDAInfo.GITHUB + ")")
+                .append("\nType `").append(prefix).append("help")
                 .append("` to see my commands!").append(join || inv ? invline : "").append("\n\nSome of my features include: ```html\n");
        descr.append("IGNITE COINS WALLET: Wondering how much Ignite Coins you have? Wonder no more cause IgntBot will now serve as your digital wallet! Simply register your account to know your balance!\n" +
                "\n" +
@@ -76,8 +76,7 @@ public class AboutCommand implements ICommand {
 
         builder.setDescription(descr);
         event.getJDA().getShardInfo();
-        builder.addField("Stats", (event.getJDA().getGuilds().size() + " Servers\nShard " + (event.getJDA().getShardInfo().getShardId() + 1)
-                + "/" + event.getJDA().getShardInfo().getShardTotal()), true);
+        builder.addField("Stats", (event.getJDA().getGuilds().size() + " Servers\nJDA version " + (JDAInfo.VERSION)), true);
         builder.addField("This shard", event.getJDA().getUsers().size() + " Users\n" + event.getJDA().getGuilds().size() + " Servers", true);
         builder.addField("", event.getJDA().getTextChannels().size() + " Text Channels\n" + event.getJDA().getVoiceChannels().size() + " Voice Channels", true);
         builder.setFooter("Among sus", null);

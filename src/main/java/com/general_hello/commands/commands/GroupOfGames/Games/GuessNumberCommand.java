@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class GuessNumberCommand implements ICommand {
 
-    private final HashMap<User, GuessNumber> guessNumberHashMap = new HashMap<>();
+    public static final HashMap<User, GuessNumber> guessNumberHashMap = new HashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
 
     @Override
@@ -29,7 +29,7 @@ public class GuessNumberCommand implements ICommand {
             return;
         }
 
-        GuessNumber gn = this.guessNumberHashMap.get(ctx.getAuthor());
+        GuessNumber gn = guessNumberHashMap.get(ctx.getAuthor());
 
         if(ctx.getArgs().size() > 0 && "end".equals(ctx.getArgs().get(0)))
         {

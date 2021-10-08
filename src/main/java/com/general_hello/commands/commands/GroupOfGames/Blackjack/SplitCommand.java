@@ -19,7 +19,8 @@ public class SplitCommand implements ICommand {
 
         if (e.getArgs().isEmpty()) {
             BlackjackGame bjg = GameHandler.getBlackJackGame(e.getAuthor().getIdLong());
-            if (bjg != null) {
+            if (bjg.canSplit()) {
+                if (bjg != null) {
                     bjg.split();
                     e.getMessage().delete().queueAfter(4, TimeUnit.SECONDS);
                     e.getChannel().retrieveMessageById(bjg.getMessageId()).queue(m -> {
@@ -37,10 +38,10 @@ public class SplitCommand implements ICommand {
                 } else {
                     e.getChannel().sendMessage("You have not enough credits").queue();
                 }
-
-            } else {
-                e.getChannel().sendMessage("No game has been started! Type `" + prefix + "bj` to start one!").queue();
             }
+        } else {
+            e.getChannel().sendMessage("No game has been started! Type `" + prefix + "bj` to start one!").queue();
+        }
     }
 
     @Override

@@ -49,6 +49,12 @@ public class Status {
             try {
                 Thread.sleep(1000000);
             } catch (Exception ignored) {}
+
+            jda.getPresence().setActivity(Activity.watching("Happy Halloween! 👻 👻 👻"));
+
+            try {
+                Thread.sleep(1000000);
+            } catch (Exception ignored) {}
         }
     }
 }

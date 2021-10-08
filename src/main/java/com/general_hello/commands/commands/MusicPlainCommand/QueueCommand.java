@@ -17,6 +17,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
@@ -85,6 +87,13 @@ public class QueueCommand implements ICommand
     public String getHelp(String prefix) {
         return "Shows the current queue\n" +
                 "Optional parameter: Page number";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        ArrayList<String> q = new ArrayList<>();
+        q.add("q");
+        return q;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class GuessNumber implements Game {
 
         if(isEnded)
         {
-            e.getChannel().sendMessage("🛑 game haven't started yet!").queue();
+            e.getChannel().sendMessage("🛑 Game haven't started yet!").queue();
             return;
         }
 
@@ -58,7 +58,7 @@ public class GuessNumber implements Game {
             e.getChannel().sendMessage(e.getAuthor().getAsMention() + " won! The number was " + number + ".\n" +
                     "\uD83E\uDE99 " + (2000) + " was added to your account").queue();
             GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
-            LevelPointManager.feed(e.getAuthor(), 20);
+            LevelPointManager.feed(e.getAuthor(), 30);
             DatabaseManager.INSTANCE.setCredits(e.getAuthor().getIdLong(), 2000);
             GameHandler.removeBlackJackGame(e.getAuthor().getIdLong());
             endGame(event.getAuthor());

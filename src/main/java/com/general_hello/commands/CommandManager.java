@@ -45,7 +45,7 @@ public class CommandManager {
     private final long MUSICC = 891568732810408007L;
     private final long WALLETC = 891570475220754462L;
     private final boolean testing = false;
-    private final long OTHERSC = 892205334721101844L;
+    private final long OTHERSC = 894432361868066846L;
 
     public CommandManager(EventWaiter waiter) {
 
@@ -95,6 +95,8 @@ public class CommandManager {
         addCommand(new ResumeCommand());
         addCommand(new SkipCommand());
         addCommand(new VolumeCommand());
+        addCommand(new StopCommand());
+        addCommand(new LeaveCommand());
 
         //others
         addCommand(new JokeCommand());
@@ -160,9 +162,13 @@ public class CommandManager {
 
             EmbedBuilder embedBuilder = new EmbedBuilder().setColor(Color.RED);
 
-            if (event.getGuild().getIdLong() != 860295266765635584L) {
-                if (!testing) {
-                    if (!cmd.getCategory().equals(CommandType.SPECIAL) || !cmd.getCategory().equals(CommandType.OTHERS)) {
+            if (event.getGuild().getIdLong() == 843769353040298011L) {
+                if (!event.getMember().getRoles().contains(event.getGuild().getRoleById(894793721558761483L))) {
+                    event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRoleById(894793721558761483L)).queue();
+                }
+
+                    if (!testing) {
+                    if (!cmd.getCategory().equals(CommandType.SPECIAL)) {
                         System.out.println(cmd.getCategory());
                         switch (cmd.getCategory()) {
                             case GAMES:
@@ -195,6 +201,19 @@ public class CommandManager {
 
                                     embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
                                             "Go to " + event.getGuild().getGuildChannelById(WALLETC).getAsMention() + " and send \n" +
+                                            "```java\n" +
+                                            prefix + " " + invoke + "\n" +
+                                            "```");
+                                    event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
+                                    return;
+                                }
+                                break;
+                            case OTHERS:
+                                if (event.getChannel().getIdLong() != (OTHERSC)) {
+                                    System.out.println("5");
+
+                                    embedBuilder.setDescription(Emoji.ERROR + " Incorrect text channel!\n" +
+                                            "Go to " + event.getGuild().getGuildChannelById(OTHERSC).getAsMention() + " and send \n" +
                                             "```java\n" +
                                             prefix + " " + invoke + "\n" +
                                             "```");

@@ -1,8 +1,11 @@
 package com.general_hello.commands.OtherEvents;
 
 import com.general_hello.commands.Config;
+import com.general_hello.commands.Database.DatabaseManager;
+import com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand;
 import com.general_hello.commands.commands.Info.InfoUserCommand;
 import com.general_hello.commands.commands.PrefixStoring;
+import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
@@ -31,9 +34,31 @@ public class OnSelectionMenu extends ListenerAdapter {
                 .addOption("Chess", "chess")
                 .build();
         int x = 0;
+        String answer = TriviaCommand.storeAnswer.get(event.getUser());
 
+        System.out.println(event.getSelectedOptions().get(0).getValue());
+        if (TriviaCommand.storeAnswer.containsKey(event.getUser())) {
+            if (event.getSelectedOptions().get(0).getValue().equals(answer)) {
+                event.getChannel().sendMessage("Correct answer!!!!\n" +
+                        "You got \uD83E\uDE99 1,000 for getting the correct answer").queue();
+                LevelPointManager.feed(event.getUser(), 40);
+                DatabaseManager.INSTANCE.setCredits(event.getUser().getIdLong(), 1000);
+                event.deferEdit().queue();
+                event.getMessage().delete().queue();
+                TriviaCommand.storeAnswer.remove(event.getUser());
+            } else {
+                EmbedBuilder e = new EmbedBuilder();
+                e.setTitle("Incorrect answer");
+                e.setFooter("A correct answer gives you \uD83E\uDE99 1,000");
+                e.addField("The correct answer is " + TriviaCommand.storeAnswer.get(event.getUser()), "Better luck next time", false).setColor(Color.RED);
+                event.getChannel().sendMessageEmbeds(e.build()).queue();
+                event.getMessage().delete().queue();
+                TriviaCommand.storeAnswer.remove(event.getUser());
+                event.deferEdit().queue();
+            }
+        }
         while (x < event.getSelectedOptions().size()) {
-            switch (event.getSelectedOptions().get(0).getValue()) {
+            switch (event.getSelectedOptions().get(x).getValue()) {
                 case "reject":
                     event.getUser().openPrivateChannel().complete().sendMessage("Sorry, you are too young to use this bot! (You shouldn't be on Discord!)").queue();
                     event.getMessage().delete().queue();

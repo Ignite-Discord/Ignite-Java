@@ -27,7 +27,7 @@ public class SayCommand implements ICommand {
                 String content = "";
 
                 for (int i = 0; i < tokens.length; i++) {
-                    content += i == 0 || i == 1 || i == 2 ? "" : tokens[i] + " "; //Ignore first two tokens: =say and embed
+                    content += i == 0 || i == 1 || i == 2 || i == 3 ? "" : tokens[i] + " "; //Ignore first two tokens: =say and embed
                 }
 
                 e.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_MANAGE);
@@ -37,8 +37,8 @@ public class SayCommand implements ICommand {
 
                 embedmsg.setAuthor(e.getArgs().get(1), null, e.getAuthor().getAvatarUrl());
                 embedmsg.setDescription(content);
-                embedmsg.setFooter("Requested by " + e.getAuthor().getName(), null);
-                e.getChannel().sendMessage(embedmsg.build()).queue(
+                embedmsg.setFooter("Announced by " + e.getAuthor().getName(), null);
+                e.getChannel().sendMessageEmbeds(embedmsg.build()).queue(
                         (message) -> {
                             if (e.getAuthor().getId().equals(Config.get("owner_id"))) {
                                 message.addReaction("👍🏻").queue();
@@ -53,14 +53,14 @@ public class SayCommand implements ICommand {
         else
         {
             String[] tokens = e.getMessage().getContentRaw().split(" ");
-            String content = "";
+            StringBuilder content = new StringBuilder();
 
-            for(int i = 0; i < tokens.length; i++) {
-                content += i == 0 ? "" : tokens[i] + " "; //Ignore first token: =say
+            for(int i = 1; i < tokens.length; i++) {
+                content.append(i == 1 ? "" : tokens[i] + " "); //Ignore first token: =say
             }
             e.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_MANAGE);
 
-            e.getChannel().sendMessage(content).queue();
+            e.getChannel().sendMessage(content.toString()).queue();
 
             e.getMessage().delete().queue();
         }
@@ -83,6 +83,6 @@ public class SayCommand implements ICommand {
 
     @Override
     public CommandType getCategory() {
-        return CommandType.OTHERS;
+        return CommandType.SPECIAL;
     }
 }

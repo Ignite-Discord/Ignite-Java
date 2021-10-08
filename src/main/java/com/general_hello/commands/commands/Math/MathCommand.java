@@ -46,12 +46,12 @@ public class MathCommand implements ICommand {
 
                 else if(result % 1 == 0)
                 {
-                    e.getChannel().sendMessage(Emoji.PRINT + Emoji.NUMBER + "  `" + input + "` is  `"
+                    e.getChannel().sendMessage(Emoji.USER + "  `" + input + "` is  `"
                             + integer + "`").queue();
                 }
                 else
                 {
-                    e.getChannel().sendMessage(Emoji.PRINT + Emoji.NUMBER + "  `" + input + "` is  `"
+                    e.getChannel().sendMessage(Emoji.USER + "  `" + input + "` is  `"
                             + result + "`").queue();
                 }
 

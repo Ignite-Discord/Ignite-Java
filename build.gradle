@@ -62,6 +62,7 @@ dependencies {
     implementation group: 'com.google.api-client', name: 'google-api-client', version: '1.30.4'
     implementation group: 'com.google.oauth-client', name: 'google-oauth-client-jetty', version: '1.32.1'
     implementation group: 'com.google.apis', name: 'google-api-services-sheets', version: 'v4-rev581-1.25.0'
+    implementation group: 'com.github.shinixsensei-dev', name: 'OpenTDB4j', version: '1.1.0'
 }
 
 compileJava.options.encoding = 'UTF-8'

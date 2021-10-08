@@ -7,6 +7,9 @@ import com.general_hello.commands.commands.ICommand;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 
 import java.sql.SQLException;
 
@@ -29,7 +32,7 @@ public class BlackjackCommand implements ICommand {
             return;
         }
 
-        if (Integer.parseInt(e.getArgs().get(0)) > DatabaseManager.INSTANCE.getCredits(author.getIdLong())) {
+        if (Integer.parseInt(e.getArgs().get(0)) > DatabaseManager.INSTANCE.getCredits(author.getIdLong()) || Integer.parseInt(e.getArgs().get(0)) < 0) {
             e.getChannel().sendMessage("You do not have enough to make that bet!").queue();
             return;
         }
@@ -46,9 +49,23 @@ public class BlackjackCommand implements ICommand {
                         DatabaseManager.INSTANCE.setCredits(author.getIdLong(), (int) d);
                         eb.addField("Credits", "You now have " + d + " more credits", false);
                     }
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
-                        if (!bjg.hasEnded()) bjg.setMessageId(m.getIdLong());
-                    });
+
+                    if (!bjg.hasEnded()) {
+                        e.getChannel().sendMessageEmbeds(eb.build()).setActionRows(
+                                ActionRow.of(
+                                        Button.of(ButtonStyle.PRIMARY, playerId + ":hit", "Hit"),
+                                        Button.of(ButtonStyle.PRIMARY, playerId + ":stand", "Stand"),
+                                        Button.of(ButtonStyle.PRIMARY, playerId + ":double", "Double")
+                                ), ActionRow.of(
+                                        Button.of(ButtonStyle.PRIMARY, playerId + ":split", "Split"),
+                                        Button.of(ButtonStyle.DANGER, playerId + ":endbj", "Surrender")
+                                )
+                        ).queue(m -> bjg.setMessageId(m.getIdLong()));
+                    } else {
+                        e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(
+                                Button.of(ButtonStyle.SUCCESS, "GG", "Game Ended").asDisabled()
+                        ).queue();
+                    }
                 } else {
                     e.getChannel().sendMessage("You're already playing a game").queue();
                 }
