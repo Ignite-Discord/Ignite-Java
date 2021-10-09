@@ -16,8 +16,8 @@ com/general_hello/commands/commands/Utils/Usage.java
  com.general_hello.commands.commands.Utils.Usage
 com/general_hello/commands/commands/GroupOfGames/Blackjack/GameHandler.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler
-com/general_hello/commands/OtherEvents/OnButtonClick.java
- com.general_hello.commands.OtherEvents.OnButtonClick
+com/general_hello/commands/commands/GroupOfGames/Games/TriviaCommand.java
+ com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand
 com/general_hello/commands/commands/GroupOfGames/MiniGames/ChessRequest.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessRequest
 com/general_hello/commands/commands/Others/PingCommand.java
@@ -28,8 +28,8 @@ com/general_hello/commands/OtherEvents/OnButtonChessClick.java
  com.general_hello.commands.OtherEvents.OnButtonChessClick
 com/general_hello/commands/commands/Utils/Util.java
  com.general_hello.commands.commands.Utils.Util
-com/general_hello/commands/Bot.java
- com.general_hello.commands.Bot
+com/general_hello/commands/commands/Info/AboutCommand.java
+ com.general_hello.commands.commands.Info.AboutCommand
 com/general_hello/commands/commands/Uno/UnoCard.java
  com.general_hello.commands.commands.Uno.UnoCard
  com.general_hello.commands.commands.Uno.UnoCard$Color
@@ -78,8 +78,8 @@ com/general_hello/commands/commands/Utils/TextUploader.java
  com.general_hello.commands.commands.Utils.TextUploader$Result
 com/general_hello/commands/commands/Others/BadDesign.java
  com.general_hello.commands.commands.Others.BadDesign
-com/general_hello/commands/OtherEvents/OnReadyEvent.java
- com.general_hello.commands.OtherEvents.OnReadyEvent
+com/general_hello/commands/commands/Utils/MCColor.java
+ com.general_hello.commands.commands.Utils.MCColor
 com/general_hello/commands/OtherEvents/OnSelectionMenu.java
  com.general_hello.commands.OtherEvents.OnSelectionMenu
 com/general_hello/commands/commands/Others/PasteCommand.java
@@ -118,8 +118,8 @@ com/general_hello/commands/commands/Uno/DrawCommand.java
  com.general_hello.commands.commands.Uno.DrawCommand
 com/general_hello/commands/commands/Utils/Action.java
  com.general_hello.commands.commands.Utils.Action
-com/general_hello/commands/OtherEvents/OnPrivateMessage.java
- com.general_hello.commands.OtherEvents.OnPrivateMessage
+com/general_hello/commands/Status.java
+ com.general_hello.commands.Status
 com/general_hello/commands/commands/GroupOfGames/Blackjack/HitCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.HitCommand
 com/general_hello/commands/commands/Utils/UtilBot.java
@@ -131,8 +131,8 @@ com/general_hello/commands/commands/Uno/ChallengeCommand.java
  com.general_hello.commands.commands.Uno.ChallengeCommand
 com/general_hello/commands/commands/Music/MusicUtil.java
  com.general_hello.commands.commands.Music.MusicUtil
-com/general_hello/commands/commands/Others/UpdateIgniteCoinsCommand.java
- com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand
+com/general_hello/commands/commands/DefaultCommands/HelpCommand.java
+ com.general_hello.commands.commands.DefaultCommands.HelpCommand
 com/general_hello/commands/commands/RankingSystem/ViewRank.java
  com.general_hello.commands.commands.RankingSystem.ViewRank
 com/general_hello/commands/commands/Utils/UtilNum.java
@@ -177,8 +177,8 @@ com/general_hello/commands/commands/PrefixStoring.java
  com.general_hello.commands.commands.PrefixStoring
 com/general_hello/commands/commands/DefaultCommands/AddCreditsCommand.java
  com.general_hello.commands.commands.DefaultCommands.AddCreditsCommand
-com/general_hello/commands/commands/DefaultCommands/BalanceCommand.java
- com.general_hello.commands.commands.DefaultCommands.BalanceCommand
+com/general_hello/commands/Listener.java
+ com.general_hello.commands.Listener
 com/general_hello/commands/Config.java
  com.general_hello.commands.Config
 com/general_hello/commands/commands/GroupOfGames/Blackjack/DoubleDownCommand.java
@@ -192,28 +192,28 @@ com/general_hello/commands/commands/GroupOfGames/Blackjack/SplitCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.SplitCommand
 com/general_hello/commands/commands/Utils/APOD.java
  com.general_hello.commands.commands.Utils.APOD
-com/general_hello/commands/commands/GetData.java
- com.general_hello.commands.commands.GetData
+com/general_hello/commands/commands/Utils/ErrorUtils.java
+ com.general_hello.commands.commands.Utils.ErrorUtils
 com/general_hello/commands/commands/DefaultCommands/UptimeCOmmand.java
  com.general_hello.commands.commands.DefaultCommands.UptimeCOmmand
 com/general_hello/commands/commands/MusicPlainCommand/RepeatCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.RepeatCommand
 com/general_hello/commands/commands/Emoji/EmojiObject.java
  com.general_hello.commands.commands.Emoji.EmojiObject
-com/general_hello/commands/commands/Utils/ErrorUtils.java
- com.general_hello.commands.commands.Utils.ErrorUtils
-com/general_hello/commands/Status.java
- com.general_hello.commands.Status
-com/general_hello/commands/commands/Utils/MCColor.java
- com.general_hello.commands.commands.Utils.MCColor
-com/general_hello/commands/commands/Info/AboutCommand.java
- com.general_hello.commands.commands.Info.AboutCommand
-com/general_hello/commands/commands/GroupOfGames/Games/TriviaCommand.java
- com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand
+com/general_hello/commands/commands/GetData.java
+ com.general_hello.commands.commands.GetData
 com/general_hello/commands/CommandManager.java
  com.general_hello.commands.CommandManager
  com.general_hello.commands.CommandManager$1
-com/general_hello/commands/Listener.java
- com.general_hello.commands.Listener
-com/general_hello/commands/commands/DefaultCommands/HelpCommand.java
- com.general_hello.commands.commands.DefaultCommands.HelpCommand
+com/general_hello/commands/commands/DefaultCommands/BalanceCommand.java
+ com.general_hello.commands.commands.DefaultCommands.BalanceCommand
+com/general_hello/commands/commands/Others/UpdateIgniteCoinsCommand.java
+ com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand
+com/general_hello/commands/OtherEvents/OnButtonClick.java
+ com.general_hello.commands.OtherEvents.OnButtonClick
+com/general_hello/commands/OtherEvents/OnReadyEvent.java
+ com.general_hello.commands.OtherEvents.OnReadyEvent
+com/general_hello/commands/OtherEvents/OnPrivateMessage.java
+ com.general_hello.commands.OtherEvents.OnPrivateMessage
+com/general_hello/commands/Bot.java
+ com.general_hello.commands.Bot

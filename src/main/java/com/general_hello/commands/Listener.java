@@ -65,11 +65,6 @@ public class Listener extends ListenerAdapter {
             }
         }
 
-        if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) {
-                event.getChannel().sendMessage("Psst. Check your **DMS** for the prefix of this bot").queue();
-                event.getMessage().getAuthor().openPrivateChannel().complete().sendMessage("The prefix for this bot is `" + prefix + "`").queue();
-            }
-
 
         jda = event.getJDA();
 

@@ -67,7 +67,7 @@ public class OnButtonClick extends ListenerAdapter {
                 event.getMessage().delete().queue();
                 event.getChannel().sendMessageEmbeds(helpCrap(3, event).build()).queue();
                 return;
-            case "music":
+            case "rpg":
                 event.getMessage().delete().queue();
                 event.getChannel().sendMessageEmbeds(helpCrap(6, event).build()).queue();
                 return;
@@ -97,8 +97,10 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.DISCORD_BOT + " | Bot (3)", "Shows the commands you can do with the bot", false);
                 embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.INFO + " | Info (3)", "Shows basic to complex information about users, servers, or mods", false);
                 embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.MOD + " | Moderation (4)","Basic to advanced moderation tools used by staff to control or monitor the server.", false);
-                embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.MUSIC + " | Music (7)","Basic to advanced music commands.", false);
+                embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.MUSIC + " | Music (7)","Basic to advanced music commands. (Do ignt musichelp to see its commands)", false);
                 embedBuilder.addField(com.general_hello.commands.commands.Emoji.Emoji.GAME + " | Games (4)","Fun games.", false);
+                embedBuilder.addField("\uD83D\uDCDA | RPG (?)","Fun RPG commands for igniters", false);
+
 
                 embedBuilder.setFooter("Type " + prefix + " help [group name] to see their commands");
 
@@ -116,7 +118,7 @@ public class OnButtonClick extends ListenerAdapter {
                                 Button.secondary(event.getMember().getUser().getId() + ":info", "Info").withEmoji(Emoji.fromEmote("info", Long.parseLong("870871190217060393"), true)),
                                 Button.secondary(event.getMember().getUser().getId() + ":game", "Games").withEmoji(Emoji.fromEmote("games", Long.parseLong("891146612016025630"), true))),
                         ActionRow.of(
-                                Button.secondary(event.getMember().getUser().getId() + ":music", "Music").withEmoji(Emoji.fromEmote("music", Long.parseLong("891148744408584192"), true)),
+                                Button.secondary(event.getMember().getUser().getId() + ":rpg", "RPG").withEmoji(Emoji.fromUnicode("U+1F4DA")),
                                 Button.secondary(event.getMember().getUser().getId() + ":mod", "Moderation").withDisabled(disableOrEnable).withEmoji(Emoji.fromEmote("mod", Long.parseLong("862898484041482270"), true)),
                                 Button.danger(event.getMember().getUser().getId() + ":end", "Cancel").withEmoji(Emoji.fromEmote("cancel", Long.parseLong("863204248657461298"), true)))
                 ).queue();
@@ -384,7 +386,7 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
                 break;
             case 6:
-                embedBuilder.setTitle("Music Commands *Temporary*");
+                embedBuilder.setTitle("RPG Commands *Temporary*");
                 embedBuilder.setColor(Color.blue);
                 embedBuilder.addField("1.) Play Command", "`" + prefix + " play`", false);
                 embedBuilder.addField("2.) Pause Command", "`" + prefix + " pause`", false);

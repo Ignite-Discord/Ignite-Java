@@ -11,7 +11,6 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
-import net.dv8tion.jda.api.Permission;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,7 +19,7 @@ import java.util.List;
 public class UpdateIgniteCoinsCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) throws InterruptedException, IOException, SQLException {
-        if (!ctx.getMember().hasPermission(Permission.MANAGE_SERVER) && !ctx.getMember().getRoles().contains(ctx.getGuild().getRoleById(888627140046749697L))) {
+        if (!ctx.getMember().getRoles().contains(ctx.getGuild().getRoleById(888627140046749697L))) {
             ctx.getChannel().sendMessage("You don't have the `Manage Server permission` with you!").queue();
             return;
         }

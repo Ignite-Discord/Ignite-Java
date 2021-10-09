@@ -76,7 +76,6 @@ public class CommandManager {
         addCommand(new GuessNumberCommand());
 
         //blackjack
-        //TODO: MAKE BLACK JACK TO BUTTONS INSTEAD OF COMMANDS
         addCommand(new BlackjackCommand(gameHandler));
         addCommand(new DoubleDownCommand());
         addCommand(new HitCommand());

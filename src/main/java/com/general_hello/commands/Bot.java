@@ -57,6 +57,7 @@ public class Bot {
                 .addEventListeners(new OnSelectionMenu())
                 .addEventListeners(new OnButtonChessClick())
                 .addEventListeners(new OnReadyEvent())
+                .addEventListeners(new OnRPGButtonClick())
                 .setActivity(Activity.watching("ignt help"))
                 .setStatus(OnlineStatus.ONLINE)
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
