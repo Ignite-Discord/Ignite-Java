@@ -10,14 +10,19 @@ public class Weapons {
     private final String name;
     private Level level;
     private final AttainableBy retrieveBy;
+    private final String emoji;
 
-
-    public Weapons(Rarity rarity, int damage, String name, Level level) {
+    public Weapons(Rarity rarity, int damage, String name, Level level, AttainableBy retrieveBy, String emoji) {
         this.rarity = rarity;
         this.damage = level.getMultipliedValue(rarity.getMultipliedValue(damage));
         this.name = name;
         this.level = level;
-        this.retrieveBy = AttainableBy.CRAFTING;
+        this.retrieveBy = retrieveBy;
+        this.emoji = emoji;
+    }
+
+    public String getEmoji() {
+        return emoji;
     }
 
     public AttainableBy getRetrieveBy() {

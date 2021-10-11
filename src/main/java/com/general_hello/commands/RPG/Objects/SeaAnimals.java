@@ -1,46 +1,21 @@
 package com.general_hello.commands.RPG.Objects;
 
+import com.general_hello.commands.RPG.Items.Uncommon.FishingPole;
 import com.general_hello.commands.RPG.Types.AttainableBy;
 import com.general_hello.commands.RPG.Types.Level;
 import com.general_hello.commands.RPG.Types.Rarity;
 
-public class SeaAnimals {
-    private final Rarity rarity;
-    private final int rewardForCooking;
-    private final String name;
-    private Level level;
-    private final AttainableBy retrieveBy;
+public class SeaAnimals extends Animals {
+    private final Tools toolsToUse;
 
-    public SeaAnimals(Rarity rarity, int rewardForCooking, String name, Level level, AttainableBy retrieveBy) {
-        this.rarity = rarity;
-        this.rewardForCooking = rarity.getMultipliedValue(rewardForCooking);
-        this.name = name;
-        this.level = level;
-        this.retrieveBy = retrieveBy;
+    public SeaAnimals(Rarity rarity, int rewardForCooking, String name, Level level, AttainableBy retrieveBy, String emoji) {
+        super(rarity, rewardForCooking, name, level, retrieveBy, emoji);
+        // TODO: 10/10/2021 Fix the level here
+        this.toolsToUse = new FishingPole();
     }
 
-    public AttainableBy getRetrieveBy() {
-        return retrieveBy;
-    }
-
-    public Level getLevel() {
-        return level;
-    }
-
-    public SeaAnimals setLevel(Level level) {
-        this.level = level;
-        return this;
-    }
-
-    public Rarity getRarity() {
-        return rarity;
-    }
-
-    public int getRewardForCooking() {
-        return rewardForCooking;
-    }
-
-    public String getName() {
-        return name;
+    @Override
+    public Tools getToolsToUse() {
+        return toolsToUse;
     }
 }

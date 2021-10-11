@@ -12,12 +12,14 @@ public class Artifacts {
     private final String collectionName;
     private final ArrayList<Artifacts> neededItems;
     private final AttainableBy retrieveBy;
+    private final String emoji;
 
-    public Artifacts(Rarity rarity, boolean isCollection, String name, String collectionName, ArrayList<Artifacts> neededItems, AttainableBy retrieveBy) {
+    public Artifacts(Rarity rarity, boolean isCollection, String name, String collectionName, ArrayList<Artifacts> neededItems, AttainableBy retrieveBy, String emoji) {
         this.rarity = rarity;
         this.isCollection = isCollection;
         this.name = name;
         this.retrieveBy = retrieveBy;
+        this.emoji = emoji;
 
         if (isCollection) {
             this.collectionName = collectionName;
@@ -26,6 +28,10 @@ public class Artifacts {
             this.collectionName = "No collection possible";
             this.neededItems = null;
         }
+    }
+
+    public String getEmoji() {
+        return emoji;
     }
 
     public AttainableBy getRetrieveBy() {

@@ -44,13 +44,13 @@ public class Status {
                 Thread.sleep(1000000);
             } catch (Exception ignored) {}
 
-            jda.getPresence().setActivity(Activity.watching("Deuteronomy 23 1. No one who has been emasculated by crushing or cutting may enter the assembly of the LORD."));
+            jda.getPresence().setActivity(Activity.watching("The Passion of Christ"));
 
             try {
                 Thread.sleep(1000000);
             } catch (Exception ignored) {}
 
-            jda.getPresence().setActivity(Activity.watching("Happy Halloween! 👻 👻 👻"));
+            jda.getPresence().setActivity(Activity.watching("Merry Christmas! 🎄🎄🎄"));
 
             try {
                 Thread.sleep(1000000);

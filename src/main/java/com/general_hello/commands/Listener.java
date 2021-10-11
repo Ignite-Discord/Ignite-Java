@@ -38,7 +38,7 @@ public class Listener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        System.out.println(event.getAuthor().getName() + " sent " + event.getMessage().getContentRaw() + " in " + event.getChannel().getName());
+        System.out.println(event.getAuthor().getName() + " sent " + event.getMessage().getContentRaw() + " in #" + event.getChannel().getName());
         EmbedBuilder em;
 
         if (event.getAuthor().isBot() || event.isWebhookMessage()) {
