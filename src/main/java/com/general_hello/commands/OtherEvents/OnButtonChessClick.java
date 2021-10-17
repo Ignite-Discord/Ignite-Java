@@ -11,6 +11,7 @@ public class OnButtonChessClick extends ListenerAdapter {
         String[] id = event.getComponentId().split(":"); // this is the custom id we specified in our button
         String authorId = id[0];
         if (id.length == 1) {
+            if (!event.isAcknowledged())
             event.deferEdit().queue();
             return;
         }

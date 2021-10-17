@@ -2,54 +2,79 @@ com/general_hello/commands/commands/DefaultCommands/SetPrefixCommand.java
  com.general_hello.commands.commands.DefaultCommands.SetPrefixCommand
 com/general_hello/commands/commands/Others/UnLockDownCommand.java
  com.general_hello.commands.commands.Others.UnLockDownCommand
+com/general_hello/commands/commands/Utils/UtilBot.java
+ com.general_hello.commands.commands.Utils.UtilBot
+ com.general_hello.commands.commands.Utils.UtilBot$1
+com/general_hello/commands/RPG/Items/Legendary/AttainHunt/Unicorn.java
+ com.general_hello.commands.RPG.Items.Legendary.AttainHunt.Unicorn
 com/general_hello/commands/commands/Uno/UnoGame.java
  com.general_hello.commands.commands.Uno.UnoGame
  com.general_hello.commands.commands.Uno.UnoGame$1
 com/general_hello/commands/commands/Music/FormatUtil.java
  com.general_hello.commands.commands.Music.FormatUtil
-com/general_hello/commands/commands/MusicPlainCommand/QueueCommand.java
- com.general_hello.commands.commands.MusicPlainCommand.QueueCommand
+com/general_hello/commands/RPG/Items/Rare/AttainHunt/Camel.java
+ com.general_hello.commands.RPG.Items.Rare.AttainHunt.Camel
+com/general_hello/commands/OtherEvents/OtherEvents.java
+ com.general_hello.commands.OtherEvents.OtherEvents
+com/general_hello/commands/RPG/Objects/SeaAnimals.java
+ com.general_hello.commands.RPG.Objects.SeaAnimals
 com/general_hello/commands/commands/GroupOfGames/Blackjack/BlackjackGame.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackGame
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackGame$EndState
 com/general_hello/commands/commands/Utils/Usage.java
  com.general_hello.commands.commands.Utils.Usage
+com/general_hello/commands/commands/Others/LockDownCommand.java
+ com.general_hello.commands.commands.Others.LockDownCommand
 com/general_hello/commands/commands/GroupOfGames/Blackjack/GameHandler.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler
-com/general_hello/commands/commands/GroupOfGames/Games/TriviaCommand.java
- com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand
+com/general_hello/commands/commands/Info/AboutCommand.java
+ com.general_hello.commands.commands.Info.AboutCommand
 com/general_hello/commands/commands/GroupOfGames/MiniGames/ChessRequest.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessRequest
 com/general_hello/commands/commands/Others/PingCommand.java
  com.general_hello.commands.commands.Others.PingCommand
 com/general_hello/commands/commands/Emoji/Emoji.java
  com.general_hello.commands.commands.Emoji.Emoji
-com/general_hello/commands/OtherEvents/OnButtonChessClick.java
- com.general_hello.commands.OtherEvents.OnButtonChessClick
+com/general_hello/commands/RPG/Types/Level.java
+ com.general_hello.commands.RPG.Types.Level
+com/general_hello/commands/RPG/Items/Uncommon/AttainHunt/Cow.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainHunt.Cow
 com/general_hello/commands/commands/Utils/Util.java
  com.general_hello.commands.commands.Utils.Util
-com/general_hello/commands/commands/Info/AboutCommand.java
- com.general_hello.commands.commands.Info.AboutCommand
+com/general_hello/commands/RPG/Items/Common/AttainFish/Garbage.java
+ com.general_hello.commands.RPG.Items.Common.AttainFish.Garbage
+com/general_hello/commands/commands/Math/MathCommand.java
+ com.general_hello.commands.commands.Math.MathCommand
 com/general_hello/commands/commands/Uno/UnoCard.java
  com.general_hello.commands.commands.Uno.UnoCard
  com.general_hello.commands.commands.Uno.UnoCard$Color
  com.general_hello.commands.commands.Uno.UnoCard$Value
 com/general_hello/commands/commands/Music/AudioScheduler.java
  com.general_hello.commands.commands.Music.AudioScheduler
+com/general_hello/commands/RPG/Items/SuperRare/AttainFish/Lobster.java
+ com.general_hello.commands.RPG.Items.SuperRare.AttainFish.Lobster
 com/general_hello/commands/commands/GroupOfGames/Blackjack/StandCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.StandCommand
 com/general_hello/commands/commands/MusicPlainCommand/StopCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.StopCommand
 com/general_hello/commands/commands/Register/Data.java
  com.general_hello.commands.commands.Register.Data
-com/general_hello/commands/commands/Music/ButtonPaginator.java
- com.general_hello.commands.commands.Music.ButtonPaginator
- com.general_hello.commands.commands.Music.ButtonPaginator$1
- com.general_hello.commands.commands.Music.ButtonPaginator$Builder
+com/general_hello/commands/commands/MusicPlainCommand/VolumeCommand.java
+ com.general_hello.commands.commands.MusicPlainCommand.VolumeCommand
+com/general_hello/commands/RPG/Items/Rare/AttainFish/JellyFish.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.JellyFish
+com/general_hello/commands/RPG/Items/Rare/AttainFish/Squid.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.Squid
 com/general_hello/commands/commands/GroupOfGames/Blackjack/BlackjackCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackjackCommand
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Donkey.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Donkey
+com/general_hello/commands/RPG/Items/Uncommon/AttainHunt/Eagle.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainHunt.Eagle
 com/general_hello/commands/commands/Register/SetNameCommand.java
  com.general_hello.commands.commands.Register.SetNameCommand
+com/general_hello/commands/RPG/Items/Rare/AttainFish/PufferFish.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.PufferFish
 com/general_hello/commands/commands/GroupOfGames/MiniGames/ChessStoring.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.ChessStoring
 com/general_hello/commands/commands/Music/CachedMessage.java
@@ -60,95 +85,152 @@ com/general_hello/commands/commands/Others/JokeCommand.java
  com.general_hello.commands.commands.Others.JokeCommand
 com/general_hello/commands/commands/GroupOfGames/MiniGames/MainChessCode.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.MainChessCode
+com/general_hello/commands/RPG/Objects/LandAnimals.java
+ com.general_hello.commands.RPG.Objects.LandAnimals
+com/general_hello/commands/RPG/Items/SuperRare/AttainFish/SoulFish.java
+ com.general_hello.commands.RPG.Items.SuperRare.AttainFish.SoulFish
 com/general_hello/commands/commands/MusicPlainCommand/PauseCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.PauseCommand
+com/general_hello/commands/RPG/Items/Uncommon/AttainFish/BoxOfSand.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainFish.BoxOfSand
+com/general_hello/commands/RPG/Items/Uncommon/AttainFish/FishermanNet.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainFish.FishermanNet
+com/general_hello/commands/RPG/Items/Rare/AttainHunt/Lion.java
+ com.general_hello.commands.RPG.Items.Rare.AttainHunt.Lion
+com/general_hello/commands/RPG/Items/Legendary/AttainFish/Leviathan.java
+ com.general_hello.commands.RPG.Items.Legendary.AttainFish.Leviathan
 com/general_hello/commands/commands/DefaultCommands/PingCommand.java
  com.general_hello.commands.commands.DefaultCommands.PingCommand
 com/general_hello/commands/Database/SQLiteDataSource.java
  com.general_hello.commands.Database.SQLiteDataSource
 com/general_hello/commands/commands/MusicPlainCommand/ResumeCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.ResumeCommand
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Dove.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Dove
 com/general_hello/commands/commands/ICommand.java
  com.general_hello.commands.commands.ICommand
 com/general_hello/commands/commands/Info/InfoUserCommand.java
  com.general_hello.commands.commands.Info.InfoUserCommand
  com.general_hello.commands.commands.Info.InfoUserCommand$1
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Gnat.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Gnat
+com/general_hello/commands/RPG/Items/Uncommon/HuntingRifle.java
+ com.general_hello.commands.RPG.Items.Uncommon.HuntingRifle
 com/general_hello/commands/commands/Utils/TextUploader.java
  com.general_hello.commands.commands.Utils.TextUploader
  com.general_hello.commands.commands.Utils.TextUploader$Result
 com/general_hello/commands/commands/Others/BadDesign.java
  com.general_hello.commands.commands.Others.BadDesign
-com/general_hello/commands/commands/Utils/MCColor.java
- com.general_hello.commands.commands.Utils.MCColor
-com/general_hello/commands/OtherEvents/OnSelectionMenu.java
- com.general_hello.commands.OtherEvents.OnSelectionMenu
+com/general_hello/commands/OtherEvents/OnReadyEvent.java
+ com.general_hello.commands.OtherEvents.OnReadyEvent
+com/general_hello/commands/OtherEvents/OnButtonChessClick.java
+ com.general_hello.commands.OtherEvents.OnButtonChessClick
 com/general_hello/commands/commands/Others/PasteCommand.java
  com.general_hello.commands.commands.Others.PasteCommand
 com/general_hello/commands/commands/GroupOfGames/Blackjack/Card.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.Card
  com.general_hello.commands.commands.GroupOfGames.Blackjack.Card$Face
  com.general_hello.commands.commands.GroupOfGames.Blackjack.Card$Value
+com/general_hello/commands/RPG/RpgUser/RPGUser.java
+ com.general_hello.commands.RPG.RpgUser.RPGUser
+com/general_hello/commands/RPG/Items/Uncommon/AttainFish/FishUncommon.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainFish.FishUncommon
 com/general_hello/commands/commands/RankingSystem/LevelPointManager.java
  com.general_hello.commands.commands.RankingSystem.LevelPointManager
 com/general_hello/commands/commands/Utils/EmbedUtil.java
  com.general_hello.commands.commands.Utils.EmbedUtil
+com/general_hello/commands/OtherEvents/OnRPGButtonClick.java
+ com.general_hello.commands.OtherEvents.OnRPGButtonClick
 com/general_hello/commands/commands/Uno/PlayCardCommand.java
  com.general_hello.commands.commands.Uno.PlayCardCommand
 com/general_hello/commands/commands/DefaultCommands/SheetsQuickstart.java
  com.general_hello.commands.commands.DefaultCommands.SheetsQuickstart
+com/general_hello/commands/RPG/Types/AttainableBy.java
+ com.general_hello.commands.RPG.Types.AttainableBy
 com/general_hello/commands/commands/Music/AudioPlayerSendHandler.java
  com.general_hello.commands.commands.Music.AudioPlayerSendHandler
 com/general_hello/commands/commands/Uno/UnoCommand.java
  com.general_hello.commands.commands.Uno.UnoCommand
 com/general_hello/commands/commands/User/UserPhoneUser.java
  com.general_hello.commands.commands.User.UserPhoneUser
-com/general_hello/commands/commands/GroupOfGames/Games/GuessNumberCommand.java
- com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand
+com/general_hello/commands/RPG/Objects/Tools.java
+ com.general_hello.commands.RPG.Objects.Tools
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Pig.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Pig
+com/general_hello/commands/commands/Utils/MCColor.java
+ com.general_hello.commands.commands.Utils.MCColor
 com/general_hello/commands/commands/Register/RegisterCommand.java
  com.general_hello.commands.commands.Register.RegisterCommand
+com/general_hello/commands/RPG/Items/Legendary/AttainFish/Kraken.java
+ com.general_hello.commands.RPG.Items.Legendary.AttainFish.Kraken
+com/general_hello/commands/RPG/TestMain.java
+ com.general_hello.commands.RPG.TestMain
 com/general_hello/commands/Database/DatabaseManager.java
  com.general_hello.commands.Database.DatabaseManager
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Dog.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Dog
 com/general_hello/commands/commands/CommandType.java
  com.general_hello.commands.commands.CommandType
 com/general_hello/commands/commands/GroupOfGames/Blackjack/BlackJackHand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.BlackJackHand
-com/general_hello/commands/commands/MusicPlainCommand/VolumeCommand.java
- com.general_hello.commands.commands.MusicPlainCommand.VolumeCommand
+com/general_hello/commands/commands/Others/SayCommand.java
+ com.general_hello.commands.commands.Others.SayCommand
 com/general_hello/commands/commands/Uno/DrawCommand.java
  com.general_hello.commands.commands.Uno.DrawCommand
 com/general_hello/commands/commands/Utils/Action.java
  com.general_hello.commands.commands.Utils.Action
-com/general_hello/commands/Status.java
- com.general_hello.commands.Status
+com/general_hello/commands/OtherEvents/OnPrivateMessage.java
+ com.general_hello.commands.OtherEvents.OnPrivateMessage
 com/general_hello/commands/commands/GroupOfGames/Blackjack/HitCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.HitCommand
-com/general_hello/commands/commands/Utils/UtilBot.java
- com.general_hello.commands.commands.Utils.UtilBot
- com.general_hello.commands.commands.Utils.UtilBot$1
+com/general_hello/commands/commands/Utils/ErrorUtils.java
+ com.general_hello.commands.commands.Utils.ErrorUtils
+com/general_hello/commands/RPG/Items/Common/AttainFish/SeaWeed.java
+ com.general_hello.commands.RPG.Items.Common.AttainFish.SeaWeed
 com/general_hello/commands/commands/Uno/ImageHandler.java
  com.general_hello.commands.commands.Uno.ImageHandler
+com/general_hello/commands/RPG/Objects/Animals.java
+ com.general_hello.commands.RPG.Objects.Animals
 com/general_hello/commands/commands/Uno/ChallengeCommand.java
  com.general_hello.commands.commands.Uno.ChallengeCommand
 com/general_hello/commands/commands/Music/MusicUtil.java
  com.general_hello.commands.commands.Music.MusicUtil
-com/general_hello/commands/commands/DefaultCommands/HelpCommand.java
- com.general_hello.commands.commands.DefaultCommands.HelpCommand
+com/general_hello/commands/commands/Others/UpdateIgniteCoinsCommand.java
+ com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand
+com/general_hello/commands/RPG/Items/Legendary/AttainFish/LegendaryFish.java
+ com.general_hello.commands.RPG.Items.Legendary.AttainFish.LegendaryFish
 com/general_hello/commands/commands/RankingSystem/ViewRank.java
  com.general_hello.commands.commands.RankingSystem.ViewRank
 com/general_hello/commands/commands/Utils/UtilNum.java
  com.general_hello.commands.commands.Utils.UtilNum
+com/general_hello/commands/RPG/Items/Rare/AttainFish/JonahBigFish.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.JonahBigFish
 com/general_hello/commands/commands/Guild/DataObject.java
  com.general_hello.commands.commands.Guild.DataObject
+com/general_hello/commands/commands/Music/ButtonPaginator.java
+ com.general_hello.commands.commands.Music.ButtonPaginator
+ com.general_hello.commands.commands.Music.ButtonPaginator$1
+ com.general_hello.commands.commands.Music.ButtonPaginator$Builder
+com/general_hello/commands/RPG/Items/Uncommon/AttainHunt/Sheep.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainHunt.Sheep
+com/general_hello/commands/RPG/Items/Common/AttainFish/FishCommon.java
+ com.general_hello.commands.RPG.Items.Common.AttainFish.FishCommon
 com/general_hello/commands/commands/GroupOfGames/Games/Game.java
  com.general_hello.commands.commands.GroupOfGames.Games.Game
 com/general_hello/commands/commands/GroupOfGames/MiniGames/AlphaBetaChess.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.AlphaBetaChess
+com/general_hello/commands/RPG/Items/SuperRare/AttainFish/Octopus.java
+ com.general_hello.commands.RPG.Items.SuperRare.AttainFish.Octopus
+com/general_hello/commands/RPG/Items/Rare/AttainFish/CuttleFish.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.CuttleFish
 com/general_hello/commands/commands/Utils/UtilString.java
  com.general_hello.commands.commands.Utils.UtilString
-com/general_hello/commands/OtherEvents/OtherEvents.java
- com.general_hello.commands.OtherEvents.OtherEvents
-com/general_hello/commands/commands/Others/LockDownCommand.java
- com.general_hello.commands.commands.Others.LockDownCommand
+com/general_hello/commands/RPG/Items/Uncommon/FishingPole.java
+ com.general_hello.commands.RPG.Items.Uncommon.FishingPole
+com/general_hello/commands/Status.java
+ com.general_hello.commands.Status
+com/general_hello/commands/commands/GroupOfGames/Games/TriviaCommand.java
+ com.general_hello.commands.commands.GroupOfGames.Games.TriviaCommand
 com/general_hello/commands/commands/RankingSystem/LevelPointCard.java
  com.general_hello.commands.commands.RankingSystem.LevelPointCard
  com.general_hello.commands.commands.RankingSystem.LevelPointCard$ColorSet
@@ -157,63 +239,131 @@ com/general_hello/commands/commands/Info/InfoServerCommand.java
  com.general_hello.commands.commands.Info.InfoServerCommand
 com/general_hello/commands/commands/MusicPlainCommand/SkipCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.SkipCommand
-com/general_hello/commands/commands/Music/GuildAudioPlayer.java
- com.general_hello.commands.commands.Music.GuildAudioPlayer
+com/general_hello/commands/OtherEvents/OnSelectionMenu.java
+ com.general_hello.commands.OtherEvents.OnSelectionMenu
 com/general_hello/commands/commands/Utils/MoneyData.java
  com.general_hello.commands.commands.Utils.MoneyData
-com/general_hello/commands/commands/Math/MathCommand.java
- com.general_hello.commands.commands.Math.MathCommand
+com/general_hello/commands/commands/MusicPlainCommand/QueueCommand.java
+ com.general_hello.commands.commands.MusicPlainCommand.QueueCommand
+com/general_hello/commands/RPG/Items/Rare/AttainFish/ExoticFish.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.ExoticFish
 com/general_hello/commands/commands/Music/AudioManager.java
  com.general_hello.commands.commands.Music.AudioManager
-com/general_hello/commands/commands/Others/SayCommand.java
- com.general_hello.commands.commands.Others.SayCommand
+com/general_hello/commands/RPG/Items/Rare/AttainHunt/Serpent.java
+ com.general_hello.commands.RPG.Items.Rare.AttainHunt.Serpent
+com/general_hello/commands/RPG/Items/Rare/AttainFish/Shrimp.java
+ com.general_hello.commands.RPG.Items.Rare.AttainFish.Shrimp
 com/general_hello/commands/commands/CommandContext.java
  com.general_hello.commands.commands.CommandContext
+com/general_hello/commands/commands/Music/GuildAudioPlayer.java
+ com.general_hello.commands.commands.Music.GuildAudioPlayer
 com/general_hello/commands/commands/GroupOfGames/Games/GuessNumber.java
  com.general_hello.commands.commands.GroupOfGames.Games.GuessNumber
 com/general_hello/commands/commands/GroupOfGames/MiniGames/Rating.java
  com.general_hello.commands.commands.GroupOfGames.MiniGames.Rating
 com/general_hello/commands/commands/PrefixStoring.java
  com.general_hello.commands.commands.PrefixStoring
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Goat.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Goat
 com/general_hello/commands/commands/DefaultCommands/AddCreditsCommand.java
  com.general_hello.commands.commands.DefaultCommands.AddCreditsCommand
-com/general_hello/commands/Listener.java
- com.general_hello.commands.Listener
+com/general_hello/commands/commands/DefaultCommands/BalanceCommand.java
+ com.general_hello.commands.commands.DefaultCommands.BalanceCommand
+com/general_hello/commands/RPG/Items/SuperRare/AttainHunt/Dinosaur.java
+ com.general_hello.commands.RPG.Items.SuperRare.AttainHunt.Dinosaur
 com/general_hello/commands/Config.java
  com.general_hello.commands.Config
 com/general_hello/commands/commands/GroupOfGames/Blackjack/DoubleDownCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.DoubleDownCommand
+com/general_hello/commands/RPG/Items/Uncommon/AttainFish/PetersFish.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainFish.PetersFish
+com/general_hello/commands/RPG/Objects/Weapons.java
+ com.general_hello.commands.RPG.Objects.Weapons
 com/general_hello/commands/commands/Uno/UnoHand.java
  com.general_hello.commands.commands.Uno.UnoHand
 com/general_hello/commands/commands/MusicPlainCommand/PlayCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.PlayCommand
  com.general_hello.commands.commands.MusicPlainCommand.PlayCommand$1
+com/general_hello/commands/RPG/Items/Common/AttainFish/EgyptianBrokenWeapon.java
+ com.general_hello.commands.RPG.Items.Common.AttainFish.EgyptianBrokenWeapon
 com/general_hello/commands/commands/GroupOfGames/Blackjack/SplitCommand.java
  com.general_hello.commands.commands.GroupOfGames.Blackjack.SplitCommand
 com/general_hello/commands/commands/Utils/APOD.java
  com.general_hello.commands.commands.Utils.APOD
-com/general_hello/commands/commands/Utils/ErrorUtils.java
- com.general_hello.commands.commands.Utils.ErrorUtils
+com/general_hello/commands/RPG/Items/Uncommon/AttainHunt/Sparrow.java
+ com.general_hello.commands.RPG.Items.Uncommon.AttainHunt.Sparrow
+com/general_hello/commands/commands/GetData.java
+ com.general_hello.commands.commands.GetData
 com/general_hello/commands/commands/DefaultCommands/UptimeCOmmand.java
  com.general_hello.commands.commands.DefaultCommands.UptimeCOmmand
 com/general_hello/commands/commands/MusicPlainCommand/RepeatCommand.java
  com.general_hello.commands.commands.MusicPlainCommand.RepeatCommand
+com/general_hello/commands/RPG/Items/SuperRare/AttainFish/Shark.java
+ com.general_hello.commands.RPG.Items.SuperRare.AttainFish.Shark
+com/general_hello/commands/RPG/Types/Rarity.java
+ com.general_hello.commands.RPG.Types.Rarity
+com/general_hello/commands/RPG/Items/Common/AttainHunt/Locust.java
+ com.general_hello.commands.RPG.Items.Common.AttainHunt.Locust
 com/general_hello/commands/commands/Emoji/EmojiObject.java
  com.general_hello.commands.commands.Emoji.EmojiObject
-com/general_hello/commands/commands/GetData.java
- com.general_hello.commands.commands.GetData
+com/general_hello/commands/RPG/Items/SuperRare/Artifacts/MosesRod.java
+ com.general_hello.commands.RPG.Items.SuperRare.Artifacts.MosesRod
+com/general_hello/commands/RPG/Objects/Artifacts.java
+ com.general_hello.commands.RPG.Objects.Artifacts
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/FirstCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.FirstCommandment
+com/general_hello/commands/RPG/Items/Rare/Artifacts/DavidsFirstStone.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.DavidsFirstStone
+com/general_hello/commands/RPG/Items/Rare/Artifacts/JosephsCoat.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.JosephsCoat
+com/general_hello/commands/RPG/Items/Rare/Artifacts/DavidsSecondStone.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.DavidsSecondStone
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/SixthCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.SixthCommandment
+com/general_hello/commands/RPG/Items/Common/Artifacts/SackCloth.java
+ com.general_hello.commands.RPG.Items.Common.Artifacts.SackCloth
+com/general_hello/commands/RPG/Items/Uncommon/Artifacts/AmmoriteOldWeapon.java
+ com.general_hello.commands.RPG.Items.Uncommon.Artifacts.AmmoriteOldWeapon
+com/general_hello/commands/RPG/Items/Rare/Artifacts/DavidsFifthStone.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.DavidsFifthStone
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/SeventhCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.SeventhCommandment
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/ThirdCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.ThirdCommandment
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/EightCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.EightCommandment
+com/general_hello/commands/RPG/Items/Rare/Artifacts/DavidsFourthStone.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.DavidsFourthStone
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/TenthCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.TenthCommandment
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/FifthCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.FifthCommandment
+com/general_hello/commands/RPG/Items/Rare/Artifacts/Diamond.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.Diamond
+com/general_hello/commands/RPG/Items/Common/Artifacts/ClayPot.java
+ com.general_hello.commands.RPG.Items.Common.Artifacts.ClayPot
+com/general_hello/commands/RPG/Items/Rare/Artifacts/Ruby.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.Ruby
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/NinthCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.NinthCommandment
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/SecondCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.SecondCommandment
+com/general_hello/commands/RPG/Items/Uncommon/Artifacts/WineSkin.java
+ com.general_hello.commands.RPG.Items.Uncommon.Artifacts.WineSkin
+com/general_hello/commands/RPG/Items/Legendary/Artifacts/FourthCommandment.java
+ com.general_hello.commands.RPG.Items.Legendary.Artifacts.FourthCommandment
+com/general_hello/commands/RPG/Items/Rare/Artifacts/DavidsThirdStone.java
+ com.general_hello.commands.RPG.Items.Rare.Artifacts.DavidsThirdStone
+com/general_hello/commands/commands/GroupOfGames/Games/GuessNumberCommand.java
+ com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand
+com/general_hello/commands/Listener.java
+ com.general_hello.commands.Listener
 com/general_hello/commands/CommandManager.java
  com.general_hello.commands.CommandManager
  com.general_hello.commands.CommandManager$1
-com/general_hello/commands/commands/DefaultCommands/BalanceCommand.java
- com.general_hello.commands.commands.DefaultCommands.BalanceCommand
-com/general_hello/commands/commands/Others/UpdateIgniteCoinsCommand.java
- com.general_hello.commands.commands.Others.UpdateIgniteCoinsCommand
 com/general_hello/commands/OtherEvents/OnButtonClick.java
  com.general_hello.commands.OtherEvents.OnButtonClick
-com/general_hello/commands/OtherEvents/OnReadyEvent.java
- com.general_hello.commands.OtherEvents.OnReadyEvent
-com/general_hello/commands/OtherEvents/OnPrivateMessage.java
- com.general_hello.commands.OtherEvents.OnPrivateMessage
+com/general_hello/commands/commands/DefaultCommands/HelpCommand.java
+ com.general_hello.commands.commands.DefaultCommands.HelpCommand
 com/general_hello/commands/Bot.java
  com.general_hello.commands.Bot

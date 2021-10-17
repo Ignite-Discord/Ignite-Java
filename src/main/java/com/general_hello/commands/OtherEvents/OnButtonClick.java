@@ -104,11 +104,7 @@ public class OnButtonClick extends ListenerAdapter {
 
                 embedBuilder.setFooter("Type " + prefix + " help [group name] to see their commands");
 
-                boolean disableOrEnable = true;
-
-                if (!event.getMember().hasPermission(Permission.MANAGE_SERVER) && !event.getMember().getRoles().contains(event.getGuild().getRoleById(888627140046749697L))) {
-                    disableOrEnable = false;
-                }
+                boolean disableOrEnable = !event.getMember().hasPermission(Permission.MANAGE_SERVER) && !event.getMember().getRoles().contains(event.getGuild().getRoleById(888627140046749697L));
 
                 event.getMessage().delete().queue();
                 event.getChannel().sendMessageEmbeds(embedBuilder.build()).setActionRows(
@@ -118,7 +114,7 @@ public class OnButtonClick extends ListenerAdapter {
                                 Button.secondary(event.getMember().getUser().getId() + ":info", "Info").withEmoji(Emoji.fromEmote("info", Long.parseLong("870871190217060393"), true)),
                                 Button.secondary(event.getMember().getUser().getId() + ":game", "Games").withEmoji(Emoji.fromEmote("games", Long.parseLong("891146612016025630"), true))),
                         ActionRow.of(
-                                Button.secondary(event.getMember().getUser().getId() + ":rpg", "RPG").withEmoji(Emoji.fromUnicode("U+1F4DA")),
+                                Button.secondary(event.getMember().getUser().getId() + ":rpg", "RPG").withEmoji(Emoji.fromUnicode("U+1F4DA")).asDisabled(),
                                 Button.secondary(event.getMember().getUser().getId() + ":mod", "Moderation").withDisabled(disableOrEnable).withEmoji(Emoji.fromEmote("mod", Long.parseLong("862898484041482270"), true)),
                                 Button.danger(event.getMember().getUser().getId() + ":end", "Cancel").withEmoji(Emoji.fromEmote("cancel", Long.parseLong("863204248657461298"), true)))
                 ).queue();
@@ -348,8 +344,7 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField("1.) Set Prefix Command", "`" + prefix + " setprefix`", false);
                 embedBuilder.addField("2.) Lockdown Command", "`" + prefix + " lockdown`", false);
                 embedBuilder.addField("3.) Un-lockdown Command", "`" + prefix + " unlockdown`", false);
-                embedBuilder.addField("4.) Add Meme Command", "`" + prefix + " addmeme`", false);
-                embedBuilder.addField("5.) Update Ignite Coins Balance Command", "`" + prefix + " updatecoins`", false);
+                embedBuilder.addField("4.) Update Ignite Coins Balance Command", "`" + prefix + " updatecoins`", false);
 
                 embedBuilder.setFooter("\nType " + prefix + " help [command name] to see what they do");
                 break;
@@ -367,10 +362,10 @@ public class OnButtonClick extends ListenerAdapter {
                 embedBuilder.addField("9.) Make Facts Command", "`" + prefix + " makefacts`", false);
                 embedBuilder.addField("10.) Quote Command", "`" + prefix + " quote`", false);
                 embedBuilder.addField("11.) Share code Command (Programming)", "`" + prefix + " sharecode`", false);
-                embedBuilder.addField("12.) Akinator Command", "`" + prefix + " aki`", false);
+                embedBuilder.addField("12.) Akinator Command *NOT WORKING*", "`" + prefix + " aki`", false);
                 embedBuilder.addField("13.) Rock Paper Scissors Command", "`" + prefix + " rps`", false);
-                embedBuilder.addField("14.) Connect 4 Command", "`" + prefix + " c4`", false);
-                embedBuilder.addField("15.) Tic Tac Toe Command", "`" + prefix + " ttt`", false);
+                embedBuilder.addField("14.) Connect 4 Command *NOT WORKING*", "`" + prefix + " c4`", false);
+                embedBuilder.addField("15.) Tic Tac Toe Command *NOT WORKING*", "`" + prefix + " ttt`", false);
 
                 embedBuilder.setFooter("Type " + prefix + " help [command name] to see what they do");
                 break;

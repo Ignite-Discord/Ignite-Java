@@ -29,7 +29,6 @@ public class OnSelectionMenu extends ListenerAdapter {
                 .addOption("Uno", "uno")
                 .addOption("Blackjack", "bj")
                 .addOption("Guess the number", "gn")
-                .addOption("Hangman", "hangman")
                 .addOption("Trivia", "trivia")
                 .addOption("Chess", "chess")
                 .build();
@@ -95,6 +94,7 @@ public class OnSelectionMenu extends ListenerAdapter {
                     event.getMessage().delete().queue();
                     event.getChannel().sendMessageEmbeds(helpCrap(2, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();
                     event.deferReply().queue();
+                    break;
                 case "trivia":
                     event.getMessage().delete().queue();
                     event.getChannel().sendMessageEmbeds(helpCrap(4, event).build()).setActionRows(ActionRow.of(menu), ActionRow.of(Button.of(ButtonStyle.DANGER, "0000:backgames", "Back"))).queue();

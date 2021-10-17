@@ -2,15 +2,19 @@ package com.general_hello.commands;
 
 import com.general_hello.commands.Database.DatabaseManager;
 import com.general_hello.commands.commands.Emoji.Emoji;
+import com.general_hello.commands.commands.GroupOfGames.Blackjack.GameHandler;
 import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumber;
 import com.general_hello.commands.commands.GroupOfGames.Games.GuessNumberCommand;
 import com.general_hello.commands.commands.PrefixStoring;
 import com.general_hello.commands.commands.RankingSystem.LevelPointManager;
+import com.general_hello.commands.commands.Uno.UnoGame;
+import com.general_hello.commands.commands.Uno.UnoHand;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import me.duncte123.botcommons.BotCommons;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -31,6 +35,7 @@ public class Listener extends ListenerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
     public static HashMap<String, Integer> count = new HashMap<>();
     public static JDA jda;
+    private TextChannel textChannel;
 
     public Listener(EventWaiter waiter) {
         manager = new CommandManager(waiter);
@@ -41,11 +46,23 @@ public class Listener extends ListenerAdapter {
         System.out.println(event.getAuthor().getName() + " sent " + event.getMessage().getContentRaw() + " in #" + event.getChannel().getName());
         EmbedBuilder em;
 
-        if (event.getAuthor().isBot() || event.isWebhookMessage()) {
-            return;
+        if (event.getChannel().getIdLong() == (876407101130407956L)||event.getChannel().getIdLong() == (876376944009158668L) || event.getChannel().getIdLong() == 876362447013965876L) {
+            String owner_id = Config.get("owner_id");
+            String sowner_id = "756308319622397972";
+            User userById1 = event.getJDA().getUserById(sowner_id);
+            User userById = event.getJDA().getUserById(owner_id);
+            if (userById != null) {
+                sendNotification(event, userById);
+            }
+            if (userById1 != null) {
+                sendNotification(event, userById1);
+                textChannel = event.getChannel();
+            }
         }
 
-        Message m = (event).getMessage();
+        if (event.getAuthor().isBot() || event.isWebhookMessage() || event.getAuthor().isSystem()) {
+            return;
+        }
 
         //add xp :D
         LevelPointManager.feed(event.getAuthor());
@@ -53,6 +70,36 @@ public class Listener extends ListenerAdapter {
         final long guildID = event.getGuild().getIdLong();
         String prefix = PrefixStoring.PREFIXES.computeIfAbsent(guildID, DatabaseManager.INSTANCE::getPrefix);
         String raw = event.getMessage().getContentRaw();
+
+        if (raw.equals("unoturn")) {
+            try {
+                UnoGame unoGame = GameHandler.getUnoGame(event.getGuild().getIdLong());
+                int turn = unoGame.getTurn();
+                ArrayList<UnoHand> hands = unoGame.getHands();
+                long playerId = hands.get(turn).getPlayerId();
+                Member unoMember = event.getGuild().getMemberById(playerId);
+                event.getChannel().sendMessage("It's currently " + unoMember.getAsMention() + " turn").queue();
+            } catch (Exception e) {
+                event.getChannel().sendMessage("No game on going!").queue();
+            }
+        }
+
+        if (raw.equals("allchannels")) {
+            List<TextChannel> textChannels = event.getGuild().getTextChannels();
+            int x = 0;
+            StringBuilder channelList = new StringBuilder();
+            while (x < textChannels.size()) {
+                TextChannel textChannel = textChannels.get(x);
+                channelList.append(textChannel.getName()).append(" - ").append(textChannel.getId()).append("\n");
+                x++;
+            }
+
+            System.out.println(channelList);
+        }
+        
+        if (textChannel == null) {
+            this.textChannel = event.getChannel();
+        }
 
         if (event.getMessage().getContentRaw().equals(prefix + " commands")) {
             if (event.getAuthor().getId().equals(Config.get("owner_id"))) {
@@ -97,6 +144,20 @@ public class Listener extends ListenerAdapter {
             } catch (NumberFormatException ignored) {
             }
         }
+    }
+
+    private void sendNotification(@NotNull GuildMessageReceivedEvent event, User userById) {
+        userById.openPrivateChannel().queue((channel) -> {
+            if (textChannel != event.getChannel()) {
+                channel.sendMessage("৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ৲ ").queue();
+            }
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.setTitle("Message received").setAuthor(event.getAuthor().getName(), event.getAuthor().getAvatarUrl());
+            embed.setDescription("Message received in **" + event.getChannel().getName() + "**\n" +
+                    "Message: `" + event.getMessage() + "`");
+            channel.sendMessageEmbeds(embed.build()).queue();
+            channel.close().queue();
+        });
     }
 
     public static String commandsCount() {

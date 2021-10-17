@@ -104,7 +104,7 @@ public class Bot {
 
                 while (x < channels.size()) {
                     Role lockdown = guildById.getRolesByName("lockdown", true).get(0);
-                    channels.get(x).createPermissionOverride(lockdown).setDeny(Permission.MESSAGE_WRITE).queue();
+                    channels.get(x).upsertPermissionOverride(lockdown).setDeny(Permission.MESSAGE_WRITE).queue();
                     x++;
                     System.out.println("Lockdown setup in " + channels.get(x));
                 }
@@ -145,7 +145,7 @@ public class Bot {
 
             if (s.equalsIgnoreCase("startactivity")) {
                 Status status = new Status();
-                status.status();
+                status.status().start();
             }
 
             if (question) {

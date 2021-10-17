@@ -226,7 +226,7 @@ public class UnoGame {
         EmbedBuilder eb = new EmbedBuilder();
         UnoHand hand = hands.get(turn);
         if (player == hand.getPlayerId()) {
-            eb.setTitle("It's your turn");
+            eb.setTitle("It's your turn ");
         } else {
             eb.setTitle(String.format("It's %s's turn", hand.getPlayerName()));
         }

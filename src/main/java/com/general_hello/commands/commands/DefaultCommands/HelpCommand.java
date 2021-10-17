@@ -47,7 +47,7 @@ public class HelpCommand implements ICommand {
 
             embedBuilder.setFooter("Type " + prefix + " help [group name] to see their commands");
 
-            boolean disableOrEnable = ctx.getMember().hasPermission(Permission.MANAGE_SERVER) || ctx.getMember().getRoles().contains(ctx.getGuild().getRoleById(888627140046749697L));
+            boolean disableOrEnable = !ctx.getMember().hasPermission(Permission.MANAGE_SERVER) && !ctx.getMember().getRoles().contains(ctx.getGuild().getRoleById(888627140046749697L));
 
             channel.sendMessageEmbeds(embedBuilder.build()).setActionRows(
                     ActionRow.of(
